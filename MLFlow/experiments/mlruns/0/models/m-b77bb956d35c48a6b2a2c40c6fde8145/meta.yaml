@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/Zuhair/Programming%20Projects/Python/Uni_Courses/MLOps/DetoxifyAI/MLFlow/experiments/mlruns/0/models/m-b77bb956d35c48a6b2a2c40c6fde8145/artifacts
+creation_timestamp: 1760524475066
+experiment_id: '0'
+last_updated_timestamp: 1760524475287
+model_id: m-b77bb956d35c48a6b2a2c40c6fde8145
+model_type: null
+name: model
+source_run_id: d30fec489aee443fbd803ca2a31d7699
+status: 3
+status_message: null

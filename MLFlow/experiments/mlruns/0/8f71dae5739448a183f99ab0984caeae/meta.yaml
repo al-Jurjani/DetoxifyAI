@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/Zuhair/Programming%20Projects/Python/Uni_Courses/MLOps/DetoxifyAI/MLFlow/experiments/mlruns/0/8f71dae5739448a183f99ab0984caeae/artifacts
+end_time: 1760522939689
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 8f71dae5739448a183f99ab0984caeae
+run_name: casual-grouse-417
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1760522925056
+status: 4
+tags: []
+user_id: Zuhair

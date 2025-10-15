@@ -1,0 +1,27 @@
+name: mlflow_test_experiment_1
+
+conda_env: requirements.txt
+
+entry_points:
+  main:
+    parameters:
+      preprocessor: {type: string, default: "aggressive"}
+      model_type: {type: string, default: "logreg"}
+      ngram: {type: string, default: "(1,2)"}
+      max_features: {type: int, default: 50000}
+      logreg_C: {type: float, default: 1.0}
+      xgb_eta: {type: float, default: 0.1}
+      xgb_n_estimators: {type: int, default: 300}
+      xgb_max_depth: {type: int, default: 6}
+      xgb_colsample_bytree: {type: float, default: 0.8}
+    command: >
+      python train.py
+      --preprocessor {preprocessor}
+      --model_type {model_type}
+      --ngram {ngram}
+      --max_features {max_features}
+      --logreg_C {logreg_C}
+      --xgb_eta {xgb_eta}
+      --xgb_n_estimators {xgb_n_estimators}
+      --xgb_max_depth {xgb_max_depth}
+      --xgb_colsample_bytree {xgb_colsample_bytree}
