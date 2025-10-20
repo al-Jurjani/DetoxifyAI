@@ -1,5 +1,7 @@
 import argparse
 import ast
+import os
+import dotenv
 import mlflow
 import mlflow.sklearn
 import mlflow.xgboost
@@ -87,6 +89,32 @@ if __name__ == "__main__":
 
     X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
 
+    # dotenv.load_dotenv()
+    # mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
+
+    # mlflow.set_tracking_uri(mlflow_tracking_uri) # type: ignore
+    # os.environ["MLFLOW_TRACKING_URI"] = mlflow_tracking_uri  # set for child processes # type: ignore
+    # print("Old MLflow Tracking URI:", mlflow.get_tracking_uri())
+    # mlflow.set_tracking_uri("http://127.0.0.1:5000")
+    # print("New MLflow Tracking URI:", mlflow.get_tracking_uri())
+
+    dotenv.load_dotenv()
+    # # os.getenv("MLFLOW_TRACKING_URI")
+    # mlflow.set_tracking_uri("http://localhost:5000")  # type: ignore
+    os.environ["AZURE_STORAGE_CONNECTION_STRING"] = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
+    # mlflow.set_tracking_uri("http://127.0.0.1:5000")  # type: ignore
+    # print("MLflow Tracking URI:", mlflow.get_tracking_uri())
+    # mlflow.set_experiment("mlflow_test_experiment_1")
+
+
+    
+    print("Azure storage connection string (init_env.py file): ", os.getenv("AZURE_STORAGE_CONNECTION_STRING", ""))
+    print("-"*21)
+    print("-"*21)
+    print("-"*21)
+    print("MLflow Tracking URI (train.py file):", mlflow.get_tracking_uri())
+    # using the mlflow run command from terminal automatically created a run
+    # so don't need start_run()
     with mlflow.start_run():
         mlflow.log_params(vars(args))
 
@@ -96,7 +124,12 @@ if __name__ == "__main__":
             preds = model.predict_proba(X_val)[:, 1]
             auc = roc_auc_score(y_val, preds)
             mlflow.log_metric("roc_auc", float(auc))
-            mlflow.pyfunc.log_model("model", python_model=model)
+            # mlflow.sklearn.log_model(model, artifact_path="model")  # type: ignore
+            joblib.dump(model, "model.pkl")
+            # save tfidf vectorizer
+            joblib.dump(vect, "tfidf.pkl")
+            mlflow.log_artifact("tfidf.pkl", artifact_path="vectorizer")
+            mlflow.log_artifact("model.pkl", artifact_path="model")
 
         elif args.model_type == "xgboost":
             model = XGBClassifier(eta=args.xgb_eta, n_estimators=args.xgb_n_estimators, eval_metric="auc")
@@ -104,8 +137,11 @@ if __name__ == "__main__":
             preds = model.predict_proba(X_val)[:, 1]
             auc = roc_auc_score(y_val, preds)
             mlflow.log_metric("roc_auc", float(auc))
-            mlflow.pyfunc.log_model("model", python_model=model)
+            # mlflow.xgboost.log_model(model, artifact_path="model") # type: ignore
+            joblib.dump(model, "model.pkl")
+            # save tfidf vectorizer
+            joblib.dump(vect, "tfidf.pkl")
+            mlflow.log_artifact("tfidf.pkl", artifact_path="vectorizer")
+            mlflow.log_artifact("model.pkl", artifact_path="model")
 
-        # save tfidf vectorizer
-        joblib.dump(vect, "tfidf.pkl")
-        mlflow.log_artifact("tfidf.pkl", artifact_path="vectorizer")
+        

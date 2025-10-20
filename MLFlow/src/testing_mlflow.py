@@ -5,7 +5,7 @@ import dotenv
 dotenv.load_dotenv()
 os.getenv("MLFLOW_TRACKING_URI")
 
-mlflow.set_experiment("local_test_azure_5")
+mlflow.set_experiment("local_test_azure_45")
 with mlflow.start_run():
     mlflow.log_param("test_param", 13)
     mlflow.log_metric("accuracy", 0.1234)

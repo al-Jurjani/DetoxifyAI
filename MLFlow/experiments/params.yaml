@@ -2,7 +2,7 @@ preprocessor: "aggressive"         # options: aggressive, stopwords, stemming, l
 model_type: "logreg"               # options: logreg, xgboost
 ngram: "(1,2)"                     # "(1,2)" for bigrams, "(1,3)" for trigrams
 max_features: 50000
-logreg_C: 1.0
+logreg_C: 0.5
 xgb_eta: 0.1
 xgb_n_estimators: 300
 xgb_max_depth: 6
