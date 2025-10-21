@@ -6,7 +6,7 @@ entry_points:
   main:
     parameters:
       preprocessor: {type: string, default: "stopwords"}
-      model_type: {type: string, default: "xgboost"}
+      model_type: {type: string, default: "logreg"}
       ngram: {type: string, default: "(1,2)"}
       max_features: {type: int, default: 50000}
       logreg_C: {type: float, default: 0.05}
