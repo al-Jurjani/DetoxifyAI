@@ -4,9 +4,9 @@ import time
 
 app = FastAPI(title="DetoxifyAI API")
 
-# Define metrics
-REQUEST_COUNT = Counter("app_request_count", "Total requests", ["method", "endpoint"])
-REQUEST_LATENCY = Histogram("app_request_latency_seconds", "Request latency (s)", ["endpoint"])
+# Define Prometheus metrics
+REQUEST_COUNT = Counter("app_request_count", "Total number of requests", ["method", "endpoint"])
+REQUEST_LATENCY = Histogram("app_request_latency_seconds", "Request latency (seconds)", ["endpoint"])
 
 @app.middleware("http")
 async def add_metrics(request: Request, call_next):
@@ -18,8 +18,8 @@ async def add_metrics(request: Request, call_next):
     return response
 
 @app.get("/")
-def home():
-    return {"message": "DetoxifyAI API running 🚀"}
+def read_root():
+    return {"message": "DetoxifyAI API running successfully 🚀"}
 
 @app.get("/metrics")
 def metrics():

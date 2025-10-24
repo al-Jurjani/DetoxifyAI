@@ -5,3 +5,5 @@ mlflow
 prometheus_client
 pandas
 scikit-learn
+fastapi
+uvicorn
