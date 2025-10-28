@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import roc_auc_score
+from sklearn.metrics import roc_auc_score, accuracy_score, f1_score
 from nltk.stem import PorterStemmer, WordNetLemmatizer
 from nltk.corpus import stopwords
 import pandas as pd
@@ -115,6 +115,8 @@ if __name__ == "__main__":
     print("MLflow Tracking URI (train.py file):", mlflow.get_tracking_uri())
     # using the mlflow run command from terminal automatically created a run
     # so don't need start_run()
+    import pandas as pd
+
     with mlflow.start_run():
         mlflow.log_params(vars(args))
 
@@ -122,11 +124,27 @@ if __name__ == "__main__":
             model = LogisticRegression(C=args.logreg_C, max_iter=1000)
             model.fit(X_train, y_train)
             preds = model.predict_proba(X_val)[:, 1]
+            preds_binary = model.predict(X_val)
+            
+            # Calculate metrics
             auc = roc_auc_score(y_val, preds)
+            accuracy = accuracy_score(y_val, preds_binary)
+            f1 = f1_score(y_val, preds_binary)
+            
+            # Log metrics to MLflow
             mlflow.log_metric("roc_auc", float(auc))
-            # mlflow.sklearn.log_model(model, artifact_path="model")  # type: ignore
+            mlflow.log_metric("accuracy", float(accuracy))
+            mlflow.log_metric("f1_score", float(f1))
+            
+            # Save metrics as CSV
+            metrics_df = pd.DataFrame({
+                "metric": ["roc_auc", "accuracy", "f1_score"],
+                "value": [float(auc), float(accuracy), float(f1)]
+            })
+            metrics_df.to_csv("metrics.csv", index=False)
+            mlflow.log_artifact("metrics.csv", artifact_path="metrics")
+            
             joblib.dump(model, "model.pkl")
-            # save tfidf vectorizer
             joblib.dump(vect, "tfidf.pkl")
             mlflow.log_artifact("tfidf.pkl", artifact_path="vectorizer")
             mlflow.log_artifact("model.pkl", artifact_path="model")
@@ -135,11 +153,27 @@ if __name__ == "__main__":
             model = XGBClassifier(eta=args.xgb_eta, n_estimators=args.xgb_n_estimators, eval_metric="auc")
             model.fit(X_train, y_train)
             preds = model.predict_proba(X_val)[:, 1]
+            preds_binary = model.predict(X_val)
+            
+            # Calculate metrics
             auc = roc_auc_score(y_val, preds)
+            accuracy = accuracy_score(y_val, preds_binary)
+            f1 = f1_score(y_val, preds_binary)
+            
+            # Log metrics to MLflow
             mlflow.log_metric("roc_auc", float(auc))
-            # mlflow.xgboost.log_model(model, artifact_path="model") # type: ignore
+            mlflow.log_metric("accuracy", float(accuracy))
+            mlflow.log_metric("f1_score", float(f1))
+            
+            # Save metrics as CSV
+            metrics_df = pd.DataFrame({
+                "metric": ["roc_auc", "accuracy", "f1_score"],
+                "value": [float(auc), float(accuracy), float(f1)]
+            })
+            metrics_df.to_csv("metrics.csv", index=False)
+            mlflow.log_artifact("metrics.csv", artifact_path="metrics")
+            
             joblib.dump(model, "model.pkl")
-            # save tfidf vectorizer
             joblib.dump(vect, "tfidf.pkl")
             mlflow.log_artifact("tfidf.pkl", artifact_path="vectorizer")
             mlflow.log_artifact("model.pkl", artifact_path="model")
