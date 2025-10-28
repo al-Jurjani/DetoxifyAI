@@ -41,26 +41,26 @@
 # def generate_report():
 #     """Generate Evidently report from data"""
 #     global report_html
-    
+
 #     # Load and split dataset
 #     df = pd.read_csv("Data/combined_dataset.csv")
 #     train_df = df.sample(frac=0.8, random_state=42)
 #     test_df = df.drop(train_df.index)
-    
+
 #     # Get metrics from presets
 #     drift_preset = DataDriftPreset()
 #     summary_preset = DataSummaryPreset()
-    
+
 #     # In Evidently 0.7.x, presets can be used directly as metrics
 #     # Don't call generate_metrics - just use the preset instances
 #     metrics = [drift_preset, summary_preset]
-    
+
 #     # Create report
 #     report = Report(metrics=metrics)  # type: ignore
-    
+
 #     # Run the report
 #     report.run(reference_data=train_df, current_data=test_df)
-    
+
 #     # Save as HTML - try different methods
 #     try:
 #         report.save_html(report_path)  # type: ignore
@@ -73,11 +73,11 @@
 #         except AttributeError:
 #             # Another alternative
 #             report.save(report_path)  # type: ignore
-    
+
 #     # Store in memory
 #     with open(report_path, 'r', encoding='utf-8') as f:
 #         report_html = f.read()
-    
+
 #     print(f"Report generated successfully at: {report_path}")
 #     return report_html
 
@@ -184,26 +184,26 @@
 # def generate_report():
 #     """Generate Evidently report from data"""
 #     global report_html
-    
+
 #     # Load and split dataset
 #     df = pd.read_csv("Data/combined_dataset.csv")
 #     train_df = df.sample(frac=0.8, random_state=42)
 #     test_df = df.drop(train_df.index)
-    
+
 #     # Get metrics from presets
 #     drift_preset = DataDriftPreset()
 #     summary_preset = DataSummaryPreset()
-    
+
 #     # In Evidently 0.7.x, presets can be used directly as metrics
 #     # Don't call generate_metrics - just use the preset instances
 #     metrics = [drift_preset, summary_preset]
-    
+
 #     # Create report
 #     report = Report(metrics=metrics)  # type: ignore
-    
+
 #     # Run the report
 #     report.run(reference_data=train_df, current_data=test_df)
-    
+
 #     # Save as HTML - try different methods
 #     try:
 #         report.save_html(report_path)  # type: ignore
@@ -246,11 +246,11 @@
 #                 """
 #                 with open(report_path, 'w', encoding='utf-8') as f:
 #                     f.write(html_str)
-    
+
 #     # Store in memory
 #     with open(report_path, 'r', encoding='utf-8') as f:
 #         report_html = f.read()
-    
+
 #     print(f"Report generated successfully at: {report_path}")
 #     return report_html
 
@@ -315,7 +315,6 @@
 #     uvicorn.run(app, host="127.0.0.1", port=7000)
 
 
-
 #############################################################################################
 #############################################################################
 #####################################################################
@@ -328,11 +327,11 @@ import numpy
 
 # Print versions for verification
 print(f"Evidently version: {evidently.__version__}")  # Should be 0.4.39
-print(f"NumPy version: {numpy.__version__}")       # Should be 2.0+
+print(f"NumPy version: {numpy.__version__}")  # Should be 2.0+
 
 # Load dataset
 try:
-    data = pd.read_csv('Data/combined_dataset.csv')  # Adjust path if needed
+    data = pd.read_csv("Data/combined_dataset.csv")  # Adjust path if needed
     print(f"Dataset shape: {data.shape}")
 except FileNotFoundError:
     print("Error: 'data.csv' not found. Please provide the correct path.")
@@ -359,5 +358,5 @@ except Exception as e:
     exit(1)
 
 # Save report as HTML
-report.save_html('data_drift_report.html')
+report.save_html("data_drift_report.html")
 print("Data drift report saved as 'data_drift_report.html'")
