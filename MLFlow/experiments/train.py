@@ -3,9 +3,11 @@ import ast
 import os
 import dotenv
 import mlflow
-import mlflow.sklearn
-import mlflow.xgboost
-import joblib, re, string
+# import mlflow.sklearn
+# import mlflow.xgboost
+import joblib
+import re
+import string
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from xgboost import XGBClassifier
