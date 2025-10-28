@@ -1,6 +1,7 @@
 from fastapi import FastAPI, Request, Response
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 import time
+from pydantic import BaseModel
 
 app = FastAPI(title="DetoxifyAI API")
 
@@ -24,3 +25,16 @@ def read_root():
 @app.get("/metrics")
 def metrics():
     return Response(generate_latest(), media_type=CONTENT_TYPE_LATEST)
+
+class Query(BaseModel):
+    text: str
+
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+@app.post("/predict")
+async def predict(req: Query):
+    # Stub logic — always returns fake "toxic" label
+    text = req.text
+    return {"input": text, "prediction": "non-toxic", "confidence": 0.99}
