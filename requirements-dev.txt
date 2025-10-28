@@ -1,3 +1,4 @@
+# requirements-dev.txt
 fastapi
 uvicorn
 # evidently
@@ -6,3 +7,9 @@ mlflow
 prometheus_client
 pandas
 scikit-learn
+
+pytest
+pytest-cov
+ruff
+black
+requests
