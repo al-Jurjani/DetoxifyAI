@@ -90,11 +90,11 @@ jobs:
       - name: Run canary container
         run: |
           docker rm -f canary || true
-          docker run -d --name canary -e CANARY=true -p ${CANARY_PORT}:${CANARY_PORT} $IMAGE
+          docker run -d --name canary -e CANARY=true -p 8000:8000 $IMAGE_NAME:${{ github.sha }}
       - name: Wait for /health (timeout 60s)
         run: |
           for i in $(seq 1 30); do
-            code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:${CANARY_PORT}/health || echo "000")
+            code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/health || echo "000")
             if [ "$code" = "200" ]; then echo "healthy"; exit 0; fi
             echo "waiting for health ($i) got $code"
             sleep 2
