@@ -47,7 +47,7 @@ jobs:
           if [ -f requirements-dev.txt ]; then pip install -r requirements-dev.txt; else pip install pytest pytest-cov; fi
       - name: Run tests with coverage
         run: |
-          pytest --maxfail=1 --disable-warnings -q --cov=src --cov-report=xml --cov-fail-under=80
+          pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml --cov-fail-under=80
 
   build_and_push:
     name: Build & Push Docker image to GHCR
