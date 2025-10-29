@@ -86,7 +86,7 @@ jobs:
       - name: Install jq and curl
         run: sudo apt-get update && sudo apt-get install -y jq curl
       - name: Pull image
-        run: docker pull $IMAGE
+        run: docker pull $IMAGE_NAME:${{ github.sha }}
       - name: Run canary container
         run: |
           docker rm -f canary || true
