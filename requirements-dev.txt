@@ -13,3 +13,4 @@ pytest-cov
 ruff
 black
 requests
+azure-storage-blob
