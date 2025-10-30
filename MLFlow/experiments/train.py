@@ -78,15 +78,15 @@ if __name__ == "__main__":
     parser.add_argument("--max_features", type=int)
 
     # Logistic Regression parameters
-    parser.add_argument("--logreg_C", type=float)
-    parser.add_argument("--logreg_penalty")
-    parser.add_argument("--logreg_max_iter", type=int)
+    # parser.add_argument("--logreg_C", type=float)
+    # parser.add_argument("--logreg_penalty")
+    # parser.add_argument("--logreg_max_iter", type=int)
 
     # XGBoost parameters
-    # parser.add_argument("--xgb_eta", type=float)
-    # parser.add_argument("--xgb_n_estimators", type=int)
-    # parser.add_argument("--xgb_max_depth", type=int)
-    # parser.add_argument("--xgb_colsample_bytree", type=float)
+    parser.add_argument("--xgb_eta", type=float)
+    parser.add_argument("--xgb_n_estimators", type=int)
+    parser.add_argument("--xgb_max_depth", type=int)
+    parser.add_argument("--xgb_colsample_bytree", type=float)
 
     args = parser.parse_args()
 
@@ -140,7 +140,8 @@ if __name__ == "__main__":
     import pandas as pd
 
     with mlflow.start_run():
-        mlflow.log_params(vars(args))
+        params = {k: v for k, v in vars(args).items() if v is not None}
+        mlflow.log_params(params)
 
         if args.model_type == "logreg":
             model = LogisticRegression(
