@@ -105,23 +105,34 @@ jobs:
         run: |
           if [ ! -f "$ACCEPTANCE_FILE" ]; then
             echo "Warning: acceptance file $ACCEPTANCE_FILE not found. Creating a small default set."
-            cat > $ACCEPTANCE_FILE <<'JSON'
-            ["hello", "is this service alive?", "what is the sentiment of this text?", "sample input 4", "sample input 5"]
-            JSON
+            cat > "$ACCEPTANCE_FILE" <<'JSON'
+          ["hello", "is this service alive?", "what is the sentiment of this text?", "sample input 4", "sample input 5"]
+          JSON
           fi
+          
           failures=0
           total=0
-          for q in $(jq -r '.[]' $ACCEPTANCE_FILE); do
+          
+          while IFS= read -r q; do
             total=$((total+1))
             # Example: POST to /predict with JSON { "text": "<query>" }
-            status=$(curl -s -o /dev/null -w "%{http_code}" -X POST http://127.0.0.1:${CANARY_PORT}/predict \
+            status=$(curl -s -o /dev/null -w "%{http_code}" -X POST "http://127.0.0.1:${CANARY_PORT}/predict" \
               -H "Content-Type: application/json" \
-              -d "{\"text\": ${q@Q}}")
+              -d "{\"text\": \"$q\"}")
+            
             echo "query: $q -> $status"
-            if [ "$status" != "200" ]; then failures=$((failures+1)); fi
-          done
+            
+            if [ "$status" != "200" ]; then
+              failures=$((failures+1))
+            fi
+          done < <(jq -r '.[]' "$ACCEPTANCE_FILE")
+          
           echo "Acceptance results: $failures failures out of $total"
-          if [ "$failures" -gt 0 ]; then docker logs canary || true; exit 1; fi
+          
+          if [ "$failures" -gt 0 ]; then
+            docker logs canary || true
+            exit 1
+          fi
 
       - name: Tear down
         if: always()
