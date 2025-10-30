@@ -76,11 +76,18 @@ if __name__ == "__main__":
     parser.add_argument("--model_type")
     parser.add_argument("--ngram")
     parser.add_argument("--max_features", type=int)
+
+    # Logistic Regression parameters
     parser.add_argument("--logreg_C", type=float)
-    parser.add_argument("--xgb_eta", type=float)
-    parser.add_argument("--xgb_n_estimators", type=int)
-    parser.add_argument("--xgb_max_depth", type=int)
-    parser.add_argument("--xgb_colsample_bytree", type=float)
+    parser.add_argument("--logreg_penalty")
+    parser.add_argument("--logreg_max_iter", type=int)
+
+    # XGBoost parameters
+    # parser.add_argument("--xgb_eta", type=float)
+    # parser.add_argument("--xgb_n_estimators", type=int)
+    # parser.add_argument("--xgb_max_depth", type=int)
+    # parser.add_argument("--xgb_colsample_bytree", type=float)
+
     args = parser.parse_args()
 
     # dummy dataset placeholder (replace with your dataset)
@@ -136,7 +143,11 @@ if __name__ == "__main__":
         mlflow.log_params(vars(args))
 
         if args.model_type == "logreg":
-            model = LogisticRegression(C=args.logreg_C, max_iter=1000)
+            model = LogisticRegression(
+                C=args.logreg_C,
+                max_iter=args.logreg_max_iter,
+                solver="saga" if args.logreg_penalty == "l1" else "lbfgs",
+            )
             model.fit(X_train, y_train)
             preds = model.predict_proba(X_val)[:, 1]
             preds_binary = model.predict(X_val)
