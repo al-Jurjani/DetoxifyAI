@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DetoxifyAI - Toxicity Detection</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>DetoxifyAI</h1>
+            <p class="subtitle">Real-time Toxicity Detection powered by Machine Learning</p>
+            <div class="status-indicator">
+                <span class="status-dot" id="statusDot"></span>
+                <span id="statusText">Checking connection...</span>
+            </div>
+        </header>
+
+        <main>
+            <div class="input-section">
+                <label for="textInput">Enter text to analyze:</label>
+                <textarea
+                    id="textInput"
+                    placeholder="Type or paste a comment here to check for toxicity..."
+                    rows="6"
+                ></textarea>
+                <button id="analyzeBtn" class="btn-primary">
+                    <span id="btnText">Analyze Text</span>
+                    <span id="btnLoader" class="loader hidden"></span>
+                </button>
+            </div>
+
+            <div class="results-section hidden" id="resultsSection">
+                <h2>Analysis Results</h2>
+
+                <div class="result-card" id="resultCard">
+                    <div class="prediction-badge" id="predictionBadge">
+                        <span id="predictionText">NON-TOXIC</span>
+                    </div>
+
+                    <div class="confidence-meter">
+                        <div class="confidence-label">
+                            <span>Confidence Score</span>
+                            <span id="confidencePercent">0%</span>
+                        </div>
+                        <div class="confidence-bar">
+                            <div class="confidence-fill" id="confidenceFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="toxicity-meter">
+                        <div class="toxicity-label">
+                            <span>Toxicity Probability</span>
+                            <span id="toxicityPercent">0%</span>
+                        </div>
+                        <div class="toxicity-bar">
+                            <div class="toxicity-fill" id="toxicityFill"></div>
+                        </div>
+                    </div>
+
+                    <div class="analyzed-text">
+                        <h3>Analyzed Text:</h3>
+                        <p id="analyzedText"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="examples-section">
+                <h3>Try these examples:</h3>
+                <div class="example-buttons">
+                    <button class="btn-example" data-text="I love this product, it's amazing!">Positive Comment</button>
+                    <button class="btn-example" data-text="You're an idiot, nobody likes you">Toxic Comment</button>
+                    <button class="btn-example" data-text="This is just a normal comment about the weather">Neutral Comment</button>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Built with FastAPI + Machine Learning | Model: Logistic Regression with TF-IDF</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
