@@ -41,26 +41,26 @@
 # def generate_report():
 #     """Generate Evidently report from data"""
 #     global report_html
-    
+
 #     # Load and split dataset
 #     df = pd.read_csv("Data/combined_dataset.csv")
 #     train_df = df.sample(frac=0.8, random_state=42)
 #     test_df = df.drop(train_df.index)
-    
+
 #     # Get metrics from presets
 #     drift_preset = DataDriftPreset()
 #     summary_preset = DataSummaryPreset()
-    
+
 #     # In Evidently 0.7.x, presets can be used directly as metrics
 #     # Don't call generate_metrics - just use the preset instances
 #     metrics = [drift_preset, summary_preset]
-    
+
 #     # Create report
 #     report = Report(metrics=metrics)  # type: ignore
-    
+
 #     # Run the report
 #     report.run(reference_data=train_df, current_data=test_df)
-    
+
 #     # Save as HTML - try different methods
 #     try:
 #         report.save_html(report_path)  # type: ignore
@@ -73,11 +73,11 @@
 #         except AttributeError:
 #             # Another alternative
 #             report.save(report_path)  # type: ignore
-    
+
 #     # Store in memory
 #     with open(report_path, 'r', encoding='utf-8') as f:
 #         report_html = f.read()
-    
+
 #     print(f"Report generated successfully at: {report_path}")
 #     return report_html
 
@@ -184,26 +184,26 @@
 # def generate_report():
 #     """Generate Evidently report from data"""
 #     global report_html
-    
+
 #     # Load and split dataset
 #     df = pd.read_csv("Data/combined_dataset.csv")
 #     train_df = df.sample(frac=0.8, random_state=42)
 #     test_df = df.drop(train_df.index)
-    
+
 #     # Get metrics from presets
 #     drift_preset = DataDriftPreset()
 #     summary_preset = DataSummaryPreset()
-    
+
 #     # In Evidently 0.7.x, presets can be used directly as metrics
 #     # Don't call generate_metrics - just use the preset instances
 #     metrics = [drift_preset, summary_preset]
-    
+
 #     # Create report
 #     report = Report(metrics=metrics)  # type: ignore
-    
+
 #     # Run the report
 #     report.run(reference_data=train_df, current_data=test_df)
-    
+
 #     # Save as HTML - try different methods
 #     try:
 #         report.save_html(report_path)  # type: ignore
@@ -246,11 +246,11 @@
 #                 """
 #                 with open(report_path, 'w', encoding='utf-8') as f:
 #                     f.write(html_str)
-    
+
 #     # Store in memory
 #     with open(report_path, 'r', encoding='utf-8') as f:
 #         report_html = f.read()
-    
+
 #     print(f"Report generated successfully at: {report_path}")
 #     return report_html
 
