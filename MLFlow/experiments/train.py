@@ -49,10 +49,18 @@ def preprocess_with_stopwords(text):
     return " ".join([w for w in words if w not in stop_words])
 
 
+def safe_stem(word):
+    try:
+        return stemmer.stem(word)
+    except RecursionError:
+        return word  # fallback to original word
+
 def preprocess_with_stemming(text):
     text = preprocess_moderate(text)
     words = text.split()
-    return " ".join([stemmer.stem(w) for w in words])
+    cleaned = [w for w in words if w.isalpha() and len(w) > 1]
+    return " ".join([safe_stem(w) for w in cleaned])
+
 
 
 def preprocess_with_lemmatization(text):
