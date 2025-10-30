@@ -88,12 +88,12 @@ async def load_model():
     try:
         print("[INFO] Downloading model and vectorizer from Azure Blob Storage...")
 
-        # Example blob paths (update these to match your structure)
-        xg_model_blob_path = "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
-        xg_vectorizer_blob_path = "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
+        # Blob paths (without container name prefix since it's specified separately)
+        xg_model_blob_path = "3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
+        xg_vectorizer_blob_path = "3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
 
-        lg_model_blob_path = "mlflow-artifacts-mlops-proj/2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/model/model.pkl"
-        lg_vectorizer_blob_path = "mlflow-artifacts-mlops-proj/2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/vectorizer/tfidf.pkl"
+        lg_model_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/model/model.pkl"
+        lg_vectorizer_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/vectorizer/tfidf.pkl"
 
         # Access blobs
         model_blob = blob_service_client.get_blob_client(container=CONTAINER_NAME, blob=xg_model_blob_path)
