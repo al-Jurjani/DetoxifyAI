@@ -49,10 +49,18 @@ def preprocess_with_stopwords(text):
     return " ".join([w for w in words if w not in stop_words])
 
 
+def safe_stem(word):
+    try:
+        return stemmer.stem(word)
+    except RecursionError:
+        return word  # fallback to original word
+
 def preprocess_with_stemming(text):
     text = preprocess_moderate(text)
     words = text.split()
-    return " ".join([stemmer.stem(w) for w in words])
+    cleaned = [w for w in words if w.isalpha() and len(w) > 1]
+    return " ".join([safe_stem(w) for w in cleaned])
+
 
 
 def preprocess_with_lemmatization(text):
@@ -75,12 +83,28 @@ if __name__ == "__main__":
     parser.add_argument("--preprocessor")
     parser.add_argument("--model_type")
     parser.add_argument("--ngram")
+<<<<<<< HEAD
     # parser.add_argument("--max_features", type=int)
     parser.add_argument("--logreg_C", type=float)
     # parser.add_argument("--xgb_eta", type=float)
     # parser.add_argument("--xgb_n_estimators", type=int)
     # parser.add_argument("--xgb_max_depth", type=int)
     # parser.add_argument("--xgb_colsample_bytree", type=float)
+=======
+    parser.add_argument("--max_features", type=int)
+
+    # Logistic Regression parameters
+    # parser.add_argument("--logreg_C", type=float)
+    # parser.add_argument("--logreg_penalty")
+    # parser.add_argument("--logreg_max_iter", type=int)
+
+    # XGBoost parameters
+    parser.add_argument("--xgb_eta", type=float)
+    parser.add_argument("--xgb_n_estimators", type=int)
+    parser.add_argument("--xgb_max_depth", type=int)
+    parser.add_argument("--xgb_colsample_bytree", type=float)
+
+>>>>>>> f9bba589d63b9a210e2744d791b866ae3e9b68fc
     args = parser.parse_args()
 
     # dummy dataset placeholder (replace with your dataset)
@@ -133,10 +157,15 @@ if __name__ == "__main__":
     import pandas as pd
 
     with mlflow.start_run():
-        mlflow.log_params(vars(args))
+        params = {k: v for k, v in vars(args).items() if v is not None}
+        mlflow.log_params(params)
 
         if args.model_type == "logreg":
-            model = LogisticRegression(C=args.logreg_C, max_iter=1000)
+            model = LogisticRegression(
+                C=args.logreg_C,
+                max_iter=args.logreg_max_iter,
+                solver="saga" if args.logreg_penalty == "l1" else "lbfgs",
+            )
             model.fit(X_train, y_train)
             preds = model.predict_proba(X_val)[:, 1]
             preds_binary = model.predict(X_val)
