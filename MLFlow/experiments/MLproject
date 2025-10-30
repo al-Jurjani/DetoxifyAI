@@ -21,7 +21,5 @@ entry_points:
       --ngram {ngram}
       --max_features {max_features}
       --logreg_C {logreg_C}
-      --xgb_eta {xgb_eta}
-      --xgb_n_estimators {xgb_n_estimators}
-      --xgb_max_depth {xgb_max_depth}
-      --xgb_colsample_bytree {xgb_colsample_bytree}
+      --logreg_penalty {logreg_penalty}
+      --logreg_max_iter {logreg_max_iter}

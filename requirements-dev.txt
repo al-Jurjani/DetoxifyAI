@@ -1,13 +1,15 @@
+# requirements-dev.txt
 fastapi
-uvicorn[standard]
+uvicorn
 # evidently
 evidently==0.4.39
 mlflow
 prometheus_client
 pandas
 scikit-learn
-joblib
-python-multipart
-xgboost
-nltk
-azure-storage-blob
+
+pytest
+pytest-cov
+ruff
+black
+requests

@@ -315,7 +315,6 @@
 #     uvicorn.run(app, host="127.0.0.1", port=7000)
 
 
-
 #############################################################################################
 #############################################################################
 #####################################################################
@@ -328,11 +327,11 @@ import numpy
 
 # Print versions for verification
 print(f"Evidently version: {evidently.__version__}")  # Should be 0.4.39
-print(f"NumPy version: {numpy.__version__}")       # Should be 2.0+
+print(f"NumPy version: {numpy.__version__}")  # Should be 2.0+
 
 # Load dataset
 try:
-    data = pd.read_csv('Data/combined_dataset.csv')  # Adjust path if needed
+    data = pd.read_csv("Data/combined_dataset.csv")  # Adjust path if needed
     print(f"Dataset shape: {data.shape}")
 except FileNotFoundError:
     print("Error: 'data.csv' not found. Please provide the correct path.")
@@ -360,4 +359,5 @@ except Exception as e:
 
 # Save report as HTML
 report.save_html('data_drift_report.html')
+report.save_html("data_drift_report.html")
 print("Data drift report saved as 'data_drift_report.html'")

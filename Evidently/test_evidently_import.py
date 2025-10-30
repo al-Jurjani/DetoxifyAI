@@ -27,11 +27,11 @@
 #         print(f"✗ {imp}")
 #         print(f"  Error: {e}")
 
-from evidently.ui.workspace import Workspace
-from evidently.presets import DataDriftPreset
+# from evidently.ui.workspace import Workspace
+# from evidently.presets import DataDriftPreset
 # Try finding what's available instead of DataQualityPreset
-import evidently.presets
+# import evidently.presets
 
 # List what you got
-import evidently.presets as presets
-print("Available presets:", [x for x in dir(presets) if 'Preset' in x])
+# import evidently.presets as presets
+# print("Available presets:", [x for x in dir(presets) if 'Preset' in x])
