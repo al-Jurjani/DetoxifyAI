@@ -24,9 +24,9 @@
 - **Zuhair**: Repository initialization, project structure design
 
 ### Phase 2: Development
-- **Ahsanuddin**: Model development, hyperparameter tuning 
-- **Talha**: API endpoint development, request/response schemas 
-- **Zuhair**: Dataset preparation, model development, hyperparameter tuning 
+- **Ahsanuddin**: Model development, hyperparameter tuning
+- **Talha**: API endpoint development, request/response schemas
+- **Zuhair**: Dataset preparation, model development, hyperparameter tuning
 
 ### Phase 3: Integration & Testing
 - **Ahsanuddin**: Used Evidently to track data drift
