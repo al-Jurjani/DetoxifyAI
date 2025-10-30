@@ -8,6 +8,19 @@ import joblib
 import re
 import string
 import os
+from dotenv import load_dotenv
+
+
+from azure.storage.blob import BlobServiceClient
+from io import BytesIO
+
+load_dotenv()
+AZURE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
+CONTAINER_NAME = "mlflow-artifacts-mlops-proj" 
+
+blob_service_client = BlobServiceClient.from_connection_string(AZURE_CONNECTION_STRING)
+
+
 
 app = FastAPI(title="DetoxifyAI API")
 
@@ -47,29 +60,57 @@ def preprocess_aggressive(text: str) -> str:
 async def load_model():
     global model, vectorizer, model_loaded
 
-    # Get the project root directory (parent of app folder)
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(current_dir)
+    # # Get the project root directory (parent of app folder)
+    # current_dir = os.path.dirname(os.path.abspath(__file__))
+    # project_root = os.path.dirname(current_dir)
 
-    model_path = os.path.join(project_root, "MLFlow", "experiments", "model.pkl")
-    vectorizer_path = os.path.join(project_root, "MLFlow", "experiments", "tfidf.pkl")
+    # model_path = os.path.join(project_root, "MLFlow", "experiments", "model.pkl")
+    # vectorizer_path = os.path.join(project_root, "MLFlow", "experiments", "tfidf.pkl")
 
-    print(f"[INFO] Looking for model at: {model_path}")
-    print(f"[INFO] Looking for vectorizer at: {vectorizer_path}")
+    # print(f"[INFO] Looking for model at: {model_path}")
+    # print(f"[INFO] Looking for vectorizer at: {vectorizer_path}")
+
+    # try:
+    #     if os.path.exists(model_path) and os.path.exists(vectorizer_path):
+    #         model = joblib.load(model_path)
+    #         vectorizer = joblib.load(vectorizer_path)
+    #         model_loaded = True
+    #         print("[SUCCESS] Model and vectorizer loaded successfully!")
+    #     else:
+    #         print("[WARNING] Model files not found. Running in mock mode.")
+    #         print(f"[WARNING] Model exists: {os.path.exists(model_path)}")
+    #         print(f"[WARNING] Vectorizer exists: {os.path.exists(vectorizer_path)}")
+    #         model_loaded = False
+    # except Exception as e:
+    #     print(f"[ERROR] Failed to load model: {str(e)}")
+    #     model_loaded = False
 
     try:
-        if os.path.exists(model_path) and os.path.exists(vectorizer_path):
-            model = joblib.load(model_path)
-            vectorizer = joblib.load(vectorizer_path)
-            model_loaded = True
-            print("[SUCCESS] Model and vectorizer loaded successfully!")
-        else:
-            print("[WARNING] Model files not found. Running in mock mode.")
-            print(f"[WARNING] Model exists: {os.path.exists(model_path)}")
-            print(f"[WARNING] Vectorizer exists: {os.path.exists(vectorizer_path)}")
-            model_loaded = False
+        print("[INFO] Downloading model and vectorizer from Azure Blob Storage...")
+
+        # Example blob paths (update these to match your structure)
+        xg_model_blob_path = "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
+        xg_vectorizer_blob_path = "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
+
+        lg_model_blob_path = "mlflow-artifacts-mlops-proj/2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/model/model.pkl"
+        lg_vectorizer_blob_path = "mlflow-artifacts-mlops-proj/2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/vectorizer/tfidf.pkl"
+
+        # Access blobs
+        model_blob = blob_service_client.get_blob_client(container=CONTAINER_NAME, blob=xg_model_blob_path)
+        vectorizer_blob = blob_service_client.get_blob_client(container=CONTAINER_NAME, blob=xg_vectorizer_blob_path)
+
+        # Download into memory
+        model_data = BytesIO(model_blob.download_blob().readall())
+        vectorizer_data = BytesIO(vectorizer_blob.download_blob().readall())
+
+        # Load using joblib
+        model = joblib.load(model_data)
+        vectorizer = joblib.load(vectorizer_data)
+
+        model_loaded = True
+        print("[SUCCESS] Model and vectorizer loaded successfully from Azure!")
     except Exception as e:
-        print(f"[ERROR] Failed to load model: {str(e)}")
+        print(f"[ERROR] Failed to load model from Azure: {str(e)}")
         model_loaded = False
 
 @app.middleware("http")

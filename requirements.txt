@@ -10,3 +10,4 @@ joblib
 python-multipart
 xgboost
 nltk
+azure-storage-blob
