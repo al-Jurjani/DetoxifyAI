@@ -12,7 +12,7 @@ graph LR
     D --> E[Model Registry]
     E --> F[Inference API]
     F --> G[Monitoring]
-    
+
     D -.-> H[MLflow Tracking]
     G -.-> I[Prometheus/Grafana]
     G -.-> J[Evidently Dashboard]
