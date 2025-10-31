@@ -50,7 +50,7 @@ def test_predict_real_path_toxic():
         assert data["prediction"] == "toxic"
         assert data["confidence"] == 0.75
         assert data["toxic_probability"] == 0.75
-        assert data["model_loaded"] == True
+        assert data["model_loaded"]
 
         # Verify the functions were called (covers lines 190-193)
         assert mock_vectorizer.transform.called
@@ -197,7 +197,9 @@ def test_predict_various_probabilities():
     for pred, toxic_prob, expected_pred, expected_conf in test_cases:
         mock_model = Mock()
         mock_model.predict = Mock(return_value=np.array(pred))
-        mock_model.predict_proba = Mock(return_value=np.array([[1 - toxic_prob, toxic_prob]]))
+        mock_model.predict_proba = Mock(
+            return_value=np.array([[1 - toxic_prob, toxic_prob]])
+        )
 
         mock_vectorizer = Mock()
         mock_vectorizer.transform = Mock(return_value=np.array([[0.5, 0.5]]))

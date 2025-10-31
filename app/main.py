@@ -95,12 +95,16 @@ async def load_model():
             model_loaded = False
             return
 
-        print("[INFO] Downloading model and vectorizer from Azure Blob Storage...")  # pragma: no cover
+        print(
+            "[INFO] Downloading model and vectorizer from Azure Blob Storage..."
+        )  # pragma: no cover
 
         # Create blob service client  # pragma: no cover
         global blob_service_client  # pragma: no cover
-        blob_service_client = BlobServiceClient.from_connection_string(  # pragma: no cover
-            AZURE_CONNECTION_STRING
+        blob_service_client = (
+            BlobServiceClient.from_connection_string(  # pragma: no cover
+                AZURE_CONNECTION_STRING
+            )
         )
 
         # Blob paths (without container name prefix since it's specified separately)  # pragma: no cover
@@ -125,14 +129,18 @@ async def load_model():
 
         # Download into memory  # pragma: no cover
         model_data = BytesIO(model_blob.download_blob().readall())  # pragma: no cover
-        vectorizer_data = BytesIO(vectorizer_blob.download_blob().readall())  # pragma: no cover
+        vectorizer_data = BytesIO(
+            vectorizer_blob.download_blob().readall()
+        )  # pragma: no cover
 
         # Load using joblib  # pragma: no cover
         model = joblib.load(model_data)  # pragma: no cover
         vectorizer = joblib.load(vectorizer_data)  # pragma: no cover
 
         model_loaded = True  # pragma: no cover
-        print("[SUCCESS] Model and vectorizer loaded successfully from Azure!")  # pragma: no cover
+        print(
+            "[SUCCESS] Model and vectorizer loaded successfully from Azure!"
+        )  # pragma: no cover
     except Exception as e:  # pragma: no cover
         print(f"[ERROR] Failed to load model from Azure: {str(e)}")  # pragma: no cover
         model_loaded = False  # pragma: no cover
