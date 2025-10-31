@@ -14,7 +14,7 @@
 |--------|-------------------------|------------------------|
 | **Talha Shahid** | Cloud Infrastructure, API Development, Testing & CI/CD | • Created Azure VMs to host MLflow experiments with Azure Blob Storage for artifact storage<br>• Launched AWS EC2 instances for MLflow deployment<br>• Built FastAPI application with live model integration from Azure Blob Storage<br>• Hosted FastAPI on live VM with frontend integration<br>• Improved test coverage from ~60% to >80% using pytest and mock testing<br>• Fixed linting issues and CI/CD pipeline<br>• API documentation (FastAPI /docs) |
 | **Zuhair Farhan** | MLOps Setup, Monitoring, Infrastructure | • Repository initialization and project structure<br>• Dataset preparation and initial model training (Logistic Regression, XGBoost)<br>• MLflow setup with Azure Blob Storage integration for model artifacts and metrics<br>• Prometheus + Grafana monitoring stack setup and configuration<br>• CI/CD pipeline implementation (`.github/workflows/ci.yml`) - 4/5 tests passing<br>• Pre-commit hooks setup and configuration<br>• Initial documentation (README, CONTRIBUTION, CODE_OF_CONDUCT, LICENSE) |
-| **Ahsanuddin** | ML Experimentation, Data Drift Monitoring, Load Testing | • MLflow experiment execution for XGBoost and Logistic Regression with hyperparameter tuning (eta, n_estimators, max_depth, solver, penalty, C)<br>• Evidently AI setup for label drift detection with HTML report generation and local serving<br>• Grafana k6 load testing implementation with latency SLO assertions (p95 < 500ms, failure rate < 5%)<br>• pip-audit integration in CI/CD for dependency vulnerability scanning |
+| **Ahsanuddin** | ML Experimentation, Data Drift Monitoring, Load Testing | • MLflow experiment execution for XGBoost and Logistic Regression with hyperparameter tuning (eta, n_estimators, max_depth, solver, penalty, C)<br>• Evidently AI setup for label drift detection with HTML report generation and local serving<br>• Grafana k6 load testing implementation with latency SLO assertions (p95 < 500ms, failure rate < 5%)<br>• pip-audit integration in CI/CD for dependency vulnerability scanning<br>• Docker Compose configuration with separate dev, test, and prod profiles, including isolated setups for each service (app, db, and Prometheus) |
 
 ## Contributions by Deliverable
 
@@ -41,6 +41,13 @@
 - **Ahsanuddin**: MLflow experiments with XGBoost and Logistic Regression hyperparameter tuning, Evidently AI data drift detection (`generate_evidently_drift.py`, served on localhost:7000)
 - **Talha**: MLflow deployment on AWS EC2
 - **Zuhair**: MLflow initialization, Azure Blob Storage backend, Prometheus + Grafana stack
+
+## MLFlow XGBoost Runs:
+<img width="1570" height="787" alt="image" src="https://github.com/user-attachments/assets/bff9b009-b308-433a-886f-367194c49077" />
+
+## MLFlow XGBoost Runs:
+<img width="1570" height="792" alt="image" src="https://github.com/user-attachments/assets/2b67c217-f7c9-4b30-a184-13ab7291c687" />
+
 ## Blob Storage
 <img width="851" height="620" alt="image" src="https://github.com/user-attachments/assets/fc925055-df61-4f71-85f0-c7e67fab27dc" />
 
@@ -69,8 +76,38 @@
 <img width="1281" height="507" alt="image" src="https://github.com/user-attachments/assets/b8bb6b5c-dca7-42e0-b1b3-5dcf9ba2b5d9" />
 
 
-### Bonus - Load Testing with k6
-- **Ahsanuddin**: End-to-end load testing with Grafana k6 (`tests/load_test.js`) with latency SLO assertions (p95 < 500ms, failure rate < 5%), achieved 0% failures and ~22ms p95 latency
+### Bonus
+- **Muhammad Ahsan**:  
+  - End-to-end load testing with Grafana k6 (`tests/load_test.js`) with latency SLO assertions (p95 < 500ms, failure rate < 5%), achieved 0% failures and ~22ms p95 latency
+    ![WhatsApp Image 2025-10-31 at 12 19 12_eda16046](https://github.com/user-attachments/assets/83e93e01-30c4-4761-b578-d1bda70f8352)
+
+  - pip-audit integration in CI/CD for dependency vulnerability scanning
+    ![WhatsApp Image 2025-10-31 at 16 28 18_c6e3d339](https://github.com/user-attachments/assets/0ae42bc2-b87a-4e09-9c71-af289c05ef50)
+    ![WhatsApp Image 2025-10-31 at 16 31 53_c2126511](https://github.com/user-attachments/assets/59728e7a-c979-4598-9f17-ed9bc30942c4)
+    ![WhatsApp Image 2025-10-31 at 12 59 45_3957017a](https://github.com/user-attachments/assets/b29f07d7-2fe6-475f-83ff-901304d40351)
+
+  - Docker Compose configuration with separate dev, test, and prod profiles, including isolated setups for each service (app, db, and Prometheus)
+  
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/fb2a86d9-3043-45d3-bf21-83fb262bda62" alt="Dev Environment" width="1489" height="180">
+    <p><em>Docker Compose dev environment up and running</em></p>
+  </div>
+  
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/2f4e66b4-19cb-42db-bd61-9bc5830dc758" alt="Prod Environment" width="1490" height="179">
+    <p><em>Docker Compose prod environment up and running</em></p>
+  </div>
+  
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/31567f4b-f5b3-48d1-8d52-9332b10a9fc8" alt="Test Environment" width="1490" height="179">
+    <p><em>Docker Compose test environment up and running</em></p>
+  </div>
+  
+  <div align="center">
+    <img src="https://github.com/user-attachments/assets/65a908d4-ad1f-4ae8-8b71-78838b438818" alt="Docker Ps" width="1486" height="89">
+    <p><em>Docker containers running (docker ps)</em></p>
+  </div>
+
 
 ## Branch Naming Convention
 
