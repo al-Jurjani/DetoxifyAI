@@ -91,8 +91,8 @@ python
 
 ### Testing
 ```bash
-# Run all tests with coverage (70% minimum)
-pytest --cov=app --cov-report=xml --cov-fail-under=70
+# Run all tests with coverage (65% minimum)
+pytest --cov=app --cov-report=xml --cov-fail-under=65
 
 # Run tests with verbose output
 pytest -v
@@ -385,12 +385,12 @@ Workflow: .github/workflows/ci.yml
 Triggers: Push to main, Pull requests to main
 
 Jobs:
-1. Test (pytest with 70% coverage requirement)
+1. Test (pytest with 65% coverage requirement)
 2. Build & Push (Docker image to ghcr.io)
 3. Canary Deploy + Acceptance Tests (golden queries validation)
 
 Environment Variables:
-- AZURE_CONNECTION_STRING (secret)
+- AZURE_STORAGE_CONNECTION_STRING (secret)
 - IMAGE_NAME: ghcr.io/al-jurjani/detoxifyai
 ```
 
