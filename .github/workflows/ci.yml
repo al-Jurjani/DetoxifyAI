@@ -2,7 +2,7 @@ name: CI - Milestone D4
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, FastAPI-Frontend ]
   pull_request:
     branches: [ main ]
 
