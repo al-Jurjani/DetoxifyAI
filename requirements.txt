@@ -1,8 +1,14 @@
 fastapi
-uvicorn
+uvicorn[standard]
 # evidently
 evidently==0.4.39
 mlflow
 prometheus_client
 pandas
 scikit-learn
+joblib
+python-multipart
+python-dotenv
+xgboost
+nltk
+azure-storage-blob

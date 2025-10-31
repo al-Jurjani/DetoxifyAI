@@ -55,12 +55,12 @@ def safe_stem(word):
     except RecursionError:
         return word  # fallback to original word
 
+
 def preprocess_with_stemming(text):
     text = preprocess_moderate(text)
     words = text.split()
     cleaned = [w for w in words if w.isalpha() and len(w) > 1]
     return " ".join([safe_stem(w) for w in cleaned])
-
 
 
 def preprocess_with_lemmatization(text):
@@ -86,9 +86,9 @@ if __name__ == "__main__":
     parser.add_argument("--max_features", type=int)
 
     # Logistic Regression parameters
-    # parser.add_argument("--logreg_C", type=float)
-    # parser.add_argument("--logreg_penalty")
-    # parser.add_argument("--logreg_max_iter", type=int)
+    parser.add_argument("--logreg_C", type=float)
+    parser.add_argument("--logreg_penalty")
+    parser.add_argument("--logreg_max_iter", type=int)
 
     # XGBoost parameters
     parser.add_argument("--xgb_eta", type=float)
