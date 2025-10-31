@@ -39,6 +39,44 @@
 - **Zuhair**: MLflow documentation, Azure Blob Storage setup instructions
 
 
+## Detailed Contributions by Deliverable
+
+### Deliverable 1 - README.md
+- **Ahsanuddin**: Elevator Pitch, Project Logo, and Project Flow Diagram
+- **Talha**: Quick Start, Make Targets
+- **Zuhair**: Explanation of Overall Project Flow
+
+### Deliverable 2 - CONTRIBUTION.md
+- Each member mentions their contributions.
+
+### Deliverable 3 - Dockerfile
+- **Ahsanuddin**:
+- **Talha**:
+- **Zuhair**: Initial Dockerfile setup for Prometheus and Grafana
+
+### Deliverable 4 - .github/workflows/ci.yml
+- **Zuhair**: Setup the workflow on infra/ci-d4 branch - Linting test to be added.
+
+### Deliverable 5 - ML Workflow Monitoring
+- **Ahsanuddin**: Ran experiements on MLFlow, Set up Evidently
+- **Talha**: Hosted MlFlow on an AWS VM
+- **Zuhair**: MLflow Initialization, Prometheus and Grafana Set Up
+
+### Deliverable 6 - Pre-commit Hooks
+- **Zuhair**: Set up pre-commit hooks on infra/pre-commit branch
+
+### Deliverable 7 - API Documentation
+- **Talha**: what did you do fir this bro
+
+### Deliverable 8 - Security & Compliance
+- **Ahsanuddin**:
+- **Talha**:
+- **Zuhair**:
+
+### Deliverable 9 - Cloud Integration
+- **Talha**:
+- **Zuhair**:
+
 ## Branch Naming Convention
 
 We follow a structured branch naming convention to maintain clarity and organization:

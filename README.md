@@ -59,6 +59,10 @@ Access the application:
 - Frontend: Open `frontend/index.html` in a browser
 - API Docs: http://localhost:8000/docs
 
+Online VM's (Might be offline)
+- MLFlow: http://13.50.244.152:5000/
+- Frontend: http://16.16.193.183/
+
 ## Prerequisites
 
 - Python 3.11+
