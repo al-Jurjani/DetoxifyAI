@@ -33,14 +33,25 @@
 ### D4 - .github/workflows/ci.yml
 - **Zuhair**: CI/CD pipeline implementation (branch: `infra/ci-d4`) - linting, testing, build, canary deploy
 - **Talha**: CI/CD fixes and test coverage improvements
+## Last Successful Pass:
+<img width="1423" height="520" alt="image" src="https://github.com/user-attachments/assets/3c49e6fe-2e98-4b2c-8870-33b63f51edf0" />
+
 
 ### D5 - ML Workflow Monitoring
 - **Ahsanuddin**: MLflow experiments with XGBoost and Logistic Regression hyperparameter tuning, Evidently AI data drift detection (`generate_evidently_drift.py`, served on localhost:7000)
 - **Talha**: MLflow deployment on AWS EC2
 - **Zuhair**: MLflow initialization, Azure Blob Storage backend, Prometheus + Grafana stack
+## Blob Storage
+<img width="851" height="620" alt="image" src="https://github.com/user-attachments/assets/fc925055-df61-4f71-85f0-c7e67fab27dc" />
+## Grafana with Metrics from Prometheus
+![WhatsApp Image 2025-10-30 at 23 26 41_75e4cff2](https://github.com/user-attachments/assets/e95e7071-88a8-449e-acca-d11acdbed5a8)
+
 
 ### D6 - Pre-commit Hooks
 - **Zuhair**: Pre-commit hook setup (branch: `infra/pre-commit`) - trailing-whitespace, end-of-file-fixer, detect-secrets
+## Sample Git Commit After Successful Implementation of Pre-Commit Hooks
+![WhatsApp Image 2025-10-30 at 19 08 52_03370a0c](https://github.com/user-attachments/assets/a2ee8fe9-393a-45d4-a030-432eb36725a1)
+
 
 ### D7 - API Documentation
 - **Talha**: FastAPI interactive docs (/docs, /redoc), cURL examples, JSON schemas
@@ -52,6 +63,9 @@
 ### D9 - Cloud Integration
 - **Talha**: AWS EC2 (inference API hosting), AWS VM setup for MLflow
 - **Zuhair**: Azure Blob Storage (model artifacts, MLflow backend)
+## Azure Blob storing Model and Vectorizer Pickle Files, and a Metrics CSV File
+<img width="1281" height="507" alt="image" src="https://github.com/user-attachments/assets/b8bb6b5c-dca7-42e0-b1b3-5dcf9ba2b5d9" />
+
 
 ### Bonus - Load Testing with k6
 - **Ahsanuddin**: End-to-end load testing with Grafana k6 (`tests/load_test.js`) with latency SLO assertions (p95 < 500ms, failure rate < 5%), achieved 0% failures and ~22ms p95 latency
