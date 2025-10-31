@@ -376,7 +376,7 @@ MLFLOW_TRACKING_URI=http://localhost:5000
 <img width="848" height="616" alt="image" src="https://github.com/user-attachments/assets/3f16f885-99c0-4da8-a24c-7ac60ba3d154" />
 
 
-#### 3. Deploy to AWS (Optional)
+#### 3. Deploy to AWS (EC2 Instance)
 See [deploy/AWS_DEPLOYMENT.md](deploy/AWS_DEPLOYMENT.md) for detailed AWS deployment instructions.
 
 ### Service Interaction Flow
