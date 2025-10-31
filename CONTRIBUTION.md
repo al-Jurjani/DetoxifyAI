@@ -43,8 +43,10 @@
 - **Zuhair**: MLflow initialization, Azure Blob Storage backend, Prometheus + Grafana stack
 ## Blob Storage
 <img width="851" height="620" alt="image" src="https://github.com/user-attachments/assets/fc925055-df61-4f71-85f0-c7e67fab27dc" />
+
 ## Grafana with Metrics from Prometheus
-![WhatsApp Image 2025-10-30 at 23 26 41_75e4cff2](https://github.com/user-attachments/assets/e95e7071-88a8-449e-acca-d11acdbed5a8)
+![WhatsApp Image 2025-10-30 at 23 26 41_1f56e74b](https://github.com/user-attachments/assets/08832302-ac2f-4478-bfce-321896ba9698)
+
 
 
 ### D6 - Pre-commit Hooks
