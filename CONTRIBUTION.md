@@ -6,7 +6,7 @@
 |------|----------------|
 | Talha Shahid | 26948 |
 | Zuhair Farhan | 27100 |
-| Ahsanuddin | 27134 |
+| Muhammad Ahsan | 27134 |
 
 ## Task Distribution
 
@@ -14,12 +14,12 @@
 |--------|-------------------------|------------------------|
 | **Talha Shahid** | Cloud Infrastructure, API Development, Testing & CI/CD | • Created Azure VMs to host MLflow experiments with Azure Blob Storage for artifact storage<br>• Launched AWS EC2 instances for MLflow deployment<br>• Built FastAPI application with live model integration from Azure Blob Storage<br>• Hosted FastAPI on live VM with frontend integration<br>• Improved test coverage from ~60% to >80% using pytest and mock testing<br>• Fixed linting issues and CI/CD pipeline<br>• API documentation (FastAPI /docs) |
 | **Zuhair Farhan** | MLOps Setup, Monitoring, Infrastructure | • Repository initialization and project structure<br>• Dataset preparation and initial model training (Logistic Regression, XGBoost)<br>• MLflow setup with Azure Blob Storage integration for model artifacts and metrics<br>• Prometheus + Grafana monitoring stack setup and configuration<br>• CI/CD pipeline implementation (`.github/workflows/ci.yml`) - 4/5 tests passing<br>• Pre-commit hooks setup and configuration<br>• Initial documentation (README, CONTRIBUTION, CODE_OF_CONDUCT, LICENSE) |
-| **Ahsanuddin** | ML Experimentation, Data Drift Monitoring, Bonuses | • MLflow experiment execution for XGBoost and Logistic Regression with hyperparameter tuning (eta, n_estimators, max_depth, solver, penalty, C)<br>• Evidently AI setup for label drift detection with HTML report generation and local serving<br>• Grafana k6 load testing implementation with latency SLO assertions (p95 < 500ms, failure rate < 5%)<br>• pip-audit integration in CI/CD for dependency vulnerability scanning<br>• Docker Compose configuration with separate dev, test, and prod profiles, including isolated setups for each service (app, db, and Prometheus) |
+| **Muhammad Ahsan** | ML Experimentation, Data Drift Monitoring, Bonuses | • MLflow experiment execution for XGBoost and Logistic Regression with hyperparameter tuning (eta, n_estimators, max_depth, solver, penalty, C)<br>• Evidently AI setup for label drift detection with HTML report generation and local serving<br>• Grafana k6 load testing implementation with latency SLO assertions (p95 < 500ms, failure rate < 5%)<br>• pip-audit integration in CI/CD for dependency vulnerability scanning<br>• Docker Compose configuration with separate dev, test, and prod profiles, including isolated setups for each service (app, db, and Prometheus) |
 
 ## Contributions by Deliverable
 
 ### D1 - README.md
-- **Ahsanuddin**: Elevator pitch, project logo, architecture diagram
+- **Muhammad Ahsan**: Elevator pitch, project logo, architecture diagram
 - **Talha**: Quick-start guide, Make targets, FAQ section, cloud deployment documentation
 - **Zuhair**: Overall project flow explanation, MLflow documentation, monitoring stack setup
 
@@ -38,7 +38,7 @@
 
 
 ### D5 - ML Workflow Monitoring
-- **Ahsanuddin**: MLflow experiments with XGBoost and Logistic Regression hyperparameter tuning, Evidently AI data drift detection (`generate_evidently_drift.py`, served on localhost:7000)
+- **Muhammad Ahsan**: MLflow experiments with XGBoost and Logistic Regression hyperparameter tuning, Evidently AI data drift detection (`generate_evidently_drift.py`, served on localhost:7000)
 - **Talha**: MLflow deployment on AWS EC2
 - **Zuhair**: MLflow initialization, Azure Blob Storage backend, Prometheus + Grafana stack
 
@@ -67,7 +67,7 @@
 - **Talha**: FastAPI interactive docs (/docs, /redoc), cURL examples, JSON schemas
 
 ### D8 - Security & Compliance
-- **Ahsanuddin**: pip-audit integration in CI/CD for dependency vulnerability scanning
+- **Muhammad Ahsan**: pip-audit integration in CI/CD for dependency vulnerability scanning
 - **Zuhair**: LICENSE, CODE_OF_CONDUCT.md
 
 ### D9 - Cloud Integration
