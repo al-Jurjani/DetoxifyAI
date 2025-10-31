@@ -1,4 +1,6 @@
-import sys, os
+import sys
+import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from fastapi.testclient import TestClient
@@ -23,7 +25,9 @@ def test_predict_with_special_characters():
 
 def test_predict_with_mixed_content():
     """Test prediction with mixed content."""
-    res = client.post("/predict", json={"text": "Hello 123 @user #tag http://example.com"})
+    res = client.post(
+        "/predict", json={"text": "Hello 123 @user #tag http://example.com"}
+    )
     assert res.status_code == 200
     data = res.json()
     assert data["prediction"] in ["toxic", "non-toxic"]
@@ -37,7 +41,7 @@ def test_predict_confidence_range():
         "you are stupid",
         "nice to meet you",
         "I hate this",
-        "wonderful day"
+        "wonderful day",
     ]
     for text in texts:
         res = client.post("/predict", json={"text": text})

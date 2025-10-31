@@ -8,6 +8,7 @@ import os
 from http.server import SimpleHTTPRequestHandler
 from socketserver import TCPServer
 
+
 def generate_label_drift_report(csv_path="../Data/combined_dataset.csv"):
     print("📂 Loading dataset...")
     data = pd.read_csv(csv_path)
@@ -36,12 +37,14 @@ def generate_label_drift_report(csv_path="../Data/combined_dataset.csv"):
 
     return output_path
 
+
 def serve_report(port=7000):
     os.chdir("artifacts")
     TCPServer.allow_reuse_address = True
     with TCPServer(("", port), SimpleHTTPRequestHandler) as httpd:
         print(f"🚀 Serving report at: http://localhost:{port}")
         httpd.serve_forever()
+
 
 if __name__ == "__main__":
     html_path = generate_label_drift_report()

@@ -358,6 +358,6 @@ except Exception as e:
     exit(1)
 
 # Save report as HTML
-report.save_html('data_drift_report.html')
+report.save_html("data_drift_report.html")
 report.save_html("data_drift_report.html")
 print("Data drift report saved as 'data_drift_report.html'")

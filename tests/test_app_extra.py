@@ -1,4 +1,6 @@
-import sys, os
+import sys
+import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from fastapi.testclient import TestClient
@@ -55,8 +57,10 @@ def test_metrics_endpoint():
     res = client.get("/metrics")
     assert res.status_code == 200
     # Prometheus metrics should be plain text
-    assert "text/plain" in res.headers.get("content-type", "").lower() or \
-           "prometheus" in res.headers.get("content-type", "").lower()
+    assert (
+        "text/plain" in res.headers.get("content-type", "").lower()
+        or "prometheus" in res.headers.get("content-type", "").lower()
+    )
 
 
 def test_predict_response_structure():
