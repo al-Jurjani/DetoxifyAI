@@ -16,9 +16,10 @@ from io import BytesIO
 
 load_dotenv()
 AZURE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
-CONTAINER_NAME = "mlflow-artifacts-mlops-proj" 
+CONTAINER_NAME = "mlflow-artifacts-mlops-proj"
 
-blob_service_client = BlobServiceClient.from_connection_string(AZURE_CONNECTION_STRING)
+# Initialize blob service client as None, will be created in startup if connection string exists
+blob_service_client = None
 
 
 
@@ -86,7 +87,17 @@ async def load_model():
     #     model_loaded = False
 
     try:
+        # Check if Azure connection string is available
+        if not AZURE_CONNECTION_STRING:
+            print("[WARNING] No Azure connection string provided. Running in mock mode.")
+            model_loaded = False
+            return
+
         print("[INFO] Downloading model and vectorizer from Azure Blob Storage...")
+
+        # Create blob service client
+        global blob_service_client
+        blob_service_client = BlobServiceClient.from_connection_string(AZURE_CONNECTION_STRING)
 
         # Blob paths (without container name prefix since it's specified separately)
         xg_model_blob_path = "3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"

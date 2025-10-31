@@ -91,7 +91,11 @@ jobs:
       - name: Run canary container
         run: |
           docker rm -f canary || true
-          docker run -d --name canary -e CANARY=true -p 8000:8000 $IMAGE_NAME:${{ github.sha }}
+          docker run -d --name canary \
+            -e CANARY=true \
+            -e AZURE_STORAGE_CONNECTION_STRING="${{ secrets.AZURE_STORAGE_CONNECTION_STRING }}" \
+            -p 8000:8000 \
+            $IMAGE_NAME:${{ github.sha }}
       - name: Wait for /health (timeout 60s)
         run: |
           for i in $(seq 1 30); do
