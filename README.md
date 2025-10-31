@@ -1,4 +1,4 @@
-<img width="1600" height="893" alt="image" src="https://github.com/user-attachments/assets/54928356-6833-48dc-8433-d3f356dd77a7" /># DetoxifyAI 🛡️
+# DetoxifyAI 🛡️
 
 > Real-time ML-powered toxicity detection API for social platforms and content moderation
 
@@ -61,12 +61,12 @@ Access the application:
 
 Online VM's (Might be offline)
 - MLFlow: http://13.50.244.152:5000/
-<img width="1600" height="929" alt="image" src="https://github.com/user-attachments/assets/7927b468-f6a1-4c3b-a4a3-ebbaccd7c01a" />
-<img width="2733" height="1489" alt="image" src="https://github.com/user-attachments/assets/4264fd80-c0d6-4a93-82b4-1bd0a5185776" />
+<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/7927b468-f6a1-4c3b-a4a3-ebbaccd7c01a" />
+<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/4264fd80-c0d6-4a93-82b4-1bd0a5185776" />
 
 - Frontend: http://16.16.193.183/
-<img width="1600" height="893" alt="image" src="https://github.com/user-attachments/assets/12d01ccd-e5a4-4fb4-bb89-d03480ad1a2a" />
-<img width="1788" height="1525" alt="image" src="https://github.com/user-attachments/assets/ed683e21-c399-4553-88d5-f48261277057" />
+<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/12d01ccd-e5a4-4fb4-bb89-d03480ad1a2a" />
+<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/ed683e21-c399-4553-88d5-f48261277057" />
 
 
 ## Prerequisites
@@ -259,13 +259,13 @@ docker-compose up --build
 docker-compose down
 ```
 
-![Monitoring Architecture](https://via.placeholder.com/800x400?text=Prometheus+%2B+Grafana+Dashboard)
-
 ## API Documentation
 
 ### Interactive Documentation
 - **Swagger UI**: http://localhost:8000/docs
 - **ReDoc**: http://localhost:8000/redoc
+
+<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/adfa97fd-120e-4f4e-9120-916a03ccf606" />
 
 ### Endpoints
 
