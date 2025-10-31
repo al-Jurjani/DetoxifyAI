@@ -690,3 +690,4 @@ For questions or issues, please open a GitHub issue or contact the team at:
 - Cloud storage: Azure Blob Storage
 - CI/CD: GitHub Actions
 - Frontend: Vanilla HTML/CSS/JavaScript
+
