@@ -372,6 +372,9 @@ cp .env.example .env
 AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=https;AccountName=...;AccountKey=...;EndpointSuffix=core.windows.net"
 MLFLOW_TRACKING_URI=http://localhost:5000
 ```
+## Azure Blob View
+<img width="848" height="616" alt="image" src="https://github.com/user-attachments/assets/3f16f885-99c0-4da8-a24c-7ac60ba3d154" />
+
 
 #### 3. Deploy to AWS (Optional)
 See [deploy/AWS_DEPLOYMENT.md](deploy/AWS_DEPLOYMENT.md) for detailed AWS deployment instructions.
