@@ -5,7 +5,7 @@
 | Name | Student ERP ID | GitHub Username | Email |
 |------|----------------|-----------------|-------|
 | Muhammad Ahsanuddin | ERP-XXXXX | @username1 | email1@example.com |
-| Talha Saleem Shahid | ERP-XXXXX | @username2 | email2@example.com |
+| Talha Saleem Shahid | 26948 | @TalhaShahid004 | talhashahid363@gmail.com |
 | Zuhair Farhan | 27100 | @Al-Jurjani | zuhairfarhan@gmail.com |
 
 ## Task Distribution
@@ -20,7 +20,7 @@
 
 ### Phase 1: Project Setup
 - **Ahsanuddin**: Environment setup
-- **Talha**: Branches management, docker configuration, Makefile creation
+- **Talha**: Branches management, docker configuration, Makefile creation, AWS VM hosting
 - **Zuhair**: Repository initialization, project structure design
 
 ### Phase 2: Development
@@ -30,12 +30,12 @@
 
 ### Phase 3: Integration & Testing
 - **Ahsanuddin**: Used Evidently to track data drift
-- **Talha**: API testing, load testing with Prometheus and Grafana experiments, setup Azure VM to host API
+- **Talha**: API testing, load testing with Prometheus and Grafana experiments, setup AWS VM to host API
 - **Zuhair**: Model evaluation with MLflow, setup Azure Blob Storage for storage of artifacts and metrics
 
 ### Phase 4: Documentation & Deployment
 - **Ahsanuddin**: README sections on overall project
-- **Talha**: API documentation, usage examples, Azure VM setup instructions
+- **Talha**: API documentation, usage examples, AWS VM setup instructions
 - **Zuhair**: MLflow documentation, Azure Blob Storage setup instructions
 
 
