@@ -1,0 +1,17 @@
+# docker-compose.test.yml
+version: "3.8"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: pytest --maxfail=1 --disable-warnings -q
+    environment:
+      - ENV=test
+    volumes:
+      - ./tests:/app/tests
+    depends_on:
+      - prometheus
+    networks:
+      - monitoring
