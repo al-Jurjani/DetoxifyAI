@@ -691,3 +691,4 @@ For questions or issues, please open a GitHub issue or contact the team at:
 - CI/CD: GitHub Actions
 - Frontend: Vanilla HTML/CSS/JavaScript
 
+
