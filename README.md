@@ -400,6 +400,7 @@ Environment Variables:
 - AZURE_STORAGE_CONNECTION_STRING (secret)
 - IMAGE_NAME: ghcr.io/al-jurjani/detoxifyai
 ```
+<img width="2062" height="426" alt="image" src="https://github.com/user-attachments/assets/bf4aec8f-da32-4e20-997e-da8e70af0887" />
 
 ## FAQ
 
