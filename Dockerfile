@@ -4,14 +4,14 @@ FROM python:3.11-slim
 # Set working directory
 WORKDIR /app
 
+# Copy requirements first (for better layer caching)
+COPY requirements.txt /app/
+
+# Install dependencies
+RUN pip install --no-cache-dir -r requirements.txt
+
 # Copy application code
 COPY ./app /app
-
-# Install runtime + dev dependencies
-# (fastapi, uvicorn, prometheus-client, ruff, black, pytest, pytest-cov, requests)
-RUN pip install --no-cache-dir \
-    fastapi uvicorn prometheus-client \
-    ruff black pytest pytest-cov requests
 
 # Expose app port (must match CI CANARY_PORT)
 EXPOSE 8000

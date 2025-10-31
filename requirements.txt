@@ -8,6 +8,7 @@ pandas
 scikit-learn
 joblib
 python-multipart
+python-dotenv
 xgboost
 nltk
 azure-storage-blob
