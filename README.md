@@ -385,9 +385,10 @@ Workflow: .github/workflows/ci.yml
 Triggers: Push to main, Pull requests to main
 
 Jobs:
-1. Test (pytest with 65% coverage requirement)
-2. Build & Push (Docker image to ghcr.io)
-3. Canary Deploy + Acceptance Tests (golden queries validation)
+1. Lint (ruff + black code quality checks)
+2. Test (pytest with 65% coverage requirement)
+3. Build & Push (Docker image to ghcr.io)
+4. Canary Deploy + Acceptance Tests (golden queries validation)
 
 Environment Variables:
 - AZURE_STORAGE_CONNECTION_STRING (secret)

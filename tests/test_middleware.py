@@ -1,4 +1,6 @@
-import sys, os
+import sys
+import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from fastapi.testclient import TestClient
@@ -28,7 +30,10 @@ def test_cors_headers():
     """Test that CORS middleware adds appropriate headers."""
     res = client.options("/predict", headers={"Origin": "http://localhost:3000"})
     # CORS should be configured to allow all origins
-    assert res.status_code in [200, 405]  # OPTIONS might return 405 if not explicitly handled
+    assert res.status_code in [
+        200,
+        405,
+    ]  # OPTIONS might return 405 if not explicitly handled
 
 
 def test_multiple_requests_increment_counter():

@@ -1,6 +1,5 @@
 from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
 from prometheus_client import Counter, Histogram, generate_latest, CONTENT_TYPE_LATEST
 import time
 from pydantic import BaseModel
@@ -20,7 +19,6 @@ CONTAINER_NAME = "mlflow-artifacts-mlops-proj"
 
 # Initialize blob service client as None, will be created in startup if connection string exists
 blob_service_client = None
-
 
 
 app = FastAPI(title="DetoxifyAI API")
@@ -47,15 +45,17 @@ model = None
 vectorizer = None
 model_loaded = False
 
+
 # Preprocessing function
 def preprocess_aggressive(text: str) -> str:
     text = text.lower().strip()
-    text = re.sub(r'http\S+|www\S+|https\S+', '', text, flags=re.MULTILINE)
-    text = re.sub(r'@\w+|#\w+', '', text)
-    text = re.sub(r'[0-9]+', '', text)
-    text = text.translate(str.maketrans('', '', string.punctuation))
-    text = re.sub(r'\s+', ' ', text)
+    text = re.sub(r"http\S+|www\S+|https\S+", "", text, flags=re.MULTILINE)
+    text = re.sub(r"@\w+|#\w+", "", text)
+    text = re.sub(r"[0-9]+", "", text)
+    text = text.translate(str.maketrans("", "", string.punctuation))
+    text = re.sub(r"\s+", " ", text)
     return text
+
 
 @app.on_event("startup")
 async def load_model():
@@ -89,7 +89,9 @@ async def load_model():
     try:
         # Check if Azure connection string is available
         if not AZURE_CONNECTION_STRING:
-            print("[WARNING] No Azure connection string provided. Running in mock mode.")
+            print(
+                "[WARNING] No Azure connection string provided. Running in mock mode."
+            )
             model_loaded = False
             return
 
@@ -97,18 +99,29 @@ async def load_model():
 
         # Create blob service client
         global blob_service_client
-        blob_service_client = BlobServiceClient.from_connection_string(AZURE_CONNECTION_STRING)
+        blob_service_client = BlobServiceClient.from_connection_string(
+            AZURE_CONNECTION_STRING
+        )
 
         # Blob paths (without container name prefix since it's specified separately)
-        xg_model_blob_path = "3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
-        xg_vectorizer_blob_path = "3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
+        xg_model_blob_path = (
+            "3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
+        )
+        xg_vectorizer_blob_path = (
+            "3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
+        )
 
-        lg_model_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/model/model.pkl"
-        lg_vectorizer_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/vectorizer/tfidf.pkl"
+        # Alternative paths for logistic regression model (commented out, using XGBoost)
+        # lg_model_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/model/model.pkl"
+        # lg_vectorizer_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/vectorizer/tfidf.pkl"
 
         # Access blobs
-        model_blob = blob_service_client.get_blob_client(container=CONTAINER_NAME, blob=xg_model_blob_path)
-        vectorizer_blob = blob_service_client.get_blob_client(container=CONTAINER_NAME, blob=xg_vectorizer_blob_path)
+        model_blob = blob_service_client.get_blob_client(
+            container=CONTAINER_NAME, blob=xg_model_blob_path
+        )
+        vectorizer_blob = blob_service_client.get_blob_client(
+            container=CONTAINER_NAME, blob=xg_vectorizer_blob_path
+        )
 
         # Download into memory
         model_data = BytesIO(model_blob.download_blob().readall())
@@ -124,6 +137,7 @@ async def load_model():
         print(f"[ERROR] Failed to load model from Azure: {str(e)}")
         model_loaded = False
 
+
 @app.middleware("http")
 async def add_metrics(request: Request, call_next):
     start = time.time()
@@ -138,7 +152,7 @@ async def add_metrics(request: Request, call_next):
 def read_root():
     return {
         "message": "DetoxifyAI API running successfully",
-        "model_loaded": model_loaded
+        "model_loaded": model_loaded,
     }
 
 
@@ -168,7 +182,7 @@ async def predict(req: Query):
             "prediction": "non-toxic",
             "confidence": 0.50,
             "model_loaded": False,
-            "note": "Using mock prediction - model not loaded"
+            "note": "Using mock prediction - model not loaded",
         }
 
     try:
@@ -183,7 +197,7 @@ async def predict(req: Query):
             "prediction": "toxic" if prediction == 1 else "non-toxic",
             "confidence": probability if prediction == 1 else (1 - probability),
             "toxic_probability": probability,
-            "model_loaded": True
+            "model_loaded": True,
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
