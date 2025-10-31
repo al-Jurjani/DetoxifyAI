@@ -6,4 +6,3 @@ __pycache__
 mlruns.*
 *.pkl
 init_env.py
-*.csv
