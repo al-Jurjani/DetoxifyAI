@@ -613,16 +613,22 @@ This project is licensed under the MIT License - see [LICENSE.MD](LICENSE.MD) fi
 
 Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
-## Bonus Features Implemented
+## Bonus Features Status
 
-- [x] Docker Compose with monitoring services (Prometheus, Grafana, Node Exporter)
+### Not Implemented (from D1 bonus list):
+- [ ] **Docker Compose with dev/test/prod profiles** - Current docker-compose.yml only includes monitoring services (Prometheus, Grafana, Node Exporter). No separate profiles for dev/test/prod environments, and no app/db services defined.
+- [ ] **GPU-enabled image and self-hosted runner** - Standard CPU-only Docker image with `python:3.11-slim` base.
+- [ ] **Infrastructure as Code (IaC)** - No Terraform/CloudFormation templates. No `infra/` or `scripts/` directories for IaC automation.
+- [ ] **End-to-end load testing with k6** - No k6 scripts or latency SLO assertions implemented.
+- [ ] **Data Version Control (DVC/Git-LFS)** - No DVC or Git-LFS configuration for dataset versioning.
+
+### Related Features Implemented (outside bonus scope):
+- [x] Basic Docker Compose for monitoring stack (Prometheus, Grafana, Node Exporter)
 - [x] MLflow experiment tracking with Azure Blob Storage backend
 - [x] CI/CD pipeline with GitHub Actions (test, build, canary deploy, acceptance tests)
-- [ ] GPU-enabled image with self-hosted runner
-- [ ] Infrastructure as Code (Terraform for AWS/Azure)
-- [ ] Load testing with k6 and SLO assertions
-- [ ] Data version control with DVC/Git-LFS
-- [x] Data drift monitoring setup (Evidently)
+- [x] Evidently integration for data drift monitoring
+- [x] Production Dockerfile with healthchecks
+- [x] Prometheus metrics instrumentation in FastAPI
 
 ## Quick Reference Commands
 
