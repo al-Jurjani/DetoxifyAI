@@ -54,13 +54,14 @@
 ## Grafana with Metrics from Prometheus
 ![WhatsApp Image 2025-10-30 at 23 26 41_1f56e74b](https://github.com/user-attachments/assets/08832302-ac2f-4478-bfce-321896ba9698)
 
-
+## Evidently Dashboard
+<img width="1280" height="606" alt="image" src="https://github.com/user-attachments/assets/ab6b483f-7d31-48ce-b29c-9756e8906b35" />
+<img width="1280" height="465" alt="image" src="https://github.com/user-attachments/assets/2d0e1a4c-7425-4000-9bb8-aaa8b104ca4b" />
 
 ### D6 - Pre-commit Hooks
 - **Zuhair**: Pre-commit hook setup (branch: `infra/pre-commit`) - trailing-whitespace, end-of-file-fixer, detect-secrets
 ## Sample Git Commit After Successful Implementation of Pre-Commit Hooks
 ![WhatsApp Image 2025-10-30 at 19 08 52_03370a0c](https://github.com/user-attachments/assets/a2ee8fe9-393a-45d4-a030-432eb36725a1)
-
 
 ### D7 - API Documentation
 - **Talha**: FastAPI interactive docs (/docs, /redoc), cURL examples, JSON schemas
@@ -75,18 +76,17 @@
 ## Azure Blob storing Model and Vectorizer Pickle Files, and a Metrics CSV File
 <img width="1281" height="507" alt="image" src="https://github.com/user-attachments/assets/b8bb6b5c-dca7-42e0-b1b3-5dcf9ba2b5d9" />
 
-
-### Bonus
+# Bonus
 - **Muhammad Ahsan**:  
-  - End-to-end load testing with Grafana k6 (`tests/load_test.js`) with latency SLO assertions (p95 < 500ms, failure rate < 5%), achieved 0% failures and ~22ms p95 latency
+  - **End-to-end load testing with Grafana k6** (`tests/load_test.js`) with latency SLO assertions (p95 < 500ms, failure rate < 5%), achieved 0% failures and ~22ms p95 latency
     ![WhatsApp Image 2025-10-31 at 12 19 12_eda16046](https://github.com/user-attachments/assets/83e93e01-30c4-4761-b578-d1bda70f8352)
 
-  - pip-audit integration in CI/CD for dependency vulnerability scanning
+  - **pip-audit integration** in CI/CD for dependency vulnerability scanning
     ![WhatsApp Image 2025-10-31 at 16 28 18_c6e3d339](https://github.com/user-attachments/assets/0ae42bc2-b87a-4e09-9c71-af289c05ef50)
     ![WhatsApp Image 2025-10-31 at 16 31 53_c2126511](https://github.com/user-attachments/assets/59728e7a-c979-4598-9f17-ed9bc30942c4)
     ![WhatsApp Image 2025-10-31 at 12 59 45_3957017a](https://github.com/user-attachments/assets/b29f07d7-2fe6-475f-83ff-901304d40351)
 
-  - Docker Compose configuration with separate dev, test, and prod profiles, including isolated setups for each service (app, db, and Prometheus)
+  - **Docker Compose configuration with separate dev, test, and prod profiles**, including isolated setups for each service (app, db, and Prometheus)
   
   <div align="center">
     <img src="https://github.com/user-attachments/assets/fb2a86d9-3043-45d3-bf21-83fb262bda62" alt="Dev Environment" width="1489" height="180">
