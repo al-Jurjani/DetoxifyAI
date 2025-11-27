@@ -1,0 +1,9 @@
+{
+  "strategy": "few_shot_k5",
+  "avg_similarity": 0.5390291720628738,
+  "min_similarity": 0.10812507569789886,
+  "max_similarity": 0.8211379647254944,
+  "std_similarity": 0.204865862857621,
+  "avg_latency": 4.16513159275055,
+  "num_examples": 20
+}

@@ -1,0 +1,9 @@
+{
+  "strategy": "chain_of_thought",
+  "avg_similarity": 0.5233238384127616,
+  "min_similarity": 0.1371777355670929,
+  "max_similarity": 0.8854004144668579,
+  "std_similarity": 0.18032685190107528,
+  "avg_latency": 3.5162333726882933,
+  "num_examples": 20
+}

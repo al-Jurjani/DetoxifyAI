@@ -1,0 +1,162 @@
+[
+  {
+    "id": 0,
+    "toxic": "Yeah thats a really good way to get a life! Fucking fag!",
+    "expected": "Yeah, that's a really good way to get a life!",
+    "generated": "I believe there are more productive ways to focus on personal growth and improvement. Using derogatory language is not helpful or respectful.",
+    "similarity": 0.10812507569789886,
+    "latency": 7.1799376010894775
+  },
+  {
+    "id": 1,
+    "toxic": "i wish people would shut the fuck up about big money in politics .",
+    "expected": "I wish people would keep quiet about big money in politics.",
+    "generated": "I would appreciate it if the conversation about big money in politics could be kept to a minimum.",
+    "similarity": 0.8211379647254944,
+    "latency": 2.8248720169067383
+  },
+  {
+    "id": 2,
+    "toxic": "queer ur gay i hope u read this",
+    "expected": "I hope you read this.",
+    "generated": "\"I came across your post and I wanted to share some thoughts from a different perspective. I hope you find it respectful and insightful.\"",
+    "similarity": 0.22929747402668,
+    "latency": 6.711503028869629
+  },
+  {
+    "id": 3,
+    "toxic": "it s refreshing to see someone who is so fucking smart and edgy .",
+    "expected": "it's refreshing to see someone who is so smart and edgy .",
+    "generated": "It's impressive to engage with someone who possesses such a deep understanding and unique perspective.",
+    "similarity": 0.4746606945991516,
+    "latency": 5.0808210372924805
+  },
+  {
+    "id": 4,
+    "toxic": "They're more than welcome to take their brain dead asses back to their shithole country.",
+    "expected": "They're more than welcome to take themselves back to their country.",
+    "generated": "I believe it would be best for them to return to their country of origin if that is their preference.",
+    "similarity": 0.6078640818595886,
+    "latency": 3.3080646991729736
+  },
+  {
+    "id": 5,
+    "toxic": "Here is my badge of honor bitches )",
+    "expected": "Here is my badge of honor )",
+    "generated": "I'd like to share an achievement with you.\n\nOr:\nI'm proud to show you this.\n\nOr:\nI'm excited to share this with you.\n\nOr:\nI've earned this recognition.\n\nOr:\nThis is a symbol of my hard work.\n\nOr:\nI'm pleased to present this to you.\n\nOr:\nI'm glad to have reached this milestone.\n\nOr:\nI'm proud of my progress.\n\nOr:\nI'm happy to have accomplished this.\n\nOr:\nI'm grateful for this opportunity.\n\nOr:\nI'm thrilled to have achieved",
+    "similarity": 0.37520870566368103,
+    "latency": 21.6466543674469
+  },
+  {
+    "id": 6,
+    "toxic": "I've come across Mokele before, he is a power hungry little bully.",
+    "expected": "I've come across Mokele before, he is a power hungry person.",
+    "generated": "I've previously encountered an individual named Mokele who seems to have a strong desire for power.",
+    "similarity": 0.8151752948760986,
+    "latency": 1.9765753746032715
+  },
+  {
+    "id": 7,
+    "toxic": "And how can you justify a moronic 2 day block?",
+    "expected": "And how can you justify a 2 day block?",
+    "generated": "I'd like to understand your reasoning behind the two-day block. Could you please share your thoughts on this?",
+    "similarity": 0.772348165512085,
+    "latency": 2.150007724761963
+  },
+  {
+    "id": 8,
+    "toxic": "glad to see they were allowed to fuck up the santa barbara coast .",
+    "expected": "Glad to see they were alllowed to destroy the santa Barbara coast",
+    "generated": "I have a different perspective on the situation regarding the Santa Barbara coast. It seems that mistakes have been made, and I see potential for learning and growth from this experience.",
+    "similarity": 0.5645177364349365,
+    "latency": 2.9754204750061035
+  },
+  {
+    "id": 9,
+    "toxic": "as a member of the lafayette community why the fuck does it matter what his political standing is !",
+    "expected": "as a member of the lafayette community why does it matter what his political standing is !",
+    "generated": "In the context of the Lafayette community, what role does an individual's political standing play?",
+    "similarity": 0.8024768829345703,
+    "latency": 2.571845769882202
+  },
+  {
+    "id": 10,
+    "toxic": "ps, congradulations on recieving the bitch star, you definatly deserve it ryan.",
+    "expected": "Congratulations on receiving the award, you definetly deserve it, Ryan.",
+    "generated": "I'd like to acknowledge your recent achievement, Ryan. It's quite an impressive feat.",
+    "similarity": 0.6694194078445435,
+    "latency": 2.543891191482544
+  },
+  {
+    "id": 11,
+    "toxic": "these idiots are bound and determined to start a civil war !",
+    "expected": "these people are bound and determined to start a civil war!",
+    "generated": "It's concerning to see some individuals expressing strong differences of opinion that could potentially lead to misunderstandings or conflicts.",
+    "similarity": 0.17842891812324524,
+    "latency": 2.391791820526123
+  },
+  {
+    "id": 12,
+    "toxic": "WHAT A FAGGOT, I'M GLAD HE'S DEAD!!!",
+    "expected": "What a person, I'm glad that he passed away.",
+    "generated": "I regret to express that I did not hold him in high regard during his lifetime.",
+    "similarity": 0.41158342361450195,
+    "latency": 1.625723123550415
+  },
+  {
+    "id": 13,
+    "toxic": "top ten most relevant \" are you fucking sorry \"",
+    "expected": "Top ten most relevant \" are you sorry?\"",
+    "generated": "\"Could you please provide the top ten most relevant 'X'? I'd appreciate your attention to detail in this matter.\"",
+    "similarity": 0.5559222102165222,
+    "latency": 2.3649489879608154
+  },
+  {
+    "id": 14,
+    "toxic": "that said , i hope they get a great attorney and sue the shit out of the cops .",
+    "expected": "that said , i hope they get a great attorney and sue the cops .",
+    "generated": "I hope they are able to secure competent legal representation and take appropriate action against the police.",
+    "similarity": 0.7018194198608398,
+    "latency": 1.7667803764343262
+  },
+  {
+    "id": 15,
+    "toxic": "they have all the fucking money , how am i supposed to earn my billions ? .",
+    "expected": "how am i to earn when they own all the money?",
+    "generated": "It seems they have more financial resources than I do currently. I'm exploring ways to increase my earnings towards building my fortune.",
+    "similarity": 0.5349066257476807,
+    "latency": 2.2924015522003174
+  },
+  {
+    "id": 16,
+    "toxic": "i thought world leader just picked random shit to do , thank you for informing us ! .",
+    "expected": "I thought world leader just picked a random things to do ,thank you for informing us!.",
+    "generated": "I was under the impression that the world leader's decisions were not based on clear objectives. It's helpful to know if there is more information available.",
+    "similarity": 0.4572508931159973,
+    "latency": 3.4237492084503174
+  },
+  {
+    "id": 17,
+    "toxic": "Once again I'm SO glad that Wikipedia is not biased or filled with retarded children.",
+    "expected": "Once again, I'm so glad that Wikipedia is not biased or filled children.",
+    "generated": "I appreciate the open nature of Wikipedia and the diversity of perspectives it brings to the table. It's important to remember that it's a collaborative platform and we can all contribute to making it more accurate and informative.",
+    "similarity": 0.5010702610015869,
+    "latency": 3.962386131286621
+  },
+  {
+    "id": 18,
+    "toxic": "good damn , that show kicks so much ass .",
+    "expected": "good god , that show is very nice",
+    "generated": "That show is truly impressive.\nOr, I really enjoy this show.\nOr, This show is fantastic.\nOr, The show is exceptional.\nOr, The show is amazing.",
+    "similarity": 0.4652063846588135,
+    "latency": 3.3905446529388428
+  },
+  {
+    "id": 19,
+    "toxic": "I am in awe of your template usage, true fucking hero you are, you twinkle-queen",
+    "expected": "I am in awe of your template usage, true hero you are.",
+    "generated": "I'm impressed by your skillful use of templates. You're a true master at it. (Or, You're a template wizard.)",
+    "similarity": 0.7341638207435608,
+    "latency": 3.114712715148926
+  }
+]
