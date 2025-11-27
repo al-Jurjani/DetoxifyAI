@@ -1,0 +1,96 @@
+,,,,,
+,,,,,
+Sample,Strategy,Tone (1-5),Intent (1-5),Length (1-5),Total (out of 15)
+0,zero-shot,3,3,2,8
+1,zero-shot,4,2,1,7
+2,zero-shot,4,1,2,7
+3,zero-shot,5,5,4,14
+4,zero-shot,4,1,2,7
+5,zero-shot,4,3,4,11
+6,zero-shot,3,1,2,6
+7,zero-shot,4,4,3,11
+8,zero-shot,3,3,3,9
+9,zero-shot,3,4,3,10
+10,zero-shot,2,5,4,11
+11,zero-shot,3,2,2,7
+12,zero-shot,4,4,4,12
+13,zero-shot,5,1,4,10
+14,zero-shot,3,5,3,11
+15,zero-shot,3,2,2,7
+16,zero-shot,4,3,3,10
+17,zero-shot,4,4,3,10
+18,zero-shot,5,5,5,15
+19,zero-shot,3,4,3,10
+,,,,,193
+,,,,,
+,,,,,
+Sample,Strategy,Tone (1-5),Intent (1-5),Length (1-5),Total (out of 15)
+0,few-shot (k=3),4,3,3,10
+1,few-shot (k=3),3,4,3,10
+2,few-shot (k=3),4,2,3,9
+3,few-shot (k=3),4,5,4,13
+4,few-shot (k=3),4,3,4,11
+5,few-shot (k=3),5,5,5,15
+6,few-shot (k=3),4,5,4,13
+7,few-shot (k=3),4,5,4,13
+8,few-shot (k=3),5,5,5,15
+9,few-shot (k=3),4,4,4,12
+10,few-shot (k=3),4,2,4,10
+11,few-shot (k=3),3,4,3,10
+12,few-shot (k=3),4,2,2,8
+13,few-shot (k=3),4,2,3,9
+14,few-shot (k=3),3,4,4,11
+15,few-shot (k=3),4,5,5,14
+16,few-shot (k=3),3,5,3,11
+17,few-shot (k=3),5,5,5,15
+18,few-shot (k=3),5,5,5,15
+19,few-shot (k=3),3,5,5,13
+,,,,,237
+,,,,,
+,,,,,
+Sample,Strategy,Tone (1-5),Intent (1-5),Length (1-5),Total (out of 15)
+0,few-shot (k=5),3,3,4,10
+1,few-shot (k=5),5,5,4,14
+2,few-shot (k=5),4,3,3,10
+3,few-shot (k=5),4,3,4,11
+4,few-shot (k=5),4,3,5,12
+5,few-shot (k=5),5,5,5,15
+6,few-shot (k=5),3,5,5,13
+7,few-shot (k=5),5,5,4,14
+8,few-shot (k=5),3,3,3,9
+9,few-shot (k=5),4,4,5,13
+10,few-shot (k=5),5,4,5,14
+11,few-shot (k=5),5,5,3,13
+12,few-shot (k=5),4,3,3,10
+13,few-shot (k=5),3,3,3,9
+14,few-shot (k=5),4,5,4,13
+15,few-shot (k=5),4,3,3,10
+16,few-shot (k=5),4,3,3,10
+17,few-shot (k=5),4,4,3,11
+18,few-shot (k=5),5,5,5,15
+19,few-shot (k=5),5,5,5,15
+,,,,,241
+,,,,,
+,,,,,
+Sample,Strategy,Tone (1-5),Intent (1-5),Length (1-5),Total (out of 15)
+0,CoT,4,3,4,11
+1,CoT,4,4,4,12
+2,CoT,4,2,3,9
+3,CoT,5,5,5,15
+4,CoT,4,4,5,13
+5,CoT,4,5,4,13
+6,CoT,4,4,4,12
+7,CoT,5,5,3,13
+8,CoT,5,5,4,14
+9,CoT,5,5,4,14
+10,CoT,5,4,4,13
+11,CoT,3,3,3,9
+12,CoT,4,2,3,9
+13,CoT,4,2,3,9
+14,CoT,5,3,4,12
+15,CoT,4,4,3,11
+16,CoT,5,5,3,13
+17,CoT,5,5,5,15
+18,CoT,5,5,5,15
+19,CoT,4,4,4,12
+,,,,,244

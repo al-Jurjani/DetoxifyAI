@@ -17,7 +17,8 @@ load_dotenv()
 AZURE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
 CONTAINER_NAME = "mlflow-artifacts-mlops-proj"
 
-# Initialize blob service client as None, will be created in startup if connection string exists
+# Initialize blob service client as None, will be created in startup
+# if connection string exists
 blob_service_client = None
 
 
@@ -109,10 +110,10 @@ async def load_model():
 
         # Blob paths (without container name prefix since it's specified separately)  # pragma: no cover
         xg_model_blob_path = (  # pragma: no cover
-            "3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
+            "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
         )
         xg_vectorizer_blob_path = (  # pragma: no cover
-            "3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
+            "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
         )
 
         # Alternative paths for logistic regression model (commented out, using XGBoost)  # pragma: no cover
