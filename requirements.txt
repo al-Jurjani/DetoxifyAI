@@ -12,3 +12,6 @@ python-dotenv
 xgboost
 nltk
 azure-storage-blob
+transformers
+torch
+pytest

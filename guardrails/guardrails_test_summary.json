@@ -1,0 +1,38 @@
+{
+  "timestamp": "2025-11-30T15:31:37.686364",
+  "total_tests": 22,
+  "event_summary": {
+    "total_events": 15,
+    "by_type": {
+      "input_pii_blocked": 4,
+      "input_injection_blocked": 4,
+      "input_too_short": 1,
+      "input_length_exceeded": 1,
+      "output_toxicity_blocked": 2,
+      "output_too_short": 2,
+      "output_repetitive": 1
+    },
+    "by_rule": {
+      "pii_detection": 4,
+      "prompt_injection": 4,
+      "length_limit": 2,
+      "toxicity_threshold": 2,
+      "hallucination_filter": 3
+    }
+  },
+  "guardrail_rules": {
+    "input_validation": [
+      "pii_detection",
+      "prompt_injection",
+      "length_limit"
+    ],
+    "output_moderation": [
+      "toxicity_threshold",
+      "hallucination_filter"
+    ]
+  },
+  "configuration": {
+    "toxicity_threshold": 0.3,
+    "model": "unitary/toxic-bert"
+  }
+}
