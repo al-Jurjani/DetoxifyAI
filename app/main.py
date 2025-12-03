@@ -9,9 +9,10 @@ import string
 import os
 from dotenv import load_dotenv
 
-
 from azure.storage.blob import BlobServiceClient
 from io import BytesIO
+
+from rag_pipeline import DetoxifyRAGPipeline
 
 load_dotenv()
 AZURE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
@@ -20,6 +21,8 @@ CONTAINER_NAME = "mlflow-artifacts-mlops-proj"
 # Initialize blob service client as None, will be created in startup
 # if connection string exists
 blob_service_client = None
+
+pipeline = None
 
 
 app = FastAPI(title="DetoxifyAI API")
@@ -60,7 +63,7 @@ def preprocess_aggressive(text: str) -> str:
 
 @app.on_event("startup")
 async def load_model():
-    global model, vectorizer, model_loaded
+    global model, vectorizer, model_loaded, pipeline
 
     # # Get the project root directory (parent of app folder)
     # current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -142,6 +145,16 @@ async def load_model():
         print(
             "[SUCCESS] Model and vectorizer loaded successfully from Azure!"
         )  # pragma: no cover
+
+        # Add RAG pipeline initialization
+        print("[INFO] Initializing RAG pipeline...")
+        # global pipeline
+        pipeline = DetoxifyRAGPipeline(
+            azure_connection_string=AZURE_CONNECTION_STRING,
+            azure_container="detoxifyai-m2-artifacts"  # Your RAG artifacts container
+        )
+        print("[SUCCESS] RAG pipeline initialized!")
+
     except Exception as e:  # pragma: no cover
         print(f"[ERROR] Failed to load model from Azure: {str(e)}")  # pragma: no cover
         model_loaded = False  # pragma: no cover
@@ -210,3 +223,90 @@ async def predict(req: Query):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
+
+
+# Add this NEW endpoint (don't touch /predict)
+# @app.post("/rephrase")
+# async def rephrase(req: Query):
+#     if not req.text or req.text.strip() == "":
+#         raise HTTPException(status_code=400, detail="Text cannot be empty")
+
+#     # Check if text is toxic first using existing model
+#     if not model_loaded or model is None or vectorizer is None:
+#         raise HTTPException(status_code=503, detail="ML model not loaded")
+
+#     preprocessed = preprocess_aggressive(req.text)
+#     X = vectorizer.transform([preprocessed])
+#     prediction = model.predict(X)[0]
+
+#     # Only rephrase if toxic
+#     if prediction == 0:  # Non-toxic
+#         return {
+#             "input": req.text,
+#             "is_toxic": False,
+#             "message": "Text is non-toxic, no rephrasing needed"
+#         }
+
+#     # Text is toxic, use RAG to rephrase
+#     if not rag_pipeline:
+#         raise HTTPException(status_code=503, detail="RAG pipeline not available")
+
+#     try:
+#         result = rag_pipeline.rephrase(req.text, k=5)
+#         return {
+#             "input": result['toxic_input'],
+#             "is_toxic": True,
+#             "rephrased": result['professional_rephrase'],
+#             "retrieved_examples": result['retrieved_examples'],
+#             "num_examples_used": result['num_examples_used']
+#         }
+#     except Exception as e:
+#         raise HTTPException(status_code=500, detail=f"Rephrasing failed: {str(e)}")
+@app.post("/rephrase")
+async def rephrase(req: Query):
+    print(f"[DEBUG] Received rephrase request: {req.text[:50]}...")
+
+    if not req.text or req.text.strip() == "":
+        raise HTTPException(status_code=400, detail="Text cannot be empty")
+
+    # Check if text is toxic first
+    print("[DEBUG] Checking toxicity...")
+    if not model_loaded or model is None or vectorizer is None:
+        print("[ERROR] ML model not loaded")
+        raise HTTPException(status_code=503, detail="ML model not loaded")
+
+    preprocessed = preprocess_aggressive(req.text)
+    X = vectorizer.transform([preprocessed])
+    prediction = model.predict(X)[0]
+
+    print(f"[DEBUG] Toxicity prediction: {prediction}")
+
+    if prediction == 0:
+        return {
+            "input": req.text,
+            "is_toxic": False,
+            "message": "Text is non-toxic, no rephrasing needed"
+        }
+
+    # Check RAG pipeline
+    print("[DEBUG] Checking RAG pipeline...")
+    if not pipeline:
+        print("[ERROR] RAG pipeline is None")
+        raise HTTPException(status_code=503, detail="RAG pipeline not available")
+
+    print("[DEBUG] Calling RAG pipeline...")
+    try:
+        result = pipeline.rephrase(req.text, k=5)
+        print("[DEBUG] RAG success!")
+        return {
+            "input": result['toxic_input'],
+            "is_toxic": True,
+            "rephrased": result['professional_rephrase'],
+            "retrieved_examples": result['retrieved_examples'],
+            "num_examples_used": result['num_examples_used']
+        }
+    except Exception as e:
+        print(f"[ERROR] RAG failed: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Rephrasing failed: {str(e)}")

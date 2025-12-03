@@ -29,6 +29,9 @@
                     <span id="btnText">Analyze Text</span>
                     <span id="btnLoader" class="loader hidden"></span>
                 </button>
+                <button id="rephraseBtn" class="btn-secondary" onclick="rephraseText()">
+                    ✨ Rephrase Text
+                </button>
             </div>
 
             <div class="results-section hidden" id="resultsSection">
@@ -64,6 +67,10 @@
                         <p id="analyzedText"></p>
                     </div>
                 </div>
+            </div>
+
+            <div class="rephrase-section hidden" id="rephraseSection">
+                <!-- Results will be inserted here by JavaScript -->
             </div>
 
             <div class="examples-section">
