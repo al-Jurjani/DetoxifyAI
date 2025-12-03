@@ -31,6 +31,7 @@ jobs:
       - name: Run black (check)
         run: black --check .
 
+  # M2-D8, Point 2 - pip-audit dependency scan
   security:
     name: Dependency Vulnerability Scan (pip-audit)
     runs-on: ubuntu-latest
