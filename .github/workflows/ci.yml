@@ -2,9 +2,10 @@ name: CI - Milestone D4
 
 on:
   push:
-    branches: [ main, FastAPI-Frontend, bonus ]
+    branches: ['**']
   pull_request:
-    branches: [ main ]
+    branches: [main]
+  workflow_dispatch:
 
 env:
   IMAGE_NAME: ghcr.io/al-jurjani/detoxifyai
