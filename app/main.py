@@ -13,6 +13,7 @@ from azure.storage.blob import BlobServiceClient
 from io import BytesIO
 
 from rag_pipeline import DetoxifyRAGPipeline
+from guardrails import DetoxifyGuardrails
 
 load_dotenv()
 AZURE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
@@ -23,7 +24,7 @@ CONTAINER_NAME = "mlflow-artifacts-mlops-proj"
 blob_service_client = None
 
 pipeline = None
-
+guardrails = None
 
 app = FastAPI(title="DetoxifyAI API")
 
@@ -63,7 +64,7 @@ def preprocess_aggressive(text: str) -> str:
 
 @app.on_event("startup")
 async def load_model():
-    global model, vectorizer, model_loaded, pipeline
+    global model, vectorizer, model_loaded, pipeline, guardrails
 
     # # Get the project root directory (parent of app folder)
     # current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -155,6 +156,14 @@ async def load_model():
         )
         print("[SUCCESS] RAG pipeline initialized!")
 
+        print("[INFO] Initializing guardrails...")
+        guardrails = DetoxifyGuardrails(
+            toxicity_threshold=0.3,
+            log_file="guardrail_events.json"
+        )
+        print("[SUCCESS] Guardrails initialized!")
+        print(f"[DEBUG] Guardrails object: {guardrails}")
+        print(f"[DEBUG] Guardrails type: {type(guardrails)}")
     except Exception as e:  # pragma: no cover
         print(f"[ERROR] Failed to load model from Azure: {str(e)}")  # pragma: no cover
         model_loaded = False  # pragma: no cover
@@ -225,34 +234,43 @@ async def predict(req: Query):
         raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
 
 
-# Add this NEW endpoint (don't touch /predict)
+# RAG ONLY rephase - works, but no guardrails in this
 # @app.post("/rephrase")
 # async def rephrase(req: Query):
+#     print(f"[DEBUG] Received rephrase request: {req.text[:50]}...")
+
 #     if not req.text or req.text.strip() == "":
 #         raise HTTPException(status_code=400, detail="Text cannot be empty")
 
-#     # Check if text is toxic first using existing model
+#     # Check if text is toxic first
+#     print("[DEBUG] Checking toxicity...")
 #     if not model_loaded or model is None or vectorizer is None:
+#         print("[ERROR] ML model not loaded")
 #         raise HTTPException(status_code=503, detail="ML model not loaded")
 
 #     preprocessed = preprocess_aggressive(req.text)
 #     X = vectorizer.transform([preprocessed])
 #     prediction = model.predict(X)[0]
 
-#     # Only rephrase if toxic
-#     if prediction == 0:  # Non-toxic
+#     print(f"[DEBUG] Toxicity prediction: {prediction}")
+
+#     if prediction == 0:
 #         return {
 #             "input": req.text,
 #             "is_toxic": False,
 #             "message": "Text is non-toxic, no rephrasing needed"
 #         }
 
-#     # Text is toxic, use RAG to rephrase
-#     if not rag_pipeline:
+#     # Check RAG pipeline
+#     print("[DEBUG] Checking RAG pipeline...")
+#     if not pipeline:
+#         print("[ERROR] RAG pipeline is None")
 #         raise HTTPException(status_code=503, detail="RAG pipeline not available")
 
+#     print("[DEBUG] Calling RAG pipeline...")
 #     try:
-#         result = rag_pipeline.rephrase(req.text, k=5)
+#         result = pipeline.rephrase(req.text, k=5)
+#         print("[DEBUG] RAG success!")
 #         return {
 #             "input": result['toxic_input'],
 #             "is_toxic": True,
@@ -261,7 +279,12 @@ async def predict(req: Query):
 #             "num_examples_used": result['num_examples_used']
 #         }
 #     except Exception as e:
+#         print(f"[ERROR] RAG failed: {str(e)}")
+#         import traceback
+#         traceback.print_exc()
 #         raise HTTPException(status_code=500, detail=f"Rephrasing failed: {str(e)}")
+
+# RAG pipeline with guardrails
 @app.post("/rephrase")
 async def rephrase(req: Query):
     print(f"[DEBUG] Received rephrase request: {req.text[:50]}...")
@@ -269,7 +292,29 @@ async def rephrase(req: Query):
     if not req.text or req.text.strip() == "":
         raise HTTPException(status_code=400, detail="Text cannot be empty")
 
-    # Check if text is toxic first
+    # STEP 1: Input Validation (Guardrails)
+    print("[DEBUG] Running input guardrails...")
+    print(f"[DEBUG] Guardrails is None? {guardrails is None}")
+    if not guardrails:
+        print("[WARNING] Guardrails not initialized")
+    else:
+        print(f"[DEBUG] Calling validate_input with: {req.text[:50]}")
+        valid, reason, meta = guardrails.validate_input(req.text)
+        if not valid:
+            print(f"[GUARDRAIL] Input blocked: {reason}")
+            return {
+                "status": "blocked",
+                "stage": "input",
+                "reason": reason,
+                "original": req.text,
+                "guardrails": {
+                    "input_passed": False,
+                    "rule_violated": meta.get('rule'),
+                    "detail": meta
+                }
+            }
+
+    # STEP 2: Check toxicity
     print("[DEBUG] Checking toxicity...")
     if not model_loaded or model is None or vectorizer is None:
         print("[ERROR] ML model not loaded")
@@ -285,10 +330,14 @@ async def rephrase(req: Query):
         return {
             "input": req.text,
             "is_toxic": False,
-            "message": "Text is non-toxic, no rephrasing needed"
+            "message": "Text is non-toxic, no rephrasing needed",
+            "guardrails": {
+                "input_passed": True,
+                "output_passed": True
+            }
         }
 
-    # Check RAG pipeline
+    # STEP 3: RAG Rephrasing
     print("[DEBUG] Checking RAG pipeline...")
     if not pipeline:
         print("[ERROR] RAG pipeline is None")
@@ -297,13 +346,42 @@ async def rephrase(req: Query):
     print("[DEBUG] Calling RAG pipeline...")
     try:
         result = pipeline.rephrase(req.text, k=5)
-        print("[DEBUG] RAG success!")
+        rephrased_text = result['professional_rephrase']
+
+        # STEP 4: Output Validation (Guardrails)
+        print("[DEBUG] Running output guardrails...")
+        if guardrails:
+            valid, reason, meta = guardrails.validate_output(rephrased_text)
+            if not valid:
+                print(f"[GUARDRAIL] Output blocked: {reason}")
+                return {
+                    "status": "blocked",
+                    "stage": "output",
+                    "reason": reason,
+                    "original": req.text,
+                    "attempted_rephrase": rephrased_text,
+                    "guardrails": {
+                        "input_passed": True,
+                        "output_passed": False,
+                        "rule_violated": meta.get('rule'),
+                        "toxicity_score": meta.get('score', meta.get('toxicity_score', 0)),
+                        "detail": meta
+                    }
+                }
+
+        # SUCCESS - All guardrails passed
+        print("[DEBUG] RAG success, all guardrails passed!")
         return {
             "input": result['toxic_input'],
             "is_toxic": True,
-            "rephrased": result['professional_rephrase'],
+            "rephrased": rephrased_text,
             "retrieved_examples": result['retrieved_examples'],
-            "num_examples_used": result['num_examples_used']
+            "num_examples_used": result['num_examples_used'],
+            "guardrails": {
+                "input_passed": True,
+                "output_passed": True,
+                "toxicity_score": meta.get('toxicity_score', 0) if guardrails else 0
+            }
         }
     except Exception as e:
         print(f"[ERROR] RAG failed: {str(e)}")
