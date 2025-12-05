@@ -1,0 +1,163 @@
+{
+  "id": null,
+  "title": "DetoxifyAI - LLM Monitoring",
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "stat",
+      "title": "Total LLM Requests (/rephrase)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(app_request_count_total{endpoint=\"/rephrase\"})",
+          "legendFormat": "Total Rephrase Requests"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 0, "w": 6, "h": 4 }
+    },
+    {
+      "type": "stat",
+      "title": "Guardrail Violations",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(guardrail_violations_total) OR on() vector(0)",
+          "legendFormat": "Total Violations"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "green" },
+              { "value": 10, "color": "yellow" },
+              { "value": 50, "color": "red" }
+            ]
+          }
+        }
+      },
+      "gridPos": { "x": 6, "y": 0, "w": 6, "h": 4 }
+    },
+    {
+      "type": "graph",
+      "title": "LLM Request Latency (/rephrase endpoint)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(app_request_latency_seconds_bucket{endpoint=\"/rephrase\"}[1m]))",
+          "legendFormat": "p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(app_request_latency_seconds_bucket{endpoint=\"/rephrase\"}[1m]))",
+          "legendFormat": "p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(app_request_latency_seconds_bucket{endpoint=\"/rephrase\"}[1m]))",
+          "legendFormat": "p99"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 0, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "Token Usage Rate (if instrumented)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(llm_tokens_total{token_type=\"input\"}[5m]) OR on() vector(0)",
+          "legendFormat": "Input Tokens/sec"
+        },
+        {
+          "expr": "rate(llm_tokens_total{token_type=\"output\"}[5m]) OR on() vector(0)",
+          "legendFormat": "Output Tokens/sec"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 6, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "Estimated LLM Cost per Hour",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(llm_cost_dollars[1h]) * 3600 OR on() vector(0)",
+          "legendFormat": "Cost/hour (USD)"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "currencyUSD"
+        }
+      },
+      "gridPos": { "x": 12, "y": 6, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "Guardrail Violations by Type",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(guardrail_violations_total[5m]) OR on() vector(0)",
+          "legendFormat": "{{rule_type}}"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 12, "w": 24, "h": 6 }
+    },
+    {
+      "type": "stat",
+      "title": "Active LLM Requests",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "llm_active_requests{endpoint=\"/rephrase\"} OR on() vector(0)",
+          "legendFormat": "Active"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 18, "w": 6, "h": 4 }
+    },
+    {
+      "type": "graph",
+      "title": "Request Rate by Endpoint",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(app_request_count_total{endpoint=\"/predict\"}[5m])",
+          "legendFormat": "Prediction (/predict)"
+        },
+        {
+          "expr": "rate(app_request_count_total{endpoint=\"/rephrase\"}[5m])",
+          "legendFormat": "Rephrasing (/rephrase)"
+        }
+      ],
+      "gridPos": { "x": 6, "y": 18, "w": 18, "h": 6 }
+    }
+  ]
+}

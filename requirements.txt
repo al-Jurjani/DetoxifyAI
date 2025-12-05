@@ -15,3 +15,5 @@ azure-storage-blob
 transformers
 torch
 pytest
+sentence-transformers
+faiss-cpu

@@ -45,6 +45,25 @@ REQUEST_LATENCY = Histogram(
     "app_request_latency_seconds", "Request latency (seconds)", ["endpoint"]
 )
 
+# NEW: Add these LLM-specific metrics
+GUARDRAIL_VIOLATIONS = Counter(
+    "guardrail_violations_total",
+    "Total guardrail violations",
+    ["rule_type"]
+)
+
+LLM_TOKENS = Counter(
+    "llm_tokens_total",
+    "Total tokens processed",
+    ["endpoint", "token_type"]  # input/output
+)
+
+LLM_COST = Counter(
+    "llm_cost_dollars",
+    "Estimated LLM cost in USD",
+    ["endpoint"]
+)
+
 # Model globals
 model = None
 vectorizer = None
@@ -302,6 +321,7 @@ async def rephrase(req: Query):
         valid, reason, meta = guardrails.validate_input(req.text)
         if not valid:
             print(f"[GUARDRAIL] Input blocked: {reason}")
+            GUARDRAIL_VIOLATIONS.labels(rule_type=meta.get('rule', 'unknown')).inc()
             return {
                 "status": "blocked",
                 "stage": "input",
@@ -348,12 +368,25 @@ async def rephrase(req: Query):
         result = pipeline.rephrase(req.text, k=5)
         rephrased_text = result['professional_rephrase']
 
+        # ADD THIS - Estimate tokens (rough approximation)
+        input_tokens = len(req.text.split()) * 1.3  # ~1.3 tokens per word
+        output_tokens = len(rephrased_text.split()) * 1.3
+
+        LLM_TOKENS.labels(endpoint="/rephrase", token_type="input").inc(input_tokens)
+        LLM_TOKENS.labels(endpoint="/rephrase", token_type="output").inc(output_tokens)
+
+        # Estimate cost (Mistral-7B pricing: ~$0.0002 per 1K tokens)
+        total_tokens = input_tokens + output_tokens
+        cost = (total_tokens / 1000) * 0.0002
+        LLM_COST.labels(endpoint="/rephrase").inc(cost)
+
         # STEP 4: Output Validation (Guardrails)
         print("[DEBUG] Running output guardrails...")
         if guardrails:
             valid, reason, meta = guardrails.validate_output(rephrased_text)
             if not valid:
                 print(f"[GUARDRAIL] Output blocked: {reason}")
+                GUARDRAIL_VIOLATIONS.labels(rule_type=meta.get('rule', 'unknown')).inc()
                 return {
                     "status": "blocked",
                     "stage": "output",

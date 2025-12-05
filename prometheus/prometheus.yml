@@ -5,7 +5,8 @@ scrape_configs:
   # FastAPI metrics
   - job_name: "detoxifyai_app"
     static_configs:
-      - targets: ["host.docker.internal:8000"]
+      # - targets: ["100.31.135.60:8000"]  # Change to actual IP like 16.16.193.183:8000
+      - targets: ["host.docker.internal:8000"]  # Local FastAPI
 
   # System metrics
   - job_name: "node_exporter"
