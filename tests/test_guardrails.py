@@ -4,7 +4,7 @@ Tests input validation and output moderation rules.
 """
 
 import pytest
-from guardrails.guardrails import DetoxifyGuardrails
+from guardrails_module.guardrails import DetoxifyGuardrails
 
 
 @pytest.fixture
