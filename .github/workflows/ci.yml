@@ -1,4 +1,4 @@
-name: CI - Milestone D4
+name: CI - Milestone D4 + D5
 
 on:
   push:
@@ -32,6 +32,30 @@ jobs:
       - name: Run black (check)
         run: black --check .
 
+  # M2-D5.a - Linting + tests for prompt scripts
+  lint_prompts:
+    name: Lint Prompt Scripts (M2-D5.a)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install linters
+        run: |
+          python -m pip install --upgrade pip
+          pip install ruff black nbqa
+      - name: Lint prompt experiments folder
+        run: |
+          echo "🔍 Linting experiments/prompt_engineering..."
+          ruff check experiments/ || echo "⚠️ Ruff warnings in experiments/"
+          black --check experiments/ || echo "⚠️ Black formatting issues in experiments/"
+      - name: Check notebooks with nbqa
+        run: |
+          echo "📓 Checking notebooks with nbqa..."
+          nbqa ruff experiments/prompt_engineering/ || echo "⚠️ Notebook linting warnings"
+
   # M2-D8, Point 2 - pip-audit dependency scan
   security:
     name: Dependency Vulnerability Scan (pip-audit)
@@ -48,7 +72,7 @@ jobs:
           pip install pip-audit
       - name: Run pip-audit on project dependencies
         run: |
-          echo "🔍 Scanning dependencies for known vulnerabilities..."
+          echo "🔒 Scanning dependencies for known vulnerabilities..."
           pip-audit -r requirements.txt -r requirements-dev.txt --strict
 
   test:
@@ -69,8 +93,37 @@ jobs:
         run: |
           pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml --cov-fail-under=80
 
+  # M2-D5.b - Automated prompt evaluation
+  evaluate_prompts:
+    name: Automated Prompt Evaluation (M2-D5.b)
+    runs-on: ubuntu-latest
+    needs: [lint_prompts]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.11
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install sentence-transformers scikit-learn numpy
+      - name: Run prompt evaluation on eval dataset
+        run: |
+          echo "📊 Running automated prompt evaluation..."
+          python experiments/evaluate_prompts.py \
+            --eval-file experiments/eval.jsonl \
+            --limit 10 \
+            --strategies zero_shot few_shot_k3 few_shot_k5 CoT \
+            --output experiments/ci_eval_results.json
+      - name: Upload evaluation results
+        uses: actions/upload-artifact@v3
+        with:
+          name: prompt-evaluation-results
+          path: experiments/ci_eval_results.json
+
   build_and_push:
-    name: Build & Push Docker image to GHCR
+    name: Build & Push Docker image to GHCR (M2-D5.c)
     runs-on: ubuntu-latest
     needs: test
     permissions:
@@ -86,7 +139,7 @@ jobs:
           registry: ghcr.io
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
-      - name: Build and push
+      - name: Build and push RAG API image
         uses: docker/build-push-action@v4
         with:
           push: true
@@ -98,7 +151,7 @@ jobs:
             PYTHONUNBUFFERED=1
 
   canary_and_acceptance:
-    name: Canary deploy + Acceptance tests
+    name: Canary deploy + Acceptance tests (M2-D5.d)
     runs-on: ubuntu-latest
     needs: build_and_push
     steps:
@@ -119,16 +172,17 @@ jobs:
         run: |
           for i in $(seq 1 30); do
             code=$(curl -s -o /dev/null -w "%{http_code}" http://127.0.0.1:8000/health || echo "000")
-            if [ "$code" = "200" ]; then echo "healthy"; exit 0; fi
-            echo "waiting for health ($i) got $code"
+            if [ "$code" = "200" ]; then echo "✅ Service healthy"; exit 0; fi
+            echo "⏳ Waiting for health ($i) got $code"
             sleep 2
           done
           docker logs canary || true
-          echo "container failed to become healthy"; exit 1
-      - name: Run acceptance tests (golden queries)
+          echo "❌ Container failed to become healthy"; exit 1
+
+      - name: Test /predict endpoint (existing)
         run: |
           if [ ! -f "$ACCEPTANCE_FILE" ]; then
-            echo "Warning: acceptance file $ACCEPTANCE_FILE not found. Creating a small default set."
+            echo "⚠️ Warning: acceptance file $ACCEPTANCE_FILE not found. Creating default set."
             cat > "$ACCEPTANCE_FILE" <<'JSON'
           ["hello", "is this service alive?", "what is the sentiment of this text?", "sample input 4", "sample input 5"]
           JSON
@@ -139,24 +193,69 @@ jobs:
 
           while IFS= read -r q; do
             total=$((total+1))
-            # Example: POST to /predict with JSON { "text": "<query>" }
             status=$(curl -s -o /dev/null -w "%{http_code}" -X POST "http://127.0.0.1:${CANARY_PORT}/predict" \
               -H "Content-Type: application/json" \
               -d "{\"text\": \"$q\"}")
 
-            echo "query: $q -> $status"
+            echo "📝 /predict query: $q -> $status"
 
             if [ "$status" != "200" ]; then
               failures=$((failures+1))
             fi
           done < <(jq -r '.[]' "$ACCEPTANCE_FILE")
 
-          echo "Acceptance results: $failures failures out of $total"
+          echo "📊 /predict acceptance: $failures failures out of $total"
 
           if [ "$failures" -gt 0 ]; then
             docker logs canary || true
             exit 1
           fi
+
+      # M2-D5.d - Test LLM service (/rephrase endpoint)
+      - name: Test /rephrase endpoint (LLM service - M2-D5.d)
+        run: |
+          echo "🤖 Testing LLM /rephrase endpoint..."
+
+          # Test 1: Basic rephrase
+          response=$(curl -s -X POST "http://127.0.0.1:${CANARY_PORT}/rephrase" \
+            -H "Content-Type: application/json" \
+            -d '{"text": "you are stupid"}')
+
+          status=$?
+          echo "Response: $response"
+
+          if [ $status -ne 0 ]; then
+            echo "❌ /rephrase endpoint failed"
+            docker logs canary
+            exit 1
+          fi
+
+          # Check response has required fields
+          if ! echo "$response" | jq -e '.professional_rephrase' > /dev/null; then
+            echo "❌ Response missing 'professional_rephrase' field"
+            exit 1
+          fi
+
+          echo "✅ /rephrase endpoint working"
+
+          # Test 2: Multiple rephrases
+          test_texts=("you are wrong" "this is terrible" "I hate this")
+
+          for text in "${test_texts[@]}"; do
+            status=$(curl -s -o /dev/null -w "%{http_code}" -X POST "http://127.0.0.1:${CANARY_PORT}/rephrase" \
+              -H "Content-Type: application/json" \
+              -d "{\"text\": \"$text\"}")
+
+            echo "🔄 Rephrase '$text' -> HTTP $status"
+
+            if [ "$status" != "200" ]; then
+              echo "❌ Failed on: $text"
+              docker logs canary
+              exit 1
+            fi
+          done
+
+          echo "✅ All /rephrase tests passed (M2-D5.d complete)"
 
       - name: Tear down
         if: always()

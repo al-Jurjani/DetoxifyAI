@@ -4,16 +4,10 @@ import modal
 app = modal.App("detoxifyai-mistral")
 
 # Define GPU image with dependencies
-image = (
-    modal.Image.debian_slim(python_version="3.10")
-    .pip_install(
-        "torch",
-        "transformers",
-        "accelerate",
-        "bitsandbytes",
-        "sentencepiece"
-    )
+image = modal.Image.debian_slim(python_version="3.10").pip_install(
+    "torch", "transformers", "accelerate", "bitsandbytes", "sentencepiece"
 )
+
 
 # Deploy Mistral-7B with 4-bit quantization
 @app.cls(
@@ -43,7 +37,7 @@ class MistralModel:
             "mistralai/Mistral-7B-Instruct-v0.1",
             quantization_config=bnb_config,
             device_map="auto",
-            trust_remote_code=True
+            trust_remote_code=True,
         )
 
         print("✅ Model loaded!")
@@ -59,7 +53,7 @@ class MistralModel:
             temperature=temperature,
             do_sample=True,
             top_p=0.9,
-            pad_token_id=self.tokenizer.eos_token_id
+            pad_token_id=self.tokenizer.eos_token_id,
         )
 
         generated_text = self.tokenizer.decode(outputs[0], skip_special_tokens=True)

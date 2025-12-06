@@ -10,7 +10,7 @@ from guardrails_module.guardrails import DetoxifyGuardrails
 @pytest.fixture
 def guardrails():
     """Create guardrails instance for testing."""
-    return DetoxifyGuardrails(toxicity_threshold=0.3, log_file='test_events.json')
+    return DetoxifyGuardrails(toxicity_threshold=0.3, log_file="test_events.json")
 
 
 class TestInputValidation:
@@ -21,28 +21,28 @@ class TestInputValidation:
         valid, msg, meta = guardrails.validate_input("My SSN is 123-45-6789")
         assert not valid
         assert "PII" in msg
-        assert meta['pii_type'] == 'ssn'
+        assert meta["pii_type"] == "ssn"
 
     def test_pii_email_detection(self, guardrails):
         """Test email detection blocks input."""
         valid, msg, meta = guardrails.validate_input("Contact me at test@example.com")
         assert not valid
         assert "PII" in msg
-        assert meta['pii_type'] == 'email'
+        assert meta["pii_type"] == "email"
 
     def test_pii_phone_detection(self, guardrails):
         """Test phone number detection blocks input."""
         valid, msg, meta = guardrails.validate_input("Call me at 555-123-4567")
         assert not valid
         assert "PII" in msg
-        assert meta['pii_type'] == 'phone'
+        assert meta["pii_type"] == "phone"
 
     def test_pii_credit_card_detection(self, guardrails):
         """Test credit card detection blocks input."""
         valid, msg, meta = guardrails.validate_input("My card is 4532-1234-5678-9010")
         assert not valid
         assert "PII" in msg
-        assert meta['pii_type'] == 'credit_card'
+        assert meta["pii_type"] == "credit_card"
 
     def test_prompt_injection_ignore_instructions(self, guardrails):
         """Test prompt injection detection - ignore instructions."""
@@ -67,7 +67,7 @@ class TestInputValidation:
         valid, msg, meta = guardrails.validate_input("Hi")
         assert not valid
         assert "short" in msg.lower()
-        assert meta['length'] == 2
+        assert meta["length"] == 2
 
     def test_input_too_long(self, guardrails):
         """Test input length validation - too long."""
@@ -75,7 +75,7 @@ class TestInputValidation:
         valid, msg, meta = guardrails.validate_input(long_text)
         assert not valid
         assert "length" in msg.lower()
-        assert meta['length'] == 501
+        assert meta["length"] == 501
 
     def test_valid_input(self, guardrails):
         """Test that normal toxic text passes input validation."""
@@ -90,22 +90,18 @@ class TestOutputValidation:
 
     def test_clean_output_approved(self, guardrails):
         """Test clean, professional output is approved."""
-        valid, msg, meta = guardrails.validate_output(
-            "I respectfully disagree with your perspective on this matter."
-        )
+        valid, msg, meta = guardrails.validate_output("I respectfully disagree with your perspective on this matter.")
         assert valid
         assert msg == "OK"
-        assert 'toxicity_score' in meta
-        assert meta['toxicity_score'] < 0.3
+        assert "toxicity_score" in meta
+        assert meta["toxicity_score"] < 0.3
 
     def test_toxic_output_blocked(self, guardrails):
         """Test toxic output is blocked."""
-        valid, msg, meta = guardrails.validate_output(
-            "You're still a complete idiot for thinking that."
-        )
+        valid, msg, meta = guardrails.validate_output("You're still a complete idiot for thinking that.")
         # Note: This may pass/fail depending on model sensitivity
         # We check that toxicity_score is calculated
-        assert 'toxicity_score' in meta or 'score' in meta
+        assert "toxicity_score" in meta or "score" in meta
 
     def test_empty_output_blocked(self, guardrails):
         """Test empty output is blocked."""
@@ -131,7 +127,7 @@ class TestOutputValidation:
             "Thank you for sharing your thoughts. I appreciate the discussion and value your perspective."
         )
         assert valid
-        assert 'toxicity_score' in meta
+        assert "toxicity_score" in meta
 
 
 class TestEventLogging:
@@ -145,8 +141,8 @@ class TestEventLogging:
 
         events = guardrails.get_events()
         assert len(events) >= 2
-        assert all('timestamp' in e for e in events)
-        assert all('event_type' in e for e in events)
+        assert all("timestamp" in e for e in events)
+        assert all("event_type" in e for e in events)
 
     def test_event_summary(self, guardrails):
         """Test event summary generation."""
@@ -155,9 +151,9 @@ class TestEventLogging:
         guardrails.validate_input("test@example.com")
 
         summary = guardrails.get_event_summary()
-        assert summary['total_events'] >= 2
-        assert 'by_type' in summary
-        assert 'by_rule' in summary
+        assert summary["total_events"] >= 2
+        assert "by_type" in summary
+        assert "by_rule" in summary
 
     def test_clear_events(self, guardrails):
         """Test clearing event log."""

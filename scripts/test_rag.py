@@ -21,28 +21,24 @@ TEST_CASES = [
     {
         "input": "You're an idiot for making that mistake",
         "category": "insult",
-        "expected_tone": "constructive feedback"
+        "expected_tone": "constructive feedback",
     },
     {
         "input": "This is the worst idea I've ever heard",
         "category": "criticism",
-        "expected_tone": "professional disagreement"
+        "expected_tone": "professional disagreement",
     },
-    {
-        "input": "Get lost, nobody wants you here",
-        "category": "hostility",
-        "expected_tone": "polite boundaries"
-    },
+    {"input": "Get lost, nobody wants you here", "category": "hostility", "expected_tone": "polite boundaries"},
     {
         "input": "You clearly have no clue what you're doing",
         "category": "workplace toxicity",
-        "expected_tone": "professional concern"
+        "expected_tone": "professional concern",
     },
     {
         "input": "That's a stupid question to ask",
         "category": "dismissiveness",
-        "expected_tone": "encouraging clarification"
-    }
+        "expected_tone": "encouraging clarification",
+    },
 ]
 
 
@@ -72,10 +68,10 @@ def print_result(test_case: Dict, result: Dict, test_num: int, total: int):
     print(f"Retrieved Examples Used: {result['num_examples_used']}")
     print()
     print("Top 3 Similar Examples:")
-    for i, example in enumerate(result['retrieved_examples'][:3], 1):
+    for i, example in enumerate(result["retrieved_examples"][:3], 1):
         print(f"  {i}. [{example['category']}]")
-        print(f"     Toxic: \"{example['toxic']}\"")
-        print(f"     Prof:  \"{example['professional']}\"")
+        print(f'     Toxic: "{example["toxic"]}"')
+        print(f'     Prof:  "{example["professional"]}"')
     print()
     print_separator("-")
     print()
@@ -102,8 +98,7 @@ def run_demo():
     # Initialize pipeline
     try:
         pipeline = DetoxifyRAGPipeline(
-            azure_connection_string=azure_connection_string,
-            azure_container="detoxifyai-m2-artifacts"
+            azure_connection_string=azure_connection_string, azure_container="detoxifyai-m2-artifacts"
         )
         print("✅ RAG pipeline initialized successfully!")
         print()
@@ -150,8 +145,7 @@ def run_all_tests():
     # Initialize pipeline
     try:
         pipeline = DetoxifyRAGPipeline(
-            azure_connection_string=azure_connection_string,
-            azure_container="detoxifyai-m2-artifacts"
+            azure_connection_string=azure_connection_string, azure_container="detoxifyai-m2-artifacts"
         )
         print("✅ RAG pipeline initialized successfully!")
         print()
@@ -167,21 +161,12 @@ def run_all_tests():
         try:
             result = pipeline.rephrase(test_case["input"], k=5)
             print_result(test_case, result, i, len(TEST_CASES))
-            results.append({
-                "test_case": test_case,
-                "result": result,
-                "status": "PASS"
-            })
+            results.append({"test_case": test_case, "result": result, "status": "PASS"})
         except Exception as e:
             print(f"❌ ERROR: Test case {i} failed: {e}")
             print()
             failed += 1
-            results.append({
-                "test_case": test_case,
-                "result": None,
-                "status": "FAIL",
-                "error": str(e)
-            })
+            results.append({"test_case": test_case, "result": None, "status": "FAIL", "error": str(e)})
 
     # Print summary
     print_header("Test Summary")
@@ -207,16 +192,8 @@ def run_all_tests():
 
 def main():
     parser = argparse.ArgumentParser(description="Test DetoxifyAI RAG Pipeline")
-    parser.add_argument(
-        "--demo",
-        action="store_true",
-        help="Run quick demo (2 examples)"
-    )
-    parser.add_argument(
-        "--test-all",
-        action="store_true",
-        help="Run comprehensive tests (all examples)"
-    )
+    parser.add_argument("--demo", action="store_true", help="Run quick demo (2 examples)")
+    parser.add_argument("--test-all", action="store_true", help="Run comprehensive tests (all examples)")
 
     args = parser.parse_args()
 

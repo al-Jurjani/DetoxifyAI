@@ -25,9 +25,7 @@ def test_predict_with_special_characters():
 
 def test_predict_with_mixed_content():
     """Test prediction with mixed content."""
-    res = client.post(
-        "/predict", json={"text": "Hello 123 @user #tag http://example.com"}
-    )
+    res = client.post("/predict", json={"text": "Hello 123 @user #tag http://example.com"})
     assert res.status_code == 200
     data = res.json()
     assert data["prediction"] in ["toxic", "non-toxic"]

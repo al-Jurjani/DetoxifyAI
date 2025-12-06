@@ -197,9 +197,7 @@ def test_predict_various_probabilities():
     for pred, toxic_prob, expected_pred, expected_conf in test_cases:
         mock_model = Mock()
         mock_model.predict = Mock(return_value=np.array(pred))
-        mock_model.predict_proba = Mock(
-            return_value=np.array([[1 - toxic_prob, toxic_prob]])
-        )
+        mock_model.predict_proba = Mock(return_value=np.array([[1 - toxic_prob, toxic_prob]]))
 
         mock_vectorizer = Mock()
         mock_vectorizer.transform = Mock(return_value=np.array([[0.5, 0.5]]))

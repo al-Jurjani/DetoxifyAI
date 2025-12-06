@@ -8,11 +8,13 @@ import modal
 from typing import List, Dict, Optional, Any
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
+
 # from langchain.llms.base import LLM
 # from langchain.prompts import PromptTemplate
 # from langchain.chains import LLMChain
 from langchain_core.language_models.llms import LLM
 from langchain_core.prompts import PromptTemplate
+
 # from langchain.chains import LLMChain
 # from langchain.chains.llm import LLMChain
 from langchain_core.output_parsers import StrOutputParser
@@ -33,20 +35,12 @@ class ModalMistralLLM(LLM):
         return "modal_mistral"
 
     def _call(
-        self,
-        prompt: str,
-        stop: Optional[List[str]] = None,
-        run_manager: Optional[Any] = None,
-        **kwargs: Any
+        self, prompt: str, stop: Optional[List[str]] = None, run_manager: Optional[Any] = None, **kwargs: Any
     ) -> str:
         """Call Modal Mistral-7B endpoint"""
         MistralModel = modal.Cls.from_name("detoxifyai-mistral", "MistralModel")
 
-        response = MistralModel().generate.remote(
-            prompt,
-            max_tokens=self.max_tokens,
-            temperature=self.temperature
-        )
+        response = MistralModel().generate.remote(prompt, max_tokens=self.max_tokens, temperature=self.temperature)
 
         return response
 
@@ -56,7 +50,7 @@ class ModalMistralLLM(LLM):
             "model": "mistralai/Mistral-7B-Instruct-v0.1",
             "platform": "Modal",
             "max_tokens": self.max_tokens,
-            "temperature": self.temperature
+            "temperature": self.temperature,
         }
 
 
@@ -88,10 +82,7 @@ class DetoxifyRAGPipeline:
 
         # Download FAISS index from Azure
         blob_service = BlobServiceClient.from_connection_string(self.azure_connection_string)
-        blob_client = blob_service.get_blob_client(
-            container=self.azure_container,
-            blob="faiss_index.zip"
-        )
+        blob_client = blob_service.get_blob_client(container=self.azure_container, blob="faiss_index.zip")
 
         # Download to temp directory
         with tempfile.NamedTemporaryFile(delete=False, suffix=".zip") as tmp_file:
@@ -101,37 +92,27 @@ class DetoxifyRAGPipeline:
 
         # Extract FAISS index
         extract_dir = tempfile.mkdtemp()
-        with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        with zipfile.ZipFile(zip_path, "r") as zip_ref:
             zip_ref.extractall(extract_dir)
 
         # Load with LangChain
         embedding_model = HuggingFaceEmbeddings(
-            model_name='sentence-transformers/all-MiniLM-L6-v2',
-            model_kwargs={'device': 'cpu'},
-            encode_kwargs={'normalize_embeddings': True}
+            model_name="sentence-transformers/all-MiniLM-L6-v2",
+            model_kwargs={"device": "cpu"},
+            encode_kwargs={"normalize_embeddings": True},
         )
 
-        self.vectorstore = FAISS.load_local(
-            extract_dir,
-            embedding_model,
-            allow_dangerous_deserialization=True
-        )
+        self.vectorstore = FAISS.load_local(extract_dir, embedding_model, allow_dangerous_deserialization=True)
 
         # Create LangChain retriever
-        self.retriever = self.vectorstore.as_retriever(
-            search_type="similarity",
-            search_kwargs={"k": 5}
-        )
+        self.retriever = self.vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 5})
 
         print("✅ FAISS index loaded with LangChain retriever")
 
     def _init_llm(self):
         """Initialize LangChain LLM wrapper for Modal"""
         print("🔗 Initializing LangChain LLM (Modal Mistral-7B)...")
-        self.llm = ModalMistralLLM(
-            max_tokens=100,
-            temperature=0.7
-        )
+        self.llm = ModalMistralLLM(max_tokens=100, temperature=0.7)
         print("✅ LangChain LLM ready")
 
     def _init_chain(self):
@@ -151,10 +132,7 @@ Toxic Message: {toxic_input}
 
 Professional Rephrase:\n"""
 
-        self.prompt_template = PromptTemplate(
-            input_variables=["examples", "toxic_input"],
-            template=template
-        )
+        self.prompt_template = PromptTemplate(input_variables=["examples", "toxic_input"], template=template)
 
         # Create LangChain LLMChain
         # self.chain = LLMChain(
@@ -172,8 +150,8 @@ Professional Rephrase:\n"""
         examples_text = ""
         for i, doc in enumerate(retrieved_docs[:k], 1):
             examples_text += f"""Example {i}:
-Toxic: "{doc.metadata['toxic']}"
-Professional: "{doc.metadata['professional']}"
+Toxic: "{doc.metadata["toxic"]}"
+Professional: "{doc.metadata["professional"]}"
 
 """
         return examples_text.strip()
@@ -197,10 +175,7 @@ Professional: "{doc.metadata['professional']}"
         examples = self._format_examples(retrieved_docs, k=k)
 
         # Step 3: Run LangChain chain
-        response = self.chain.invoke({
-            "examples": examples,
-            "toxic_input": toxic_text
-        })
+        response = self.chain.invoke({"examples": examples, "toxic_input": toxic_text})
 
         # Extract only the rephrased part
         if "Professional Rephrase:" in response:
@@ -209,21 +184,21 @@ Professional: "{doc.metadata['professional']}"
             rephrased = response.strip()
 
         return {
-            'toxic_input': toxic_text,
-            'professional_rephrase': rephrased,
-            'retrieved_examples': [
+            "toxic_input": toxic_text,
+            "professional_rephrase": rephrased,
+            "retrieved_examples": [
                 {
-                    'toxic': doc.metadata['toxic'],
-                    'professional': doc.metadata['professional'],
-                    'category': doc.metadata['category']
+                    "toxic": doc.metadata["toxic"],
+                    "professional": doc.metadata["professional"],
+                    "category": doc.metadata["category"],
                 }
                 for doc in retrieved_docs[:k]
             ],
-            'num_examples_used': k,
-            'langchain_components': {
-                'llm': 'ModalMistralLLM (Custom LangChain wrapper)',
-                'retriever': 'VectorStoreRetriever (FAISS)',
-                'prompt': 'PromptTemplate',
-                'chain': 'LLMChain'
-            }
+            "num_examples_used": k,
+            "langchain_components": {
+                "llm": "ModalMistralLLM (Custom LangChain wrapper)",
+                "retriever": "VectorStoreRetriever (FAISS)",
+                "prompt": "PromptTemplate",
+                "chain": "LLMChain",
+            },
         }
