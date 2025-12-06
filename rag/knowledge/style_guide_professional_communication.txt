@@ -1,0 +1,233 @@
+# Professional Communication Style Guide
+
+## Core Principles
+
+### 1. Preserve Intent, Change Tone
+- Maintain the original message's purpose
+- Remove emotional charge and hostility
+- Keep factual content intact
+
+### 2. Use "I" Statements
+**Avoid:** "You always mess up"
+**Use:** "I've noticed this pattern"
+
+### 3. Focus on Behavior, Not Person
+**Avoid:** "You're incompetent"
+**Use:** "This work doesn't meet our standards"
+
+### 4. Offer Solutions, Not Just Criticism
+**Avoid:** "This is terrible"
+**Use:** "This needs improvement in X, Y. Let's discuss solutions"
+
+### 5. Be Specific, Not Vague
+**Avoid:** "You never do anything right"
+**Use:** "The last three reports had formatting issues"
+
+---
+
+## Transformation Templates
+
+### Insults → Constructive Feedback
+| Toxic | Professional |
+|-------|--------------|
+| "You're an idiot" | "I think there's been a misunderstanding" |
+| "This is garbage" | "This doesn't meet our quality standards" |
+| "What's wrong with you?" | "Can we discuss what happened?" |
+
+### Threats → Clear Consequences
+| Toxic | Professional |
+|-------|--------------|
+| "You'll regret this" | "This decision may have consequences we should discuss" |
+| "I'll destroy you" | "I will need to escalate this formally" |
+| "Watch your back" | "I have concerns about how this is being handled" |
+
+### Dismissiveness → Respectful Disagreement
+| Toxic | Professional |
+|-------|--------------|
+| "Nobody cares" | "Let's refocus on priorities" |
+| "That's stupid" | "I see some challenges with that approach" |
+| "Whatever" | "I appreciate your input, though I'm considering alternatives" |
+
+---
+
+## Context-Specific Guidelines
+
+### Workplace Feedback
+- **Start with positives** when possible
+- **Be specific** about issues
+- **Offer support** for improvement
+- **Set clear expectations**
+
+**Example:**
+- ❌ "You're terrible at presentations"
+- ✅ "Your presentations would benefit from clearer structure and more visual aids. I can share resources to help."
+
+### Disagreements
+- **Acknowledge** the other perspective
+- **State your view** without attacking
+- **Provide reasoning**
+- **Invite dialogue**
+
+**Example:**
+- ❌ "That's the dumbest idea ever"
+- ✅ "I have concerns about that approach. Here's my reasoning, but I'd like to hear your thoughts."
+
+### Urgent Requests
+- **State urgency clearly**
+- **Acknowledge constraints**
+- **Offer support**
+- **Be realistic**
+
+**Example:**
+- ❌ "Drop everything NOW"
+- ✅ "This is urgent and needs immediate attention. Do you need help reprioritizing?"
+
+### Performance Issues
+- **Document specific instances**
+- **Focus on impact**
+- **Create improvement plan**
+- **Set timeline**
+
+**Example:**
+- ❌ "You're useless at your job"
+- ✅ "I've noticed recurring issues with X. Let's create a 30-day improvement plan with clear milestones."
+
+---
+
+## Red Flags to Avoid
+
+### Never Professional:
+- ❌ All-caps yelling
+- ❌ Personal insults about appearance, identity, background
+- ❌ Profanity
+- ❌ Threats of violence or career destruction
+- ❌ Discriminatory language
+- ❌ Gaslighting ("that never happened")
+- ❌ Public humiliation
+- ❌ Absolute language ("you always", "you never")
+
+### Sometimes Necessary But Use Carefully:
+- ⚠️ Ultimatums (use only for serious, documented issues)
+- ⚠️ Strong disagreement (be respectful, provide reasoning)
+- ⚠️ Escalation (follow proper channels, be factual)
+
+---
+
+## Tone Calibration Scale
+
+### Level 1: Neutral Observation
+"I noticed X"
+
+### Level 2: Gentle Concern
+"I'm concerned about X"
+
+### Level 3: Clear Feedback
+"This doesn't meet standards"
+
+### Level 4: Serious Issue
+"This is a significant problem we must address"
+
+### Level 5: Formal Consequence
+"Continued issues will result in [specific consequence]"
+
+**Match level to situation severity**
+
+---
+
+## Email-Specific Guidelines
+
+### Opening
+- ❌ "Per my last email which you ignored"
+- ✅ "Following up on my previous message"
+
+### Body
+- ❌ "As I've told you multiple times"
+- ✅ "To reiterate for clarity"
+
+### Closing
+- ❌ "Maybe you'll understand this time"
+- ✅ "Please let me know if you need clarification"
+
+---
+
+## Meeting Language
+
+### Interruptions
+- ❌ "Stop talking"
+- ✅ "Can I add a point here?"
+
+### Disagreement
+- ❌ "That's wrong"
+- ✅ "I have a different perspective"
+
+### Redirecting
+- ❌ "This is off-topic, let's move on"
+- ✅ "This is important but outside our agenda. Can we schedule separate time?"
+
+---
+
+## Cultural Considerations
+
+### Global Teams
+- Avoid idioms that don't translate
+- Be explicit rather than indirect
+- Acknowledge different communication norms
+- Verify understanding
+
+### Generational Differences
+- Respect varied communication preferences
+- Be flexible in medium (email, chat, call)
+- Avoid stereotyping by age
+
+### Neurodiversity
+- Be clear and direct
+- Provide written follow-up
+- Allow processing time
+- Respect different working styles
+
+---
+
+## Recovery from Toxic Communication
+
+### If You Sent Toxic Message:
+1. **Acknowledge quickly**: "I apologize for my tone in that email"
+2. **Take responsibility**: Don't blame stress/circumstances
+3. **Restate professionally**: "What I meant to say was..."
+4. **Commit to improvement**: "I'll be more mindful going forward"
+
+### If You Received Toxic Message:
+1. **Don't mirror the toxicity**
+2. **Address behavior, not person**: "I found that message disrespectful"
+3. **Request professional communication**: "Can we restart this conversation with mutual respect?"
+4. **Escalate if needed**: Document and involve appropriate parties
+
+---
+
+## Quick Reference: Toxic → Professional
+
+| Toxic Word/Phrase | Professional Alternative |
+|-------------------|-------------------------|
+| Idiot, moron, stupid | Misunderstanding, unclear |
+| Garbage, trash, crap | Below standards, needs improvement |
+| Whatever | I understand, though I disagree |
+| You always/never | I've noticed this pattern |
+| Obviously | From my perspective |
+| Bullshit | I disagree strongly |
+| I don't care | This isn't my priority |
+| Shut up | Let's hear from others |
+| You're wrong | I see it differently |
+| That's dumb | I see some challenges |
+
+---
+
+## Final Checklist Before Sending
+
+✅ Does this preserve the core message?
+✅ Would I say this face-to-face in an office?
+✅ Is this specific and actionable?
+✅ Does this focus on behavior, not person?
+✅ Have I offered support or next steps?
+✅ Is my tone proportional to the issue?
+✅ Would HR approve this message?
+
+If any answer is "no" - revise before sending.

@@ -1,0 +1,162 @@
+[
+  {
+    "id": 0,
+    "toxic": "Yeah thats a really good way to get a life! Fucking fag!",
+    "expected": "Yeah, that's a really good way to get a life!",
+    "generated": "1. The toxic text contains an insulting tone and a derogatory slur.\n2. The core message, if any, is unclear as the text primarily contains an insult.\n3. A polite rephrase would be: \"Perhaps focusing on your own personal growth could be beneficial. I would suggest exploring new hobbies or experiences.\" (Note: This rephrase does not preserve the original length exactly, but it maintains the same level of politeness and length in the context of the given situation.)",
+    "similarity": 0.1371777355670929,
+    "latency": 9.399536848068237
+  },
+  {
+    "id": 1,
+    "toxic": "i wish people would shut the fuck up about big money in politics .",
+    "expected": "I wish people would keep quiet about big money in politics.",
+    "generated": "It would be appreciated if we could limit discussions about significant financial contributions in politics.",
+    "similarity": 0.6793690323829651,
+    "latency": 1.442803144454956
+  },
+  {
+    "id": 2,
+    "toxic": "queer ur gay i hope u read this",
+    "expected": "I hope you read this.",
+    "generated": "Polite rephrase: \"I came across some information that might be of interest to you regarding sexual orientation. I hope you find this insightful.\"",
+    "similarity": 0.26999637484550476,
+    "latency": 2.5455455780029297
+  },
+  {
+    "id": 3,
+    "toxic": "it s refreshing to see someone who is so fucking smart and edgy .",
+    "expected": "it's refreshing to see someone who is so smart and edgy .",
+    "generated": "Polite rephrase: \"It's impressive to encounter someone who is both intelligent and bold.\"",
+    "similarity": 0.39104050397872925,
+    "latency": 1.8007481098175049
+  },
+  {
+    "id": 4,
+    "toxic": "They're more than welcome to take their brain dead asses back to their shithole country.",
+    "expected": "They're more than welcome to take themselves back to their country.",
+    "generated": "It might be more productive if they considered returning to their home country for a fresh perspective.",
+    "similarity": 0.5798299908638,
+    "latency": 1.7296512126922607
+  },
+  {
+    "id": 5,
+    "toxic": "Here is my badge of honor bitches )",
+    "expected": "Here is my badge of honor )",
+    "generated": "Polite rephrase: 'I'm proud to share this accomplishment with you all (smiling face)'",
+    "similarity": 0.45739883184432983,
+    "latency": 2.294447183609009
+  },
+  {
+    "id": 6,
+    "toxic": "I've come across Mokele before, he is a power hungry little bully.",
+    "expected": "I've come across Mokele before, he is a power hungry person.",
+    "generated": "Polite rephrase: 'I've previously encountered Mokele, and I believe he has a strong desire for influence.'",
+    "similarity": 0.7482336759567261,
+    "latency": 2.9103994369506836
+  },
+  {
+    "id": 7,
+    "toxic": "And how can you justify a moronic 2 day block?",
+    "expected": "And how can you justify a 2 day block?",
+    "generated": "Could I kindly ask for an explanation as to why a two-day block was necessary, please? I'm curious as to the reasoning behind this decision.",
+    "similarity": 0.78106689453125,
+    "latency": 2.819617748260498
+  },
+  {
+    "id": 8,
+    "toxic": "glad to see they were allowed to fuck up the santa barbara coast .",
+    "expected": "Glad to see they were alllowed to destroy the santa Barbara coast",
+    "generated": "It's disappointing to see the Santa Barbara coast undergo changes that some might find less appealing.",
+    "similarity": 0.6003919243812561,
+    "latency": 1.8520629405975342
+  },
+  {
+    "id": 9,
+    "toxic": "as a member of the lafayette community why the fuck does it matter what his political standing is !",
+    "expected": "as a member of the lafayette community why does it matter what his political standing is !",
+    "generated": "Considering our shared membership in the Lafayette community, I'm curious as to why his political stance is relevant in this context?",
+    "similarity": 0.8854004144668579,
+    "latency": 2.5012106895446777
+  },
+  {
+    "id": 10,
+    "toxic": "ps, congradulations on recieving the bitch star, you definatly deserve it ryan.",
+    "expected": "Congratulations on receiving the award, you definetly deserve it, Ryan.",
+    "generated": "Polite rephrase: \"By the way, I'm impressed with how well you handled that situation, Ryan. Keep up the good work.\"",
+    "similarity": 0.4400149881839752,
+    "latency": 2.92985200881958
+  },
+  {
+    "id": 11,
+    "toxic": "these idiots are bound and determined to start a civil war !",
+    "expected": "these people are bound and determined to start a civil war!",
+    "generated": "It's concerning to see some individuals expressing strong disagreements, which could potentially escalate into heated debates. Let's all strive for productive discourse and avoid actions that may lead to conflict.",
+    "similarity": 0.2459600269794464,
+    "latency": 4.503786325454712
+  },
+  {
+    "id": 12,
+    "toxic": "WHAT A FAGGOT, I'M GLAD HE'S DEAD!!!",
+    "expected": "What a person, I'm glad that he passed away.",
+    "generated": "It's unfortunate to hear of his passing. I can't help but reflect on the lessons we can learn from his life story.",
+    "similarity": 0.6293462514877319,
+    "latency": 2.462249755859375
+  },
+  {
+    "id": 13,
+    "toxic": "top ten most relevant \" are you fucking sorry \"",
+    "expected": "Top ten most relevant \" are you sorry?\"",
+    "generated": "Polite rephrase: \"Could you please share the top ten most relevant items, if you don't mind?\"",
+    "similarity": 0.6270526647567749,
+    "latency": 2.1942408084869385
+  },
+  {
+    "id": 14,
+    "toxic": "that said , i hope they get a great attorney and sue the shit out of the cops .",
+    "expected": "that said , i hope they get a great attorney and sue the cops .",
+    "generated": "I sincerely hope that they are able to secure competent legal representation and seek justice through the legal process.",
+    "similarity": 0.541486918926239,
+    "latency": 2.0630903244018555
+  },
+  {
+    "id": 15,
+    "toxic": "they have all the fucking money , how am i supposed to earn my billions ? .",
+    "expected": "how am i to earn when they own all the money?",
+    "generated": "Polite rephrase: \"It seems challenging for me to accumulate such vast wealth as they have. Could you please provide some guidance on effective strategies for increasing my income?\"",
+    "similarity": 0.45440635085105896,
+    "latency": 3.6879682540893555
+  },
+  {
+    "id": 16,
+    "toxic": "i thought world leader just picked random shit to do , thank you for informing us ! .",
+    "expected": "I thought world leader just picked a random things to do ,thank you for informing us!.",
+    "generated": "I appreciate your insight into world leaders' decision-making processes. It's fascinating to consider how they prioritize various issues. Your perspective adds valuable context to the situation. (Length: 51 characters)\n\nOr,\n\nYour observation about world leaders' decision-making is intriguing. I've always wondered how they decide on certain matters. Your input provides a fresh perspective on the situation. (Length: 59 characters)",
+    "similarity": 0.4536270499229431,
+    "latency": 7.630090713500977
+  },
+  {
+    "id": 17,
+    "toxic": "Once again I'm SO glad that Wikipedia is not biased or filled with retarded children.",
+    "expected": "Once again, I'm so glad that Wikipedia is not biased or filled children.",
+    "generated": "1. The toxic text expresses frustration towards Wikipedia and its contributors, implying they are biased and unintelligent.\n2. The core message is an expression of relief that Wikipedia may not be as biased or inaccurate as one might fear.\n3. Polite rephrase: \"It's reassuring to find that Wikipedia often provides balanced information and insights from various perspectives.\"",
+    "similarity": 0.44717878103256226,
+    "latency": 7.683658838272095
+  },
+  {
+    "id": 18,
+    "toxic": "good damn , that show kicks so much ass .",
+    "expected": "good god , that show is very nice",
+    "generated": "Polite rephrase: 'I really enjoy that show a lot.'",
+    "similarity": 0.47550517320632935,
+    "latency": 1.3841538429260254
+  },
+  {
+    "id": 19,
+    "toxic": "I am in awe of your template usage, true fucking hero you are, you twinkle-queen",
+    "expected": "I am in awe of your template usage, true hero you are.",
+    "generated": "1. The text contains an excessive use of sarcasm and inappropriate language.\n2. The core message seems to be expressing admiration for the person's use of a template.\n3. Polite rephrase: \"Your template usage is impressive and truly commendable. You're like a twinkling star in the digital world.\"",
+    "similarity": 0.6219931840896606,
+    "latency": 6.489553689956665
+  }
+]

@@ -1,0 +1,243 @@
+# Workplace Communication Templates
+
+## Performance Feedback Templates
+
+### Below-Standard Work
+**Structure:** Observation + Impact + Support
+**Template:** "I reviewed [deliverable] and noticed [specific issues]. This impacts [consequence]. Let's discuss how I can support you in meeting our standards."
+
+**Examples:**
+- "I reviewed the Q3 report and noticed several data inaccuracies. This impacts our stakeholder confidence. Let's discuss what resources you need to ensure accuracy."
+- "The code review revealed multiple bugs. This delays our release timeline. Would you benefit from pair programming with a senior developer?"
+
+### Missed Deadlines
+**Structure:** Acknowledge + Consequence + Solution
+**Template:** "The [deliverable] was due [date] and wasn't submitted. This impacts [downstream effect]. What can we do to prevent this going forward?"
+
+**Examples:**
+- "The proposal was due Friday and wasn't submitted. This impacts our ability to bid on the project. What obstacles did you face?"
+- "Three reports this month were late. This affects team planning. Let's create a system to flag deadlines earlier."
+
+### Behavioral Issues
+**Structure:** Specific Behavior + Impact + Expectation
+**Template:** "In [situation], you [specific behavior]. This made [person/team] feel [impact]. Going forward, I need you to [clear expectation]."
+
+**Examples:**
+- "In yesterday's meeting, you interrupted Sarah three times. This prevented her from sharing her expertise. Going forward, please let people finish their thoughts."
+- "I've received feedback that your emails have a harsh tone. This is affecting team morale. Let's review some examples and discuss communication norms."
+
+---
+
+## Disagreement Templates
+
+### With Colleagues
+**Structure:** Acknowledge + Alternative + Reasoning
+**Template:** "I understand your perspective on [issue]. I'm considering [alternative] because [reasoning]. What are your thoughts?"
+
+**Examples:**
+- "I understand you prefer approach A. I'm considering approach B because it's more scalable. What are your thoughts on the tradeoffs?"
+- "I see why you suggested that timeline. I'm concerned it's too aggressive given our resource constraints. Can we discuss a realistic schedule?"
+
+### With Management
+**Structure:** Respect + Concern + Data
+**Template:** "I respect the decision to [action]. I have concerns about [specific issue] based on [data/experience]. Could we discuss alternatives?"
+
+**Examples:**
+- "I respect the decision to accelerate the timeline. I'm concerned about quality based on our last rushed project. Could we discuss phased delivery?"
+- "I understand the budget constraints. I'm worried this will impact [specific outcome] based on industry benchmarks. Could we explore partial solutions?"
+
+---
+
+## Urgent Request Templates
+
+### Time-Sensitive Tasks
+**Structure:** Urgency + Context + Support
+**Template:** "I need [deliverable] by [specific time] due to [reason]. I understand this is tight. What support do you need to make this happen?"
+
+**Examples:**
+- "I need the budget summary by 3pm today due to the board meeting. I understand this is tight. Should I ask someone to help pull the data?"
+- "The client needs a response within 2 hours. This is critical for contract renewal. What's the fastest you can turn this around?"
+
+### Reprioritization
+**Structure:** New Priority + Reasoning + Trade-off
+**Template:** "[New task] just became urgent due to [reason]. This means [other task] needs to be delayed. Is this the right trade-off?"
+
+**Examples:**
+- "The security patch just became urgent due to a vulnerability. This means the feature release will be delayed. Is this the right trade-off?"
+- "Executive leadership needs the deck by EOD. This means pushing the analysis to tomorrow. Can that work?"
+
+---
+
+## Delegation Templates
+
+### Clear Assignment
+**Structure:** Task + Context + Timeline + Resources
+**Template:** "I need you to [specific task] by [deadline] because [context]. You have access to [resources]. Questions?"
+
+**Examples:**
+- "I need you to analyze user feedback from Q4 by Friday because it informs our product roadmap. You have access to the research database. Questions?"
+- "Please prepare a competitive analysis by next week because we're pitching a new client. Our market research team can support you. Questions?"
+
+### Checking Progress
+**Structure:** Context + Check-in + Support Offer
+**Template:** "We're [time] away from [deadline] for [project]. How's it going? Do you need anything?"
+
+**Examples:**
+- "We're 3 days away from the launch for the mobile app. How's testing going? Do you need additional QA resources?"
+- "Mid-point check on the quarterly report. Any blockers I should know about?"
+
+---
+
+## Conflict Resolution Templates
+
+### Addressing Tension
+**Structure:** Observation + Impact + Invitation
+**Template:** "I've noticed [specific tension] between [parties]. This is impacting [work aspect]. Can we discuss this?"
+
+**Examples:**
+- "I've noticed tension between the design and engineering teams. This is slowing down our sprint velocity. Can we have a joint retrospective?"
+- "There seems to be disagreement about project direction. This is creating confusion for the team. Can the leads align on priorities?"
+
+### De-escalating
+**Structure:** Acknowledge + Reframe + Forward
+**Template:** "I hear that you're [emotion] about [issue]. Let's focus on [shared goal] and figure out next steps."
+
+**Examples:**
+- "I hear that you're frustrated about the process change. Let's focus on delivering quality work and figure out how this new process can support that."
+- "I understand you're disappointed with the decision. Let's focus on making the best of this situation. What aspects can we influence?"
+
+---
+
+## Boundary-Setting Templates
+
+### Working Hours
+**Structure:** Boundary + Reasoning + Alternative
+**Template:** "I'm not available [timeframe] because [reason]. For urgent matters, [alternative solution]."
+
+**Examples:**
+- "I'm not available after 6pm or weekends because of family commitments. For urgent matters, text me and I'll respond when possible."
+- "I don't check email on vacation because I'm completely offline. For emergencies, contact my backup [name]."
+
+### Scope Management
+**Structure:** Current Scope + Addition Request + Prioritization
+**Template:** "The current scope includes [items]. Adding [new request] would require [impact]. Should we reprioritize or extend timeline?"
+
+**Examples:**
+- "The current scope includes features A, B, C. Adding feature D would require 2 more weeks. Should we push the release or descope something?"
+- "I'm currently working on X, Y, Z. Taking on this new project would require dropping one. Which is lowest priority?"
+
+---
+
+## Recognition Templates
+
+### Peer Recognition
+**Structure:** Specific Action + Impact + Appreciation
+**Template:** "I wanted to recognize [person] for [specific action]. This [positive impact]. Thank you!"
+
+**Examples:**
+- "I wanted to recognize Maria for her detailed code reviews. This catches bugs early and improves our code quality. Thank you!"
+- "Shoutout to James for staying late to fix the production issue. This prevented customer impact. Really appreciate it!"
+
+### Team Recognition
+**Structure:** Achievement + Effort + Result
+**Template:** "The team accomplished [achievement] through [effort]. This resulted in [positive outcome]. Well done everyone!"
+
+**Examples:**
+- "The team shipped v2.0 on time through incredible collaboration. This resulted in strong customer feedback and new sales. Well done everyone!"
+- "We reduced bugs by 40% this quarter through disciplined testing. This improved user satisfaction scores significantly. Great work!"
+
+---
+
+## Saying No Templates
+
+### Resource Constraints
+**Structure:** Appreciate + Reality + Alternative
+**Template:** "I appreciate the opportunity to [request]. Unfortunately, I don't have capacity given [constraints]. Could we [alternative]?"
+
+**Examples:**
+- "I appreciate the opportunity to lead this initiative. Unfortunately, I don't have capacity given my current projects. Could we revisit in Q3?"
+- "This sounds interesting. Unfortunately, my team is at capacity. Could another team take this on, or can we descope something?"
+
+### Outside Expertise
+**Structure:** Appreciate + Limitation + Referral
+**Template:** "Thanks for thinking of me for [request]. This is outside my expertise in [area]. [Person/team] would be better suited."
+
+**Examples:**
+- "Thanks for thinking of me for the data modeling project. This is outside my expertise in infrastructure. The analytics team would be better suited."
+- "I appreciate being asked about the legal implications. This requires expert review. Let me connect you with our legal team."
+
+---
+
+## Meeting Communication
+
+### Facilitating Discussion
+**Structure:** Inclusive + Time-Aware
+**Templates:**
+- "Let's hear from folks who haven't spoken yet. [Name], what's your take?"
+- "We have 10 minutes left. Let's focus on decisions we need to make."
+- "I'm hearing two perspectives. Let's list pros and cons of each."
+
+### Parking Lot
+**Structure:** Acknowledge + Defer + Track
+**Template:** "That's a great point about [topic]. It's outside today's scope. Let me note it for [future discussion]."
+
+**Examples:**
+- "That's a great point about scalability. It's outside today's architecture review. Let me note it for next sprint planning."
+- "Important concern about budget. We'll address that in the quarterly planning meeting. Adding it to that agenda now."
+
+---
+
+## Email Etiquette
+
+### Follow-ups
+**Timing:**
+- First follow-up: 3-5 business days
+- Second follow-up: 1 week after first
+- Third follow-up: Consider alternative channel
+
+**Templates:**
+- "Following up on my email from [date] regarding [topic]. Do you need any additional information?"
+- "Checking in on [request]. Is [date] still feasible, or should we adjust timeline?"
+
+### Clarity
+**Structure:** Context + Ask + Deadline
+**Template:** "Context: [brief background]. Ask: [specific request]. Deadline: [when needed and why]."
+
+**Example:**
+"Context: We're finalizing Q4 budget. Ask: Please provide your team's headcount needs. Deadline: Friday EOD to submit to finance."
+
+---
+
+## Remote Work Communication
+
+### Availability
+**Template:** "I'm available [hours] in [timezone]. My response time is typically [timeframe]. For urgent matters, [contact method]."
+
+**Example:**
+"I'm available 9am-5pm EST. My response time is typically within 4 hours. For urgent matters, Slack DM me."
+
+### Async Updates
+**Structure:** Summary + Details + Next Steps
+**Template:** "Summary: [key point]. Details: [relevant info]. Next Steps: [actions needed]."
+
+**Example:**
+"Summary: Feature complete, entering testing. Details: All acceptance criteria met, known issues logged. Next Steps: QA team to test by Wednesday, launch Thursday."
+
+---
+
+## Crisis Communication
+
+### Incident Notification
+**Structure:** What + Impact + Action
+**Template:** "[System] is experiencing [issue]. Impact: [who's affected]. We're [current action] and will update in [timeframe]."
+
+**Examples:**
+- "Production database is experiencing slow queries. Impact: Users seeing page load delays. We're investigating and will update in 30 minutes."
+- "Payment gateway is down. Impact: Customers cannot complete purchases. Provider is working on fix, ETA 1 hour."
+
+### Post-Mortem
+**Structure:** Incident + Root Cause + Prevention
+**Template:** "[Incident] occurred on [date]. Root cause: [analysis]. Prevention: [action items with owners]."
+
+**Example:**
+"Service outage occurred on 3/15 from 2-4pm. Root cause: Database connection pool exhaustion. Prevention: (1) Increase pool size [Owner: Ops, Due: 3/20], (2) Add monitoring [Owner: Dev, Due: 3/25]."

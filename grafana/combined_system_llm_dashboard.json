@@ -1,0 +1,350 @@
+{
+  "id": null,
+  "title": "DetoxifyAI - Complete System & LLM Dashboard",
+  "timezone": "browser",
+  "schemaVersion": 30,
+  "version": 1,
+  "refresh": "5s",
+  "panels": [
+    {
+      "type": "row",
+      "title": "LLM Performance Metrics",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "stat",
+      "title": "Total Rephrase Requests",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(app_request_count_total{endpoint=\"/rephrase\"})",
+          "legendFormat": "Total"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "blue" },
+              { "value": 100, "color": "green" },
+              { "value": 1000, "color": "yellow" }
+            ]
+          }
+        }
+      },
+      "gridPos": { "x": 0, "y": 1, "w": 6, "h": 4 }
+    },
+    {
+      "type": "stat",
+      "title": "Guardrail Violations",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(guardrail_violations_total) OR on() vector(0)",
+          "legendFormat": "Total"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "green" },
+              { "value": 10, "color": "yellow" },
+              { "value": 50, "color": "red" }
+            ]
+          },
+          "unit": "short"
+        }
+      },
+      "gridPos": { "x": 6, "y": 1, "w": 6, "h": 4 }
+    },
+    {
+      "type": "gauge",
+      "title": "Current Token Usage (Total)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(llm_tokens_total) OR on() vector(0)",
+          "legendFormat": "Tokens"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "green" },
+              { "value": 10000, "color": "yellow" },
+              { "value": 50000, "color": "red" }
+            ]
+          },
+          "unit": "short",
+          "max": 100000,
+          "min": 0
+        }
+      },
+      "options": {
+        "showThresholdLabels": true,
+        "showThresholdMarkers": true
+      },
+      "gridPos": { "x": 12, "y": 1, "w": 6, "h": 4 }
+    },
+    {
+      "type": "stat",
+      "title": "Estimated Total Cost (USD)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(llm_cost_dollars_total) OR on() vector(0)",
+          "legendFormat": "Cost"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "green" },
+              { "value": 1, "color": "yellow" },
+              { "value": 10, "color": "red" }
+            ]
+          },
+          "unit": "currencyUSD",
+          "decimals": 4
+        }
+      },
+      "gridPos": { "x": 18, "y": 1, "w": 6, "h": 4 }
+    },
+    {
+      "type": "graph",
+      "title": "Request Latency by Endpoint (p50, p95, p99)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, rate(app_request_latency_seconds_bucket{endpoint=\"/rephrase\"}[1m]))",
+          "legendFormat": "/rephrase p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(app_request_latency_seconds_bucket{endpoint=\"/rephrase\"}[1m]))",
+          "legendFormat": "/rephrase p95"
+        },
+        {
+          "expr": "histogram_quantile(0.99, rate(app_request_latency_seconds_bucket{endpoint=\"/rephrase\"}[1m]))",
+          "legendFormat": "/rephrase p99"
+        },
+        {
+          "expr": "histogram_quantile(0.50, rate(app_request_latency_seconds_bucket{endpoint=\"/predict\"}[1m]))",
+          "legendFormat": "/predict p50"
+        },
+        {
+          "expr": "histogram_quantile(0.95, rate(app_request_latency_seconds_bucket{endpoint=\"/predict\"}[1m]))",
+          "legendFormat": "/predict p95"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "s",
+          "label": "Latency"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 5, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "Request Rate by Endpoint",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(app_request_count_total{endpoint=\"/predict\"}[5m])",
+          "legendFormat": "Prediction (/predict)"
+        },
+        {
+          "expr": "rate(app_request_count_total{endpoint=\"/rephrase\"}[5m])",
+          "legendFormat": "Rephrasing (/rephrase)"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "reqps",
+          "label": "Requests/sec"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 5, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "Guardrail Violations Over Time",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(guardrail_violations_total[5m]) OR on() vector(0)",
+          "legendFormat": "{{rule_type}}"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Violations/sec"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 11, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "Token Usage Rate",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(llm_tokens_total{token_type=\"input\"}[5m]) OR on() vector(0)",
+          "legendFormat": "Input Tokens/sec"
+        },
+        {
+          "expr": "rate(llm_tokens_total{token_type=\"output\"}[5m]) OR on() vector(0)",
+          "legendFormat": "Output Tokens/sec"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "short",
+          "label": "Tokens/sec"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 11, "w": 12, "h": 6 }
+    },
+    {
+      "type": "row",
+      "title": "System Metrics (from Milestone 1)",
+      "gridPos": { "x": 0, "y": 17, "w": 24, "h": 1 },
+      "collapsed": false
+    },
+    {
+      "type": "stat",
+      "title": "Total API Requests",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "sum(app_request_count_total)",
+          "legendFormat": "Total"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 18, "w": 6, "h": 4 }
+    },
+    {
+      "type": "stat",
+      "title": "Memory Usage (GB)",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "(node_memory_MemTotal_bytes - node_memory_MemAvailable_bytes) / 1024 / 1024 / 1024",
+          "legendFormat": "Used"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "decgbytes",
+          "decimals": 2
+        }
+      },
+      "gridPos": { "x": 6, "y": 18, "w": 6, "h": 4 }
+    },
+    {
+      "type": "gauge",
+      "title": "CPU Usage %",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "100 - (avg(rate(node_cpu_seconds_total{mode=\"idle\"}[1m])) * 100)",
+          "legendFormat": "CPU"
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              { "value": 0, "color": "green" },
+              { "value": 70, "color": "yellow" },
+              { "value": 90, "color": "red" }
+            ]
+          },
+          "unit": "percent",
+          "max": 100,
+          "min": 0
+        }
+      },
+      "gridPos": { "x": 12, "y": 18, "w": 6, "h": 4 }
+    },
+    {
+      "type": "graph",
+      "title": "Overall Request Latency",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(app_request_latency_seconds_sum[1m]) / rate(app_request_latency_seconds_count[1m])",
+          "legendFormat": "Avg Latency"
+        }
+      ],
+      "yaxes": [
+        {
+          "format": "s",
+          "label": "Seconds"
+        }
+      ],
+      "gridPos": { "x": 0, "y": 22, "w": 12, "h": 6 }
+    },
+    {
+      "type": "graph",
+      "title": "CPU Usage by Core",
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
+      "targets": [
+        {
+          "expr": "rate(node_cpu_seconds_total{mode!=\"idle\"}[1m])",
+          "legendFormat": "{{cpu}}"
+        }
+      ],
+      "gridPos": { "x": 12, "y": 22, "w": 12, "h": 6 }
+    }
+  ]
+}

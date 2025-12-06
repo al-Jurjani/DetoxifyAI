@@ -1,0 +1,171 @@
+{
+  "timestamp": "2025-11-28T04:30:38.487374",
+  "config": {
+    "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+    "llm_model": "mistralai/Mistral-7B-Instruct-v0.1",
+    "top_k": 5,
+    "temperature": 1.0
+  },
+  "results": [
+    {
+      "toxic_input": "You're an idiot for making that mistake",
+      "professional_rephrase": "I noticed an error in the report, and it would be helpful to review it together.",
+      "retrieved_examples": [
+        {
+          "toxic": "You're going to pay for this mistake.",
+          "professional": "We need to address the impact of this error and establish accountability.",
+          "category": "threat_aggression"
+        },
+        {
+          "toxic": "You're such an idiot, can't believe you made that mistake.",
+          "professional": "I noticed an error in the report. Would you like me to help review it?",
+          "category": "insult_personal"
+        },
+        {
+          "toxic": "Let's tell everyone how badly you messed this up.",
+          "professional": "Let's discuss this mistake privately and create a plan to prevent it.",
+          "category": "public_humiliation"
+        },
+        {
+          "toxic": "You better watch your back.",
+          "professional": "I believe this decision may have consequences we should discuss.",
+          "category": "threat_aggression"
+        },
+        {
+          "toxic": "You always make the same mistakes.",
+          "professional": "I've noticed this issue recurring. Let's create a plan to prevent it.",
+          "category": "absolute_language"
+        }
+      ],
+      "num_examples_used": 5
+    },
+    {
+      "toxic_input": "This is complete garbage, redo it",
+      "professional_rephrase": "Professional: This may require additional attention. Let's explore options for improvement.",
+      "retrieved_examples": [
+        {
+          "toxic": "This damn project is a disaster.",
+          "professional": "This project is facing significant challenges that need immediate attention.",
+          "category": "profanity"
+        },
+        {
+          "toxic": "This is complete bullshit.",
+          "professional": "I strongly disagree with this decision and find it problematic.",
+          "category": "profanity"
+        },
+        {
+          "toxic": "This failure is entirely on you.",
+          "professional": "You owned this deliverable, and we need to understand why it didn't succeed.",
+          "category": "blame_accusation"
+        },
+        {
+          "toxic": "Your contribution is worthless.",
+          "professional": "I'm not sure this aligns with our current objectives. Let's refocus.",
+          "category": "dismissive_condescending"
+        },
+        {
+          "toxic": "Your opinion is worthless, delete your account.",
+          "professional": "I have a different perspective on this issue.",
+          "category": "social_media_toxic"
+        }
+      ],
+      "num_examples_used": 5
+    },
+    {
+      "toxic_input": "I don't care about your excuses, just get it done",
+      "professional_rephrase": "Please provide a specific deadline or timeline for completion, and let me know if any additional resources or support are needed.",
+      "retrieved_examples": [
+        {
+          "toxic": "I don't care about your excuses, just get it done.",
+          "professional": "I understand there are challenges, but this is a critical deadline we must meet.",
+          "category": "deadline_pressure"
+        },
+        {
+          "toxic": "You work for me, so just do it.",
+          "professional": "This is a priority task. I need it completed by end of day.",
+          "category": "demanding_entitled"
+        },
+        {
+          "toxic": "I'm going to make sure you regret this.",
+          "professional": "I'm very disappointed with this outcome and would like to discuss next steps.",
+          "category": "threat_aggression"
+        },
+        {
+          "toxic": "Hurry up, I don't have all day.",
+          "professional": "I'm on a tight schedule. Could we expedite this?",
+          "category": "impatient_rude"
+        },
+        {
+          "toxic": "I don't care if it's your day off, answer my calls.",
+          "professional": "This is urgent and needs your expertise. Are you available for a brief call?",
+          "category": "boundary_violation"
+        }
+      ],
+      "num_examples_used": 5
+    },
+    {
+      "toxic_input": "What a stupid idea, that will never work",
+      "professional_rephrase": "Original: \"What a stupid idea, that will never work.\"\nProfessional: \"I have some reservations about the effectiveness of that approach. Can we discuss potential obstacles and explore alternative solutions?\"",
+      "retrieved_examples": [
+        {
+          "toxic": "Oh, I'm sure that'll work perfectly.",
+          "professional": "I'm skeptical about this approach. Can we review potential challenges?",
+          "category": "sarcasm_mockery"
+        },
+        {
+          "toxic": "This will obviously fail catastrophically.",
+          "professional": "I foresee some significant risks with this approach that we should address.",
+          "category": "inflammatory"
+        },
+        {
+          "toxic": "Oh great, another brilliant idea from you.",
+          "professional": "I'd like to understand the rationale behind this suggestion.",
+          "category": "sarcasm_mockery"
+        },
+        {
+          "toxic": "That's the stupidest suggestion I've ever heard.",
+          "professional": "I don't think that approach aligns with our objectives. Here's why.",
+          "category": "idea_rejection"
+        },
+        {
+          "toxic": "That's the dumbest idea ever proposed.",
+          "professional": "I see some challenges with that approach. Have we considered alternatives?",
+          "category": "dismissive_condescending"
+        }
+      ],
+      "num_examples_used": 5
+    },
+    {
+      "toxic_input": "You're completely useless at your job",
+      "professional_rephrase": "You're not meeting expectations in your current position. Let's discuss how we can address this.",
+      "retrieved_examples": [
+        {
+          "toxic": "I want to speak to your manager because you're useless.",
+          "professional": "I'm not satisfied with the resolution offered. May I escalate this?",
+          "category": "customer_service_toxic"
+        },
+        {
+          "toxic": "You're completely useless at your job.",
+          "professional": "I think we need to identify areas where you could use additional support or training.",
+          "category": "insult_personal"
+        },
+        {
+          "toxic": "Stop complaining, just be grateful you have a job.",
+          "professional": "I hear your concerns. Let's discuss what we can realistically address.",
+          "category": "toxic_positivity"
+        },
+        {
+          "toxic": "You'll never work in this industry again.",
+          "professional": "I strongly advise reconsidering this approach, as it may impact your professional reputation.",
+          "category": "threat_aggression"
+        },
+        {
+          "toxic": "Don't worry your pretty little head about it.",
+          "professional": "I'll handle this aspect. You can focus on your assigned tasks.",
+          "category": "dismissive_condescending"
+        }
+      ],
+      "num_examples_used": 5
+    }
+  ]
+}

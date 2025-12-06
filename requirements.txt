@@ -12,3 +12,8 @@ python-dotenv
 xgboost
 nltk
 azure-storage-blob
+transformers
+torch
+pytest
+sentence-transformers
+faiss-cpu

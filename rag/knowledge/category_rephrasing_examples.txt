@@ -1,0 +1,279 @@
+# Category-Based Rephrasing Examples
+
+## Category: Personal Insults
+
+### Competence Attacks
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You're an idiot" | "I think there's been a misunderstanding" | Attack → Neutral observation |
+| "Are you stupid?" | "Could you explain your reasoning?" | Insult → Genuine inquiry |
+| "What a moron" | "This concept can be tricky" | Label → Empathy |
+| "You're completely useless" | "Let's identify where you need support" | Absolute → Specific support |
+
+### Work Quality Attacks
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "This is garbage" | "This doesn't meet our quality standards" | Emotional → Objective |
+| "Amateur hour" | "This seems less polished than usual" | Mockery → Observation |
+| "A child could do better" | "This needs significant improvement" | Comparison → Standard |
+| "Worst work I've ever seen" | "This requires substantial revision" | Hyperbole → Specific |
+
+---
+
+## Category: Threats & Aggression
+
+### Retaliation Threats
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You'll regret this" | "This decision may have consequences" | Threat → Warning |
+| "I'll ruin you" | "I'll need to escalate this" | Personal attack → Process |
+| "Watch your back" | "I have concerns about this approach" | Intimidation → Direct concern |
+| "You'll pay for this" | "We need to establish accountability" | Revenge → Professional consequence |
+
+### Aggressive Demands
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Do it now or else" | "This is urgent and needs immediate attention" | Threat → Clear urgency |
+| "I don't care about your excuses" | "Despite challenges, this deadline is firm" | Dismissive → Acknowledging + firm |
+
+---
+
+## Category: Dismissive & Condescending
+
+### Opinion Dismissal
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Nobody cares what you think" | "Let's hear from others as well" | Absolute → Inclusive |
+| "Your opinion is worthless" | "I'm not sure this aligns with our objectives" | Attack → Misalignment |
+| "What would you know?" | "Could you share your background in this area?" | Rhetorical attack → Genuine inquiry |
+
+### Idea Rejection
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Dumbest idea ever" | "I see some challenges with that approach" | Hyperbole → Specific concern |
+| "That's completely stupid" | "I have a different perspective" | Insult → Alternative view |
+| "Never share your thoughts again" | "I'm going in a different direction" | Hostile → Direct |
+
+---
+
+## Category: Profanity
+
+### General Frustration
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "This is bullshit" | "I strongly disagree with this" | Profanity → Strong disagreement |
+| "What the hell?" | "I'm confused by this choice" | Shock → Seeking clarity |
+| "This is fucking ridiculous" | "This is extremely problematic" | Profane intensity → Professional intensity |
+
+### Directive Profanity
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Get your ass in gear" | "We need to accelerate our progress" | Crude → Direct |
+| "Cut the crap" | "I'd appreciate direct communication" | Profane → Clear expectation |
+
+---
+
+## Category: Sarcasm & Mockery
+
+### False Praise
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Oh great, another brilliant idea" | "Could you explain the rationale?" | Sarcasm → Inquiry |
+| "Wow, you really outdid yourself" | "I think we need to revisit this" | Mock praise → Direct feedback |
+| "Congratulations on the bare minimum" | "I was hoping for more comprehensive work" | Sarcastic → Clear expectation |
+
+### Historical Jabs
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Because that worked so well last time" | "I'm hesitant due to previous challenges" | Sarcasm → Specific concern |
+| "Sure, let's repeat that disaster" | "Let's avoid the issues we had before" | Mock agreement → Learning |
+
+---
+
+## Category: Blame & Accusation
+
+### Direct Blame
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "This is all your fault" | "Let's identify what went wrong together" | Accusation → Collaborative problem-solving |
+| "You ruined this project" | "Several factors contributed to this outcome" | Personal → Systemic |
+| "You always mess up" | "I've noticed this pattern recurring" | Absolute → Specific observation |
+
+### Competence Questioning
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "How did you even get hired?" | "Let's discuss performance expectations" | Attack → Professional discussion |
+| "You're incompetent" | "This error had significant impact" | Label → Consequence focus |
+
+---
+
+## Category: Hostile Rejection
+
+### Refusal to Engage
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "I refuse to work with you" | "I'm finding our collaboration challenging" | Absolute → Specific issue |
+| "Get out of here" | "I need some time to process this" | Hostile → Boundary |
+| "Stop wasting my time" | "I have limited availability right now" | Dismissive → Reality |
+
+### Input Rejection
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Your input isn't wanted" | "I think we have sufficient perspectives" | Hostile → Complete |
+| "I'm done listening" | "Let's take a break and reconvene" | Shutdown → Pause |
+
+---
+
+## Category: Undermining
+
+### Credibility Attacks
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You have no idea what you're talking about" | "I have a different understanding" | Attack → Alternative perspective |
+| "You're not qualified" | "This might benefit from different expertise" | Disqualifying → Reframing |
+| "Nobody trusts your judgment" | "Let's get additional input from the team" | Absolute → Inclusive |
+
+### Experience Dismissal
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You're way out of your depth" | "This is complex. Would collaboration help?" | Attack → Support offer |
+| "Come back when you have experience" | "This requires historical context" | Dismissive → Context explanation |
+
+---
+
+## Category: Passive-Aggressive
+
+### Indirect Criticism
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "I guess your way is fine if we want to fail" | "I have concerns about potential risks" | Indirect → Direct |
+| "Sure, do whatever" | "I'd like my concerns heard before we finalize" | Resignation → Assertion |
+| "Must be nice to have free time" | "I notice you have capacity. Could you also take on X?" | Indirect → Direct request |
+
+### Implied Inequality
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Some people get away with anything" | "I've noticed inconsistencies in policy application" | Vague → Specific |
+| "We can't all be perfect" | "Different team members bring different strengths" | Bitter → Positive framing |
+
+---
+
+## Category: Demanding & Entitled
+
+### Unreasonable Demands
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Drop everything now" | "This is urgent. Can you prioritize it?" | Command → Request with context |
+| "I don't care about your other work" | "I understand you have priorities. Can we discuss fitting this in?" | Dismissive → Acknowledging |
+| "You work for me, just do it" | "This is a priority. I need it by EOD" | Power assertion → Clear directive |
+
+### Explanation Refusal
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "I shouldn't have to explain myself" | "Let me provide context for this request" | Entitled → Helpful |
+| "Figure it out yourself" | "I'd like you to take ownership of finding solutions" | Dismissive → Empowering |
+
+---
+
+## Category: Impatience & Rudeness
+
+### Time Pressure
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Hurry up, I don't have all day" | "I'm on a tight schedule. Could we expedite?" | Rude → Direct + respectful |
+| "Can you move any slower?" | "We're against a deadline. Any blockers?" | Sarcasm → Problem-solving |
+| "This is taking forever" | "This is taking longer than expected" | Exaggeration → Observation |
+
+### Brevity Demands
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Stop wasting time, get to the point" | "I have limited time. Could you summarize?" | Rude → Respectful request |
+| "I don't need your life story" | "Could you focus on the key points?" | Dismissive → Direct request |
+
+---
+
+## Category: Micromanaging
+
+### Excessive Control
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "I need to approve everything" | "Let's establish checkpoints for review" | Total control → Structured oversight |
+| "You can't be trusted alone" | "I'd like to stay closely involved in this project" | Trust attack → High engagement |
+| "Update me every hour" | "Can you provide end-of-day updates?" | Excessive → Reasonable |
+
+---
+
+## Category: Email-Specific
+
+### Passive-Aggressive Follow-ups
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Per my last email which you ignored" | "Following up on my previous email" | Accusatory → Neutral |
+| "As I already told you multiple times" | "To reiterate for clarity" | Frustrated → Helpful |
+| "Perhaps you need me to spell this out" | "Let me clarify my expectations" | Condescending → Clear |
+
+---
+
+## Category: Meeting Disruption
+
+### Interruptions
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Stop talking" | "Could I add a point here?" | Command → Request |
+| "Nobody wants to hear this" | "We're short on time. Could we focus on decisions?" | Dismissive → Time-focused |
+| "Let the adults handle this" | "This requires senior-level decision-making" | Condescending → Role-based |
+
+---
+
+## Category: Gaming & Social Media
+
+### Gaming Toxicity
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You're trash, uninstall" | "That technique takes practice to master" | Insult → Encouragement |
+| "Get good, noob" | "This is challenging. Keep practicing" | Mockery → Support |
+| "Worst player ever" | "Let's adjust our team strategy" | Attack → Collaborative |
+
+### Social Media Arguments
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "Your opinion is worthless" | "I have a different perspective" | Attack → Alternative view |
+| "Nobody asked for your take" | "I don't think this adds to the discussion" | Hostile → Constructive |
+| "Delete your account" | "I strongly disagree with this viewpoint" | Extreme → Strong disagreement |
+
+---
+
+## Category: Customer Service
+
+### Customer Hostility
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You people are incompetent" | "I'm having difficulty getting this resolved" | Attack → Problem focus |
+| "I want your manager because you're useless" | "I'd like to escalate this issue" | Personal attack → Process |
+| "Worst service ever" | "I had a very disappointing experience" | Hyperbole → Specific |
+
+---
+
+## Category: Performance Reviews
+
+### Harsh Criticism
+| Toxic | Professional | Key Transformation |
+|-------|--------------|-------------------|
+| "You're the worst performer" | "Your performance is below expectations" | Comparative attack → Standard reference |
+| "I regret hiring you" | "This role may not be the right fit" | Personal regret → Role fit |
+| "Everyone else is better than you" | "This is a standard skill for this role" | Comparison → Expectation |
+
+---
+
+## Key Transformation Techniques Summary
+
+1. **Absolutes → Specifics**: "You never" → "I've noticed three times"
+2. **Personal → Behavioral**: "You're incompetent" → "This work needs improvement"
+3. **Emotional → Objective**: "This is garbage" → "This doesn't meet standards"
+4. **Attacks → Concerns**: "You're stupid" → "I'm concerned about this approach"
+5. **Commands → Requests**: "Do it now" → "This is urgent. Can you prioritize?"
+6. **Sarcasm → Direct**: "Oh great idea" → "I have concerns about this approach"
+7. **Dismissive → Acknowledging**: "Whatever" → "I understand, though I disagree"
+8. **Threats → Consequences**: "You'll regret this" → "This may have consequences"
+9. **Mockery → Constructive**: "Genius move" → "I think there was an oversight"
+10. **Gossip → Direct**: "Did you hear about X?" → "I have concerns about X's performance"

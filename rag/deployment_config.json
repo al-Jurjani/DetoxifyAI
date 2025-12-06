@@ -1,0 +1,11 @@
+{
+  "model_name": "mistralai/Mistral-7B-Instruct-v0.1",
+  "embedding_model": "sentence-transformers/all-MiniLM-L6-v2",
+  "top_k": 5,
+  "temperature": 1.0,
+  "max_length": 512,
+  "quantization": "4-bit",
+  "azure_blob_container": "detoxifyai-m2-artifacts",
+  "faiss_index_blob": "faiss_index.zip",
+  "knowledge_base_blob": "knowledge_base.pkl"
+}

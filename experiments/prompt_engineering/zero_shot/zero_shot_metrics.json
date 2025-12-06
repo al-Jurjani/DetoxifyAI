@@ -1,0 +1,9 @@
+{
+  "strategy": "zero_shot",
+  "avg_similarity": 0.5528841882944107,
+  "min_similarity": 0.2077215313911438,
+  "max_similarity": 0.8303937911987305,
+  "std_similarity": 0.15842081476775718,
+  "avg_latency": 3.379061281681061,
+  "num_examples": 20
+}
