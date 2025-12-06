@@ -18,3 +18,4 @@ pip-audit
 
 sentence-transformers>=2.2.0
 nbqa>=1.7.0
+black[jupyter]

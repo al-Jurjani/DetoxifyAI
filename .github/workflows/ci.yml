@@ -117,7 +117,7 @@ jobs:
             --strategies zero_shot few_shot_k3 few_shot_k5 CoT \
             --output experiments/ci_eval_results.json
       - name: Upload evaluation results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: prompt-evaluation-results
           path: experiments/ci_eval_results.json
