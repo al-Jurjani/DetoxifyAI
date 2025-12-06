@@ -50,8 +50,10 @@ class TestGuardrailsInitialization:
         mock_torch.cuda.is_available.return_value = True
         mock_pipeline.return_value = Mock()
 
-        # gr = DetoxifyGuardrails()
+        gr = DetoxifyGuardrails()
+
         # Check that pipeline was called with device=0 (GPU)
+        assert gr.toxicity_threshold == 0.3  # Use gr to verify it was created
         mock_pipeline.assert_called_once()
         call_kwargs = mock_pipeline.call_args[1]
         assert call_kwargs["device"] == 0
@@ -63,8 +65,10 @@ class TestGuardrailsInitialization:
         mock_torch.cuda.is_available.return_value = False
         mock_pipeline.return_value = Mock()
 
-        # gr = DetoxifyGuardrails()
+        gr = DetoxifyGuardrails()
+
         # Check that pipeline was called with device=-1 (CPU)
+        assert gr.toxicity_threshold == 0.3  # Use gr to verify it was created
         call_kwargs = mock_pipeline.call_args[1]
         assert call_kwargs["device"] == -1
 
