@@ -32,7 +32,7 @@ def evaluate_prompt_strategy(strategy_name: str, eval_data: list, embedding_mode
     similarities = []
 
     for item in eval_data:
-        toxic_text = item['toxic']
+        # toxic_text = item['toxic']
         ground_truth = item['polite']
 
         # For CI, we use ground truth as "predicted" (simulating perfect model)
