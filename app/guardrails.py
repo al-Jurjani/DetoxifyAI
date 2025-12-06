@@ -7,7 +7,9 @@ from transformers import pipeline
 import torch
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
 logger = logging.getLogger(__name__)
 
 
@@ -24,7 +26,9 @@ class DetoxifyGuardrails:
     2. Hallucination Filter - Blocks empty or nonsensical outputs
     """
 
-    def __init__(self, toxicity_threshold: float = 0.3, log_file: str = "guardrail_events.json"):
+    def __init__(
+        self, toxicity_threshold: float = 0.3, log_file: str = "guardrail_events.json"
+    ):
         """
         Initialize guardrails with validation rules and monitoring.
 
@@ -65,7 +69,9 @@ class DetoxifyGuardrails:
         device_name = "GPU" if device == 0 else "CPU"
         logger.info(f"Using device: {device_name}")
 
-        self.toxicity_detector = pipeline("text-classification", model="unitary/toxic-bert", device=device, top_k=None)
+        self.toxicity_detector = pipeline(
+            "text-classification", model="unitary/toxic-bert", device=device, top_k=None
+        )
         logger.info("Guardrails initialized successfully")
 
     def validate_input(self, text: str) -> Tuple[bool, str, Dict]:
@@ -89,7 +95,11 @@ class DetoxifyGuardrails:
                     text_sample=self._sanitize_pii(text, matches),
                     metadata={"pii_type": pii_type, "count": len(matches)},
                 )
-                return False, f"PII detected: {pii_type}", {"rule": "pii", "pii_type": pii_type}
+                return (
+                    False,
+                    f"PII detected: {pii_type}",
+                    {"rule": "pii", "pii_type": pii_type},
+                )
 
         # Rule 2: Prompt Injection Filter
         text_lower = text.lower()
@@ -102,7 +112,11 @@ class DetoxifyGuardrails:
                     text_sample=text[:100],
                     metadata={"keyword": keyword},
                 )
-                return False, "Potential prompt injection detected", {"rule": "injection", "keyword": keyword}
+                return (
+                    False,
+                    "Potential prompt injection detected",
+                    {"rule": "injection", "keyword": keyword},
+                )
 
         # Rule 3: Length validation (prevent abuse)
         if len(text) > 500:
@@ -113,7 +127,11 @@ class DetoxifyGuardrails:
                 text_sample=text[:100],
                 metadata={"length": len(text)},
             )
-            return False, "Input exceeds maximum length (500 chars)", {"rule": "length", "length": len(text)}
+            return (
+                False,
+                "Input exceeds maximum length (500 chars)",
+                {"rule": "length", "length": len(text)},
+            )
 
         if len(text.strip()) < 5:
             self._log_event(
@@ -123,7 +141,11 @@ class DetoxifyGuardrails:
                 text_sample=text,
                 metadata={"length": len(text)},
             )
-            return False, "Input too short (minimum 5 chars)", {"rule": "length", "length": len(text)}
+            return (
+                False,
+                "Input too short (minimum 5 chars)",
+                {"rule": "length", "length": len(text)},
+            )
 
         # All checks passed
         logger.info("Input validation passed")
@@ -154,12 +176,19 @@ class DetoxifyGuardrails:
                     rule="toxicity_threshold",
                     detail=f"Score: {toxicity_score:.3f}",
                     text_sample=text[:100],
-                    metadata={"toxicity_score": toxicity_score, "threshold": self.toxicity_threshold},
+                    metadata={
+                        "toxicity_score": toxicity_score,
+                        "threshold": self.toxicity_threshold,
+                    },
                 )
                 return (
                     False,
                     f"Output toxicity too high ({toxicity_score:.3f})",
-                    {"rule": "toxicity", "score": toxicity_score, "threshold": self.toxicity_threshold},
+                    {
+                        "rule": "toxicity",
+                        "score": toxicity_score,
+                        "threshold": self.toxicity_threshold,
+                    },
                 )
         except Exception as e:
             logger.error(f"Error in toxicity detection: {e}")
@@ -176,7 +205,11 @@ class DetoxifyGuardrails:
                 text_sample=text,
                 metadata={"length": len(stripped_text)},
             )
-            return False, "Output too short or empty", {"rule": "empty", "length": len(stripped_text)}
+            return (
+                False,
+                "Output too short or empty",
+                {"rule": "empty", "length": len(stripped_text)},
+            )
 
         # Check for repetitive output (possible hallucination)
         words = stripped_text.split()
@@ -208,7 +241,9 @@ class DetoxifyGuardrails:
             sanitized = sanitized.replace(match, "[REDACTED]")
         return sanitized[:100]
 
-    def _log_event(self, event_type: str, rule: str, detail: str, text_sample: str, metadata: Dict):
+    def _log_event(
+        self, event_type: str, rule: str, detail: str, text_sample: str, metadata: Dict
+    ):
         """Log a guardrail event for monitoring."""
         event = {
             "timestamp": datetime.now().isoformat(),
@@ -249,7 +284,11 @@ class DetoxifyGuardrails:
             rule = event["rule"]
             rules[rule] = rules.get(rule, 0) + 1
 
-        return {"total_events": len(self.events), "by_type": event_types, "by_rule": rules}
+        return {
+            "total_events": len(self.events),
+            "by_type": event_types,
+            "by_rule": rules,
+        }
 
     def clear_events(self):
         """Clear all logged events (useful for testing)."""

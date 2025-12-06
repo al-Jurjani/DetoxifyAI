@@ -38,11 +38,17 @@ app.add_middleware(
 )
 
 # Define Prometheus metrics
-REQUEST_COUNT = Counter("app_request_count", "Total number of requests", ["method", "endpoint"])
-REQUEST_LATENCY = Histogram("app_request_latency_seconds", "Request latency (seconds)", ["endpoint"])
+REQUEST_COUNT = Counter(
+    "app_request_count", "Total number of requests", ["method", "endpoint"]
+)
+REQUEST_LATENCY = Histogram(
+    "app_request_latency_seconds", "Request latency (seconds)", ["endpoint"]
+)
 
 # NEW: Add these LLM-specific metrics
-GUARDRAIL_VIOLATIONS = Counter("guardrail_violations_total", "Total guardrail violations", ["rule_type"])
+GUARDRAIL_VIOLATIONS = Counter(
+    "guardrail_violations_total", "Total guardrail violations", ["rule_type"]
+)
 
 LLM_TOKENS = Counter(
     "llm_tokens_total",
@@ -101,25 +107,27 @@ async def load_model():
     try:
         # Check if Azure connection string is available
         if not AZURE_CONNECTION_STRING:
-            print("[WARNING] No Azure connection string provided. Running in mock mode.")
+            print(
+                "[WARNING] No Azure connection string provided. Running in mock mode."
+            )
             model_loaded = False
             return
 
-        print("[INFO] Downloading model and vectorizer from Azure Blob Storage...")  # pragma: no cover
+        print(
+            "[INFO] Downloading model and vectorizer from Azure Blob Storage..."
+        )  # pragma: no cover
 
         # Create blob service client  # pragma: no cover
         global blob_service_client  # pragma: no cover
-        blob_service_client = BlobServiceClient.from_connection_string(  # pragma: no cover
-            AZURE_CONNECTION_STRING
+        blob_service_client = (
+            BlobServiceClient.from_connection_string(  # pragma: no cover
+                AZURE_CONNECTION_STRING
+            )
         )
 
         # Blob paths (without container name prefix since it's specified separately)  # pragma: no cover
-        xg_model_blob_path = (  # pragma: no cover
-            "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"
-        )
-        xg_vectorizer_blob_path = (  # pragma: no cover
-            "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"
-        )
+        xg_model_blob_path = "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/model/model.pkl"  # pragma: no cover
+        xg_vectorizer_blob_path = "mlflow-artifacts-mlops-proj/3/4690eeee10294ed0bf0d12132887b898/artifacts/vectorizer/tfidf.pkl"  # pragma: no cover
 
         # Alternative paths for logistic regression model (commented out, using XGBoost)  # pragma: no cover
         # lg_model_blob_path = "2/b82b8de7266347c1b2dd9b52ad1d1321/artifacts/model/model.pkl"
@@ -135,14 +143,18 @@ async def load_model():
 
         # Download into memory  # pragma: no cover
         model_data = BytesIO(model_blob.download_blob().readall())  # pragma: no cover
-        vectorizer_data = BytesIO(vectorizer_blob.download_blob().readall())  # pragma: no cover
+        vectorizer_data = BytesIO(
+            vectorizer_blob.download_blob().readall()
+        )  # pragma: no cover
 
         # Load using joblib  # pragma: no cover
         model = joblib.load(model_data)  # pragma: no cover
         vectorizer = joblib.load(vectorizer_data)  # pragma: no cover
 
         model_loaded = True  # pragma: no cover
-        print("[SUCCESS] Model and vectorizer loaded successfully from Azure!")  # pragma: no cover
+        print(
+            "[SUCCESS] Model and vectorizer loaded successfully from Azure!"
+        )  # pragma: no cover
 
         # Add RAG pipeline initialization
         print("[INFO] Initializing RAG pipeline...")
@@ -154,7 +166,9 @@ async def load_model():
         print("[SUCCESS] RAG pipeline initialized!")
 
         print("[INFO] Initializing guardrails...")
-        guardrails = DetoxifyGuardrails(toxicity_threshold=0.3, log_file="guardrail_events.json")
+        guardrails = DetoxifyGuardrails(
+            toxicity_threshold=0.3, log_file="guardrail_events.json"
+        )
         print("[SUCCESS] Guardrails initialized!")
         print(f"[DEBUG] Guardrails object: {guardrails}")
         print(f"[DEBUG] Guardrails type: {type(guardrails)}")
@@ -303,7 +317,11 @@ async def rephrase(req: Query):
                 "stage": "input",
                 "reason": reason,
                 "original": req.text,
-                "guardrails": {"input_passed": False, "rule_violated": meta.get("rule"), "detail": meta},
+                "guardrails": {
+                    "input_passed": False,
+                    "rule_violated": meta.get("rule"),
+                    "detail": meta,
+                },
             }
 
     # STEP 2: Check toxicity
@@ -366,7 +384,9 @@ async def rephrase(req: Query):
                         "input_passed": True,
                         "output_passed": False,
                         "rule_violated": meta.get("rule"),
-                        "toxicity_score": meta.get("score", meta.get("toxicity_score", 0)),
+                        "toxicity_score": meta.get(
+                            "score", meta.get("toxicity_score", 0)
+                        ),
                         "detail": meta,
                     },
                 }

@@ -45,7 +45,17 @@ class RAGDriftMonitor:
         features = []
 
         # Profanity keywords
-        profanity_words = ["idiot", "stupid", "hate", "moron", "dumb", "garbage", "trash", "loser", "pathetic"]
+        profanity_words = [
+            "idiot",
+            "stupid",
+            "hate",
+            "moron",
+            "dumb",
+            "garbage",
+            "trash",
+            "loser",
+            "pathetic",
+        ]
 
         for query in queries:
             query_lower = query.lower()
@@ -54,8 +64,12 @@ class RAGDriftMonitor:
                     "query": query,
                     "length": len(query),
                     "word_count": len(query.split()),
-                    "has_profanity": any(word in query_lower for word in profanity_words),
-                    "profanity_count": sum(1 for word in profanity_words if word in query_lower),
+                    "has_profanity": any(
+                        word in query_lower for word in profanity_words
+                    ),
+                    "profanity_count": sum(
+                        1 for word in profanity_words if word in query_lower
+                    ),
                     "avg_word_length": np.mean([len(word) for word in query.split()]),
                     "has_caps": any(c.isupper() for c in query),
                     "exclamation_count": query.count("!"),
@@ -77,7 +91,13 @@ class RAGDriftMonitor:
         # Define column mapping
         column_mapping = ColumnMapping(
             text_features=["query"],
-            numerical_features=["length", "word_count", "profanity_count", "avg_word_length", "exclamation_count"],
+            numerical_features=[
+                "length",
+                "word_count",
+                "profanity_count",
+                "avg_word_length",
+                "exclamation_count",
+            ],
         )
 
         # Create report
@@ -87,7 +107,11 @@ class RAGDriftMonitor:
             ]
         )
 
-        report.run(reference_data=reference_df, current_data=current_df, column_mapping=column_mapping)
+        report.run(
+            reference_data=reference_df,
+            current_data=current_df,
+            column_mapping=column_mapping,
+        )
 
         # Save report
         output_dir = Path(output_path)

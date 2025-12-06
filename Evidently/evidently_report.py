@@ -14,7 +14,9 @@ try:
     data = pd.read_csv("../Data/combined_dataset.csv")
     print(f"Dataset shape: {data.shape}")
 except FileNotFoundError:
-    print("Error: '../Data/combined_dataset.csv' not found. Please provide the correct path.")
+    print(
+        "Error: '../Data/combined_dataset.csv' not found. Please provide the correct path."
+    )
     exit(1)
 
 # Split into train (reference) and test (current)

@@ -112,7 +112,9 @@ if __name__ == "__main__":
     X = vect.fit_transform(df["text"])
     y = df["label"]
 
-    X_train, X_val, y_train, y_val = train_test_split(X, y, test_size=0.2, random_state=42)
+    X_train, X_val, y_train, y_val = train_test_split(
+        X, y, test_size=0.2, random_state=42
+    )
 
     # dotenv.load_dotenv()
     # mlflow_tracking_uri = os.getenv("MLFLOW_TRACKING_URI")
@@ -126,7 +128,9 @@ if __name__ == "__main__":
     dotenv.load_dotenv()
     # # os.getenv("MLFLOW_TRACKING_URI")
     # mlflow.set_tracking_uri("http://localhost:5000")  # type: ignore
-    os.environ["AZURE_STORAGE_CONNECTION_STRING"] = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
+    os.environ["AZURE_STORAGE_CONNECTION_STRING"] = os.getenv(
+        "AZURE_STORAGE_CONNECTION_STRING", ""
+    )
     # mlflow.set_tracking_uri("http://127.0.0.1:5000")  # type: ignore
     # print("MLflow Tracking URI:", mlflow.get_tracking_uri())
     # mlflow.set_experiment("mlflow_test_experiment_1")
@@ -183,7 +187,9 @@ if __name__ == "__main__":
             mlflow.log_artifact("model.pkl", artifact_path="model")
 
         elif args.model_type == "xgboost":
-            model = XGBClassifier(eta=args.xgb_eta, n_estimators=args.xgb_n_estimators, eval_metric="auc")
+            model = XGBClassifier(
+                eta=args.xgb_eta, n_estimators=args.xgb_n_estimators, eval_metric="auc"
+            )
             model.fit(X_train, y_train)
             preds = model.predict_proba(X_val)[:, 1]
             preds_binary = model.predict(X_val)

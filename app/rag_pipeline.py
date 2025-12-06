@@ -35,12 +35,18 @@ class ModalMistralLLM(LLM):
         return "modal_mistral"
 
     def _call(
-        self, prompt: str, stop: Optional[List[str]] = None, run_manager: Optional[Any] = None, **kwargs: Any
+        self,
+        prompt: str,
+        stop: Optional[List[str]] = None,
+        run_manager: Optional[Any] = None,
+        **kwargs: Any,
     ) -> str:
         """Call Modal Mistral-7B endpoint"""
         MistralModel = modal.Cls.from_name("detoxifyai-mistral", "MistralModel")
 
-        response = MistralModel().generate.remote(prompt, max_tokens=self.max_tokens, temperature=self.temperature)
+        response = MistralModel().generate.remote(
+            prompt, max_tokens=self.max_tokens, temperature=self.temperature
+        )
 
         return response
 
@@ -81,8 +87,12 @@ class DetoxifyRAGPipeline:
         print("📥 Loading FAISS index from Azure Blob...")
 
         # Download FAISS index from Azure
-        blob_service = BlobServiceClient.from_connection_string(self.azure_connection_string)
-        blob_client = blob_service.get_blob_client(container=self.azure_container, blob="faiss_index.zip")
+        blob_service = BlobServiceClient.from_connection_string(
+            self.azure_connection_string
+        )
+        blob_client = blob_service.get_blob_client(
+            container=self.azure_container, blob="faiss_index.zip"
+        )
 
         # Download to temp directory
         with tempfile.NamedTemporaryFile(delete=False, suffix=".zip") as tmp_file:
@@ -102,10 +112,14 @@ class DetoxifyRAGPipeline:
             encode_kwargs={"normalize_embeddings": True},
         )
 
-        self.vectorstore = FAISS.load_local(extract_dir, embedding_model, allow_dangerous_deserialization=True)
+        self.vectorstore = FAISS.load_local(
+            extract_dir, embedding_model, allow_dangerous_deserialization=True
+        )
 
         # Create LangChain retriever
-        self.retriever = self.vectorstore.as_retriever(search_type="similarity", search_kwargs={"k": 5})
+        self.retriever = self.vectorstore.as_retriever(
+            search_type="similarity", search_kwargs={"k": 5}
+        )
 
         print("✅ FAISS index loaded with LangChain retriever")
 
@@ -132,7 +146,9 @@ Toxic Message: {toxic_input}
 
 Professional Rephrase:\n"""
 
-        self.prompt_template = PromptTemplate(input_variables=["examples", "toxic_input"], template=template)
+        self.prompt_template = PromptTemplate(
+            input_variables=["examples", "toxic_input"], template=template
+        )
 
         # Create LangChain LLMChain
         # self.chain = LLMChain(

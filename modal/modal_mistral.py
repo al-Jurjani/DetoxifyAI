@@ -32,7 +32,9 @@ class MistralModel:
             bnb_4bit_use_double_quant=True,
         )
 
-        self.tokenizer = AutoTokenizer.from_pretrained("mistralai/Mistral-7B-Instruct-v0.1")
+        self.tokenizer = AutoTokenizer.from_pretrained(
+            "mistralai/Mistral-7B-Instruct-v0.1"
+        )
         self.model = AutoModelForCausalLM.from_pretrained(
             "mistralai/Mistral-7B-Instruct-v0.1",
             quantization_config=bnb_config,

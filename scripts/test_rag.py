@@ -28,7 +28,11 @@ TEST_CASES = [
         "category": "criticism",
         "expected_tone": "professional disagreement",
     },
-    {"input": "Get lost, nobody wants you here", "category": "hostility", "expected_tone": "polite boundaries"},
+    {
+        "input": "Get lost, nobody wants you here",
+        "category": "hostility",
+        "expected_tone": "polite boundaries",
+    },
     {
         "input": "You clearly have no clue what you're doing",
         "category": "workplace toxicity",
@@ -98,7 +102,8 @@ def run_demo():
     # Initialize pipeline
     try:
         pipeline = DetoxifyRAGPipeline(
-            azure_connection_string=azure_connection_string, azure_container="detoxifyai-m2-artifacts"
+            azure_connection_string=azure_connection_string,
+            azure_container="detoxifyai-m2-artifacts",
         )
         print("✅ RAG pipeline initialized successfully!")
         print()
@@ -145,7 +150,8 @@ def run_all_tests():
     # Initialize pipeline
     try:
         pipeline = DetoxifyRAGPipeline(
-            azure_connection_string=azure_connection_string, azure_container="detoxifyai-m2-artifacts"
+            azure_connection_string=azure_connection_string,
+            azure_container="detoxifyai-m2-artifacts",
         )
         print("✅ RAG pipeline initialized successfully!")
         print()
@@ -166,7 +172,14 @@ def run_all_tests():
             print(f"❌ ERROR: Test case {i} failed: {e}")
             print()
             failed += 1
-            results.append({"test_case": test_case, "result": None, "status": "FAIL", "error": str(e)})
+            results.append(
+                {
+                    "test_case": test_case,
+                    "result": None,
+                    "status": "FAIL",
+                    "error": str(e),
+                }
+            )
 
     # Print summary
     print_header("Test Summary")
@@ -192,8 +205,12 @@ def run_all_tests():
 
 def main():
     parser = argparse.ArgumentParser(description="Test DetoxifyAI RAG Pipeline")
-    parser.add_argument("--demo", action="store_true", help="Run quick demo (2 examples)")
-    parser.add_argument("--test-all", action="store_true", help="Run comprehensive tests (all examples)")
+    parser.add_argument(
+        "--demo", action="store_true", help="Run quick demo (2 examples)"
+    )
+    parser.add_argument(
+        "--test-all", action="store_true", help="Run comprehensive tests (all examples)"
+    )
 
     args = parser.parse_args()
 
