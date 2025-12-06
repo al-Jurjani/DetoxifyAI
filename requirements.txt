@@ -17,3 +17,8 @@ torch
 pytest
 sentence-transformers
 faiss-cpu
+modal
+langchain
+langchain-huggingface
+langchain-community
+langchain-core
