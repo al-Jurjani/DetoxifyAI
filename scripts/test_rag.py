@@ -7,14 +7,13 @@ Demonstrates end-to-end RAG functionality for Milestone 2 D2 requirement
 import sys
 import os
 import argparse
-from typing import List, Dict
+from typing import Dict
 from dotenv import load_dotenv
 
 # Add parent directory to path to import src modules
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from app.rag_pipeline import DetoxifyRAGPipeline
-from app.guardrails import DetoxifyGuardrails
 
 
 # Test cases covering different toxicity types
@@ -64,10 +63,10 @@ def print_result(test_case: Dict, result: Dict, test_num: int, total: int):
     """Print formatted test result"""
     print(f"TEST {test_num}/{total}: {test_case['category'].upper()}")
     print("-" * 80)
-    print(f"Original (Toxic):")
+    print("Original (Toxic):")
     print(f"  → {result['toxic_input']}")
     print()
-    print(f"Rephrased (Professional):")
+    print("Rephrased (Professional):")
     print(f"  ✓ {result['professional_rephrase']}")
     print()
     print(f"Retrieved Examples Used: {result['num_examples_used']}")

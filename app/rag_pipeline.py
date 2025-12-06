@@ -15,7 +15,6 @@ from langchain_core.language_models.llms import LLM
 from langchain_core.prompts import PromptTemplate
 # from langchain.chains import LLMChain
 # from langchain.chains.llm import LLMChain
-from langchain_core.prompts import PromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
 

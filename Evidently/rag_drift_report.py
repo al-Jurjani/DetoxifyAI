@@ -102,7 +102,7 @@ class RAGDriftMonitor:
         latest_path = output_dir / "rag_drift_report_latest.html"
         report.save_html(str(latest_path))
 
-        print(f"✅ Report saved:")
+        print("✅ Report saved:")
         print(f"   - {report_path}")
         print(f"   - {latest_path}")
 
@@ -144,5 +144,5 @@ if __name__ == "__main__":
     # Generate report
     report_path = monitor.generate_report(current_queries)
 
-    print(f"\n📈 Open report in browser:")
+    print("\n📈 Open report in browser:")
     print(f"   file://{report_path.absolute()}")
