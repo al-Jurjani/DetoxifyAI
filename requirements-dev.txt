@@ -19,3 +19,10 @@ pip-audit
 sentence-transformers>=2.2.0
 nbqa>=1.7.0
 black[jupyter]
+
+langchain>=0.1.0
+langchain-huggingface>=0.0.1
+langchain-community>=0.0.1
+sentence-transformers>=2.2.0
+faiss-cpu>=1.7.4
+transformers

@@ -92,7 +92,7 @@ jobs:
           pip install modal || echo "⚠️ Modal install failed, skipping"
       - name: Run tests with coverage
         run: |
-          pytest --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml --cov-fail-under=80 --ignore=modal/
+          pytest tests/ --maxfail=1 --disable-warnings -q --cov=app --cov-report=xml --cov-fail-under=80 --ignore=modal/
 
   # M2-D5.b - Automated prompt evaluation
   evaluate_prompts:
