@@ -106,19 +106,18 @@ class TestLoadFAISSIndex:
     @patch("app.rag_pipeline.HuggingFaceEmbeddings")
     @patch("app.rag_pipeline.FAISS.load_local")
     @patch("app.rag_pipeline.BlobServiceClient")
-    @patch("app.rag_pipeline.tempfile")
-    @patch("app.rag_pipeline.zipfile.ZipFile")
+    @patch("tempfile.NamedTemporaryFile")
+    @patch("tempfile.mkdtemp")
+    @patch("zipfile.ZipFile")
     def test_load_faiss_index(
-        self, mock_zip, mock_temp, mock_blob, mock_faiss, mock_embed
+        self, mock_zip, mock_mkdtemp, mock_temp_file, mock_blob, mock_faiss, mock_embed
     ):
         """Test FAISS index is loaded from Azure"""
         # Mock temp file
-        mock_temp_file = Mock()
-        mock_temp_file.name = "/tmp/test.zip"
-        mock_temp.NamedTemporaryFile.return_value.__enter__.return_value = (
-            mock_temp_file
-        )
-        mock_temp.mkdtemp.return_value = "/tmp/extract"
+        mock_file_obj = Mock()
+        mock_file_obj.name = "/tmp/test.zip"
+        mock_temp_file.return_value.__enter__.return_value = mock_file_obj
+        mock_mkdtemp.return_value = "/tmp/extract"
 
         # Mock blob
         mock_blob_client = Mock()
@@ -141,10 +140,15 @@ class TestLoadFAISSIndex:
         mock_zip_file = Mock()
         mock_zip.return_value.__enter__.return_value = mock_zip_file
 
-        # # Create pipeline (triggers _load_faiss_index)
-        # with patch.object(DetoxifyRAGPipeline, '_init_llm'), \
-        #      patch.object(DetoxifyRAGPipeline, '_init_chain'):
-        # pipeline = DetoxifyRAGPipeline("conn_string", "container")
+        # Create pipeline (triggers _load_faiss_index)
+        with patch.object(DetoxifyRAGPipeline, "_init_llm"), patch.object(
+            DetoxifyRAGPipeline, "_init_chain"
+        ):
+            pipeline = DetoxifyRAGPipeline("conn_string", "container")
+
+        # Verify the pipeline was created
+        assert pipeline.azure_connection_string == "conn_string"
+        assert pipeline.azure_container == "container"
 
         # Verify blob client was called
         mock_blob.from_connection_string.assert_called_once_with("conn_string")
@@ -189,7 +193,10 @@ class TestInitChain:
             return_value=Mock(__or__=Mock(return_value="chain"))
         )
 
-        # pipeline = DetoxifyRAGPipeline("conn", "container")
+        pipeline = DetoxifyRAGPipeline("conn", "container")
+
+        # Verify pipeline was created and has chain
+        assert hasattr(pipeline, "chain")
 
         # Verify PromptTemplate was created
         mock_template.assert_called_once()
