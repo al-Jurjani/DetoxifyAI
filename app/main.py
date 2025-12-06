@@ -12,8 +12,8 @@ from dotenv import load_dotenv
 from azure.storage.blob import BlobServiceClient
 from io import BytesIO
 
-from .rag_pipeline import DetoxifyRAGPipeline
-from .guardrails import DetoxifyGuardrails
+from app.rag_pipeline import DetoxifyRAGPipeline
+from app.guardrails import DetoxifyGuardrails
 
 load_dotenv()
 AZURE_CONNECTION_STRING = os.getenv("AZURE_STORAGE_CONNECTION_STRING", "")
