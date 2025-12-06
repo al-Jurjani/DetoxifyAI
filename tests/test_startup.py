@@ -1,8 +1,10 @@
 """
 Tests for app startup, middleware, and Azure blob integration
 """
+
 import sys
 import os
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from fastapi.testclient import TestClient
@@ -17,15 +19,15 @@ client = TestClient(main.app)
 class TestAppStartup:
     """Test application startup logic"""
 
-    @patch('app.main.AZURE_CONNECTION_STRING', '')
+    @patch("app.main.AZURE_CONNECTION_STRING", "")
     def test_startup_no_azure_connection(self):
         """Test startup when Azure connection string is empty"""
         # App should still start without Azure
         res = client.get("/health")
         assert res.status_code == 200
 
-    @patch('app.main.AZURE_CONNECTION_STRING', 'test_connection_string')
-    @patch('app.main.BlobServiceClient')
+    @patch("app.main.AZURE_CONNECTION_STRING", "test_connection_string")
+    @patch("app.main.BlobServiceClient")
     def test_startup_with_azure_connection(self, mock_blob_service):
         """Test startup with Azure connection string"""
         # Mock blob service
@@ -66,7 +68,7 @@ class TestMiddleware:
 class TestModelLoading:
     """Test model loading from Azure"""
 
-    @patch('app.main.AZURE_CONNECTION_STRING', '')
+    @patch("app.main.AZURE_CONNECTION_STRING", "")
     def test_model_loading_no_azure(self):
         """Test model loading when no Azure connection"""
         # Should work with mock responses
@@ -75,7 +77,7 @@ class TestModelLoading:
         data = res.json()
         assert data["model_loaded"] is False
 
-    @patch('app.main.blob_service_client')
+    @patch("app.main.blob_service_client")
     def test_model_loading_blob_error(self, mock_blob):
         """Test model loading handles blob errors gracefully"""
         mock_blob.get_blob_client = Mock(side_effect=Exception("Blob error"))
@@ -226,18 +228,21 @@ class TestPreprocessFunction:
     def test_preprocess_empty_string(self):
         """Test preprocessing empty string"""
         from app.main import preprocess_aggressive
+
         result = preprocess_aggressive("")
         assert result == ""
 
     def test_preprocess_only_whitespace(self):
         """Test preprocessing only whitespace"""
         from app.main import preprocess_aggressive
+
         result = preprocess_aggressive("   \t\n  ")
         assert len(result.strip()) == 0
 
     def test_preprocess_removes_multiple_urls(self):
         """Test preprocessing removes multiple URLs"""
         from app.main import preprocess_aggressive
+
         text = "Check https://site1.com and http://site2.org"
         result = preprocess_aggressive(text)
         assert "https" not in result
@@ -246,6 +251,7 @@ class TestPreprocessFunction:
     def test_preprocess_removes_punctuation(self):
         """Test preprocessing removes punctuation"""
         from app.main import preprocess_aggressive
+
         result = preprocess_aggressive("Hello! How are you?")
         assert "!" not in result
         assert "?" not in result
@@ -253,12 +259,14 @@ class TestPreprocessFunction:
     def test_preprocess_normalizes_whitespace(self):
         """Test preprocessing normalizes whitespace"""
         from app.main import preprocess_aggressive
+
         result = preprocess_aggressive("Hello    world   test")
         assert "  " not in result  # No double spaces
 
     def test_preprocess_complex_text(self):
         """Test preprocessing complex text"""
         from app.main import preprocess_aggressive
+
         text = "Hey @user123! Check https://test.com #cool 999 times!!!"
         result = preprocess_aggressive(text)
         # Should be cleaned
