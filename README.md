@@ -662,11 +662,16 @@ print(f"Tokens: {result['tokens_used']}")
 
 ### Cloud Services Used (D7 - M2)
 
-**📸 [ADD SCREENSHOT: AWS EC2 instance showing FastAPI running]**
+<img width="1350" height="171" alt="image" src="https://github.com/user-attachments/assets/56126dac-3f26-4af6-a990-ce4ab1637e80" />
 
-**📸 [ADD SCREENSHOT: Azure Blob Storage container with FAISS index and knowledge base]**
 
-**📸 [ADD SCREENSHOT: Modal dashboard showing Mistral-7B deployment stats]**
+<img width="919" height="322" alt="image" src="https://github.com/user-attachments/assets/fca534d6-794e-48be-abd0-64552d6a0152" />
+
+<img width="916" height="343" alt="image" src="https://github.com/user-attachments/assets/11a2620e-1f48-42f6-a731-6d9e9ad12e9f" />
+
+
+<img width="1390" height="764" alt="image" src="https://github.com/user-attachments/assets/4ca96d53-617a-46ef-af5d-749bd87dc460" />
+
 
 #### 1. AWS EC2 (Compute - FastAPI Backend)
 - **Instance Type**: t2.small (upgraded for M2 with additional swap)
@@ -781,6 +786,8 @@ WANDB_API_KEY=<your_wandb_key>  # Optional for prompt tracking
 <img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/3f16f885-99c0-4da8-a24c-7ac60ba3d154" />
 
 ## CI/CD Pipeline (D5 - M1 + M2)
+
+<img width="1374" height="536" alt="image" src="https://github.com/user-attachments/assets/8abec980-c47e-43b7-abb8-e194ebaed736" />
 
 ### Workflow Overview
 The project uses GitHub Actions for continuous integration and deployment:
