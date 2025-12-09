@@ -89,6 +89,9 @@ Online VM's (Might be offline)
 - Frontend: http://16.16.193.183/
 <img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/12d01ccd-e5a4-4fb4-bb89-d03480ad1a2a" />
 <img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/ed683e21-c399-4553-88d5-f48261277057" />
+<img width="576" height="754" alt="image" src="https://github.com/user-attachments/assets/d9567687-42fa-4862-ba42-787c9c36bf40" />
+<img width="612" height="432" alt="image" src="https://github.com/user-attachments/assets/e656c66c-531a-48d0-a186-99aad11f317d" />
+
 
 ## Prerequisites
 
@@ -301,6 +304,8 @@ mlflow run . --env-manager=local --experiment-name xg_models
 ```
 
 ### Evidently Dashboard
+<img width="1774" height="693" alt="image" src="https://github.com/user-attachments/assets/ad427d8e-4da8-4d98-822e-46166a84711f" />
+
 - **Purpose**: Data drift detection on test sets
 - **Location**: `Evidently/` and `evidently_workspace/` directories
 - **Usage**: Monitors model performance degradation over time
