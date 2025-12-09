@@ -8,47 +8,47 @@ DetoxifyAI is a complete MLOps and LLMOps pipeline that detects toxic content us
 
 ```mermaid
 graph TB
-    subgraph "Data Pipeline"
+    subgraph Data["Data Pipeline"]
         A[Raw Datasets] --> B[Preprocessing]
-        B --> C[Feature Engineering<br/>TF-IDF Vectorization]
+        B --> C["Feature Engineering / TF-IDF Vectorization"]
     end
 
-    subgraph "Training & Experimentation"
+    subgraph Train["Training & Experimentation"]
         C --> D[MLflow Experiments]
-        D --> E[Model Training<br/>LogReg/XGBoost]
+        D --> E["Model Training / LogReg/XGBoost"]
         E --> F[Model Evaluation]
-        F --> G[Azure Blob Storage<br/>Model Registry]
+        F --> G["Azure Blob Storage / Model Registry"]
     end
 
-    subgraph "Inference Layer - Toxicity Detection"
-        G --> H[FastAPI Server<br/>Port 8000]
-        H --> I[Frontend UI<br/>HTML/JS]
+    subgraph Inference["Inference Layer - Toxicity Detection"]
+        G --> H["FastAPI Server / Port 8000"]
+        H --> I["Frontend UI / HTML/JS"]
     end
 
-    subgraph "LLMOps Pipeline - Rephrasing"
-        J[Knowledge Base<br/>Azure Blob] --> K[RAG Retrieval<br/>FAISS + LangChain]
-        K --> L[Mistral-7B LLM<br/>Modal Serverless]
+    subgraph LLM["LLMOps Pipeline - Rephrasing"]
+        J["Knowledge Base / Azure Blob"] --> K["RAG Retrieval / FAISS + LangChain"]
+        K --> L["Mistral-7B LLM / Modal Serverless"]
         H --> K
         L --> H
     end
 
-    subgraph "Prompt Engineering"
+    subgraph Prompts["Prompt Engineering"]
         M[Zero-Shot Strategy] --> L
         N[Few-Shot Strategy] --> L
         O[Chain-of-Thought] --> L
         P[Meta-Prompting] --> L
     end
 
-    subgraph "Safety & Guardrails"
+    subgraph Guards["Safety & Guardrails"]
         Q[PII Detection] --> H
         R[Prompt Injection Filter] --> H
         S[Toxicity Threshold] --> H
     end
 
-    subgraph "Monitoring Stack"
-        H --> T[Prometheus<br/>Port 9090]
-        T --> U[Grafana Dashboard<br/>Port 4000]
-        H --> V[MLflow Tracking<br/>Port 5000]
+    subgraph Monitor["Monitoring Stack"]
+        H --> T["Prometheus / Port 9090"]
+        T --> U["Grafana Dashboard / Port 4000"]
+        H --> V["MLflow Tracking / Port 5000"]
         L --> T
     end
 
@@ -349,11 +349,132 @@ docker-compose down
 
 ### System Architecture Diagram
 
-**📸 [ADD DIAGRAM: draw.io or Mermaid diagram showing ingestion, retrieval, and generation flow]**
+```mermaid
+graph TB
+    subgraph User["User Layer"]
+        UserBrowser[User Browser]
+    end
+
+    subgraph EC2["AWS EC2 Instance"]
+        Frontend["Frontend - Nginx / HTML/CSS/JS"]
+        FastAPI["FastAPI Backend / Port 8000"]
+
+        subgraph Predict["Prediction Path"]
+            MLModel["XGBoost Classifier / TF-IDF Vectorizer"]
+        end
+
+        subgraph RAGPath["RAG Path - If Toxic"]
+            Guardrails[Guardrails System / Input & Output Validation]
+            RAGPipeline[RAG Pipeline]
+            Retriever["LangChain Retriever / FAISS VectorStore"]
+            PromptBuilder["PromptTemplate / Few-Shot Builder"]
+            LLMWrapper["ModalMistralLLM / Custom LangChain LLM"]
+        end
+    end
+
+    subgraph Cloud["Cloud Services"]
+        AzureBlob["Azure Blob Storage / detoxifyai-m2-artifacts"]
+        AzureML["Azure Blob Storage / mlflow-artifacts"]
+        Modal["Modal Serverless GPU / Mistral-7B-Instruct"]
+    end
+
+    UserBrowser -->|HTTP| Frontend
+    Frontend -->|API Calls| FastAPI
+
+    FastAPI -->|/predict| MLModel
+    FastAPI -->|/rephrase| Guardrails
+
+    MLModel -.->|Load Model| AzureML
+
+    Guardrails -->|Input Valid| RAGPipeline
+    RAGPipeline --> Retriever
+    Retriever -.->|Load FAISS Index| AzureBlob
+    Retriever -->|Top-5 Examples| PromptBuilder
+    PromptBuilder -->|Few-Shot Prompt| LLMWrapper
+    LLMWrapper -->|API Call| Modal
+    Modal -->|Generated Text| LLMWrapper
+    LLMWrapper --> Guardrails
+    Guardrails -->|Output Valid| FastAPI
+    FastAPI --> Frontend
+    Frontend --> UserBrowser
+```
 
 ### Data Flow Diagram
 
-**📸 [ADD DIAGRAM: Components interacting with Azure Blob Storage, Modal LLM service, FAISS index]**
+```mermaid
+flowchart TB
+    subgraph Ingestion["INGESTION FLOW - Offline"]
+        KB["Knowledge Base / 200 toxic-to-professional examples + style guides"]
+
+        subgraph DocPrep["Document Preparation"]
+            Chunk["Chunking Strategy / Combined toxic+professional as single document"]
+            Meta["Add Metadata / id, category, context"]
+        end
+
+        Embed["Sentence Transformer / all-MiniLM-L6-v2 / Generate 384-dim embeddings"]
+        FAISS["Build FAISS Index / 203 documents"]
+        Upload["Upload to Azure Blob / faiss_index.zip / knowledge_base.pkl"]
+
+        KB --> Chunk
+        Chunk --> Meta
+        Meta --> Embed
+        Embed --> FAISS
+        FAISS --> Upload
+    end
+
+    subgraph InferenceFlow["INFERENCE FLOW - Runtime"]
+        Input[User Input Text]
+
+        subgraph InputGuards["Input Guardrails"]
+            PII["PII Detection / SSN, Email, Phone, CC"]
+            Injection["Prompt Injection Filter / Block manipulation attempts"]
+            Length["Length Validation / 5-500 chars"]
+        end
+
+        Classify["Toxicity Classifier / XGBoost + TF-IDF / Toxic vs Non-toxic"]
+
+        subgraph RAGPipe["RAG Pipeline - LangChain"]
+            Download[Download FAISS from Azure Blob]
+            Retrieve["VectorStoreRetriever / Similarity Search / Top-5 Examples"]
+            Build["PromptTemplate / Build Few-Shot Prompt / 5 examples + input"]
+            Generate["ModalMistralLLM / Call Modal API / Mistral-7B-Instruct"]
+        end
+
+        subgraph OutputGuards["Output Guardrails"]
+            ToxCheck["Toxicity Threshold / toxic-bert / Score < 0.3"]
+            HalluCheck["Hallucination Filter / Length & Repetition Check"]
+        end
+
+        Output[Return Professional Rephrased Text]
+        Log[Log Guardrail Events / guardrail_events.json]
+
+        Input --> PII
+        PII --> Injection
+        Injection --> Length
+        Length -->|Valid| Classify
+        Length -->|Invalid| Log
+
+        Classify -->|Non-toxic| Output
+        Classify -->|Toxic| Download
+
+        Download --> Retrieve
+        Retrieve --> Build
+        Build --> Generate
+        Generate --> ToxCheck
+
+        ToxCheck -->|Pass| HalluCheck
+        ToxCheck -->|Fail| Log
+
+        HalluCheck -->|Pass| Output
+        HalluCheck -->|Fail| Log
+
+        PII -.->|Blocked| Log
+        Injection -.->|Blocked| Log
+    end
+
+    Upload -.->|Stored| Download
+```
+
 
 ### Step-by-Step Deployment
 
@@ -664,8 +785,6 @@ WANDB_API_KEY=<your_wandb_key>  # Optional for prompt tracking
 ### Workflow Overview
 The project uses GitHub Actions for continuous integration and deployment:
 
-**📸 [ADD SCREENSHOT: GitHub Actions workflow run showing all jobs passing]**
-
 ```yaml
 Workflow: .github/workflows/ci.yml
 Triggers: Push to main, Pull requests to main
@@ -701,7 +820,7 @@ Environment Variables:
 - **M1**: 65% minimum coverage for ML model and API code
 - **M2**: 80% minimum coverage including RAG pipeline, guardrails, and prompt strategies
 
-<img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/bf4aec8f-da32-4e20-997e-da8e70af0887" />
+<!-- <img width="900" height="600" alt="image" src="https://github.com/user-attachments/assets/bf4aec8f-da32-4e20-997e-da8e70af0887" /> -->
 
 ## Security & Compliance (D8 - M2)
 
