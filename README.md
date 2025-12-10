@@ -303,6 +303,37 @@ mlflow ui --host 0.0.0.0 --port 5000
 mlflow run . --env-manager=local --experiment-name xg_models
 ```
 
+### Weights & Biases (Prompt Experiment Tracking)
+
+<img width="1019" height="712" alt="image" src="https://github.com/user-attachments/assets/a35c99cd-883e-4b81-93ec-82d8e1c17b3f" />
+
+- **Purpose**: Track and compare prompt engineering experiments (M2)
+- **Project**: `detoxifyai-prompt-evaluation`
+- **Tracked Metrics**:
+  - Cosine similarity per prompt strategy
+  - Latency distributions
+  - Manual evaluation scores (Tone, Intent, Length)
+  - Per-example outputs and comparisons
+- **Integration**: Automated logging during prompt evaluation experiments
+
+#### Accessing W&B Dashboard
+```bash
+# Set API key
+export WANDB_API_KEY=your_key_here
+
+# Experiments are logged automatically during evaluation
+python experiments/prompts/evaluate_prompts.py --log-wandb
+
+# View results at: https://wandb.ai/your-username/detoxifyai-prompt-evaluation
+```
+
+**Key Features**:
+- Side-by-side comparison of Zero-Shot, Few-Shot (k=3, k=5), and Chain-of-Thought strategies
+- Hyperparameter tracking (temperature, max_tokens, model version)
+- Real-time experiment monitoring during evaluation runs
+- Artifact storage for prompt templates and evaluation datasets
+
+
 ### Evidently Dashboard
 <img width="1774" height="693" alt="image" src="https://github.com/user-attachments/assets/ad427d8e-4da8-4d98-822e-46166a84711f" />
 
