@@ -343,11 +343,9 @@ python experiments/prompts/evaluate_prompts.py --log-wandb
 
 ### Prometheus + Grafana
 
-**📸 [ADD SCREENSHOT: Prometheus targets page showing all scraped endpoints]**
+<img width="1192" height="517" alt="image" src="https://github.com/user-attachments/assets/bc2b0746-3112-49ef-ad84-df679e17d2b9" />
 
-**📸 [ADD SCREENSHOT: Grafana ML monitoring dashboard]**
-
-**📸 [ADD SCREENSHOT: Grafana LLM monitoring dashboard with token usage, latency, cost metrics]**
+<img width="1197" height="331" alt="image" src="https://github.com/user-attachments/assets/57638e59-4469-437f-a643-674b0428c68e" />
 
 - **Prometheus**: http://localhost:9090
 - **Grafana**: http://localhost:4000 (admin/admin)
