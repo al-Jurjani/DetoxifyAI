@@ -1139,17 +1139,19 @@ Please read our [Code of Conduct](CODE_OF_CONDUCT.md) before contributing.
 
 ## Bonus Features Status
 
+### Implemented (M1):
+- ✅ **Docker Compose with dev/test/prod profiles** - Current docker-compose.yml only includes monitoring services (Prometheus, Grafana, Node Exporter). No separate profiles for dev/test/prod environments, and no app/db services defined.
+- ✅ **Infrastructure as Code (IaC)** - No Terraform/CloudFormation templates. No `infra/` or `scripts/` directories for IaC automation.
+- ✅ **Data Version Control (DVC/Git-LFS)** - No DVC or Git-LFS configuration for dataset versioning.
+
 ### Implemented (M2):
 - ✅ **LangChain Integration**: Full RAG toolchain with custom retrievers and document loaders
 - ✅ **Multi-Cloud Architecture**: AWS EC2 + Azure Blob + Modal serverless GPU
 - ✅ **Comprehensive Guardrails**: PII detection, prompt injection filtering, toxicity thresholds
 
 ### Not Implemented (from M1 bonus list):
-- ❌ **Docker Compose with dev/test/prod profiles** - Current docker-compose.yml only includes monitoring services (Prometheus, Grafana, Node Exporter). No separate profiles for dev/test/prod environments, and no app/db services defined.
 - ❌ **GPU-enabled image and self-hosted runner** - Standard CPU-only Docker image with `python:3.11-slim` base.
-- ❌ **Infrastructure as Code (IaC)** - No Terraform/CloudFormation templates. No `infra/` or `scripts/` directories for IaC automation.
 - ❌ **End-to-end load testing with k6** - No k6 scripts or latency SLO assertions implemented.
-- ❌ **Data Version Control (DVC/Git-LFS)** - No DVC or Git-LFS configuration for dataset versioning.
 
 ### Not Implemented (from M2 bonus list):
 - ❌ **A/B Testing Dashboard** - No comparative dashboard for prompt variants, would require additional Grafana configuration
