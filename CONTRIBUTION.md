@@ -210,8 +210,9 @@ pre-commit run --all-files
   - Real-time monitoring of Modal serverless GPU usage and cold-start latency
   - Dashboard screenshots and links documented in README.md
 
-**📸 Prometheus & Grafana Monitoring:**
-*(Screenshots to be added after localhost monitoring setup)*
+<img width="1197" height="504" alt="image" src="https://github.com/user-attachments/assets/2594ee57-e868-435c-9682-667ef466835f" />
+<img width="1184" height="325" alt="image" src="https://github.com/user-attachments/assets/97634146-b169-43bc-8695-6ad5e48dac16" />
+
 
 ### D5 - CI/CD for LLMOps
 - **Zuhair Farhan**:
