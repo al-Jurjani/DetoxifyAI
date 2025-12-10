@@ -166,7 +166,8 @@ pre-commit run --all-files
   - Comprehensive prompt_report.md documenting methodology, results, and insights
 
 **📸 Weights & Biases Experiment Tracking:**
-<img width="1280" height="720" alt="W&B Prompt Strategy Comparison" src="[ADD_YOUR_WANDB_SCREENSHOT_URL_HERE]" />
+<img width="1013" height="712" alt="image" src="https://github.com/user-attachments/assets/3a29366c-4ead-463b-933d-11b5afbb9674" />
+
 
 ### D2 - RAG Pipeline
 - **Zuhair Farhan**:
@@ -255,10 +256,6 @@ pre-commit run --all-files
   - Cloud configuration documentation with setup instructions
   - Screenshots and architecture diagrams showing service interaction
 
-**📸 Multi-Cloud Deployment:**
-- **AWS EC2**: *(To be added - showing FastAPI with /rephrase endpoint)*
-- **Azure Blob Storage**: *(To be added - showing detoxifyai-rag-artifacts container)*
-- **Modal Dashboard**: *(To be added - showing Mistral-7B deployment stats)*
 
 ### D8 - Security & Compliance
 - **Zuhair Farhan**:
